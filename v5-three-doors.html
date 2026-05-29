@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>if(sessionStorage.getItem('efgtm')!=='1')location.replace('index.html');</script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Effortless GTM — Pick your problem.</title>
+<meta name="description" content="Lead quantity, conversion, or time? Three doors, one signal-based system. Begin with the 5-minute audit." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=STIX+Two+Text:ital,wght@1,400;1,500&display=swap">
+
+<style>
+@font-face{font-family:'Swiza';src:url('fonts/swiza-light-webfont.woff2') format('woff2');font-weight:300;font-style:normal;font-display:swap;}
+@font-face{font-family:'Swiza';src:url('fonts/swiza-regular-webfont.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap;}
+@font-face{font-family:'Swiza';src:url('fonts/swiza-medium-webfont.woff2') format('woff2');font-weight:500;font-style:normal;font-display:swap;}
+@font-face{font-family:'Swiza';src:url('fonts/swiza-semibold-webfont.woff2') format('woff2');font-weight:600;font-style:normal;font-display:swap;}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --canvas: oklch(21% 0.035 168);
+  --canvas-2: oklch(17% 0.025 170);
+  --canvas-3: oklch(25% 0.03 162);
+  --ink: oklch(96% 0.012 155);
+  --ink-soft: oklch(85% 0.008 155);
+  --ink-muted: oklch(64% 0.006 155);
+  --mint: oklch(86% 0.05 152);
+  --mint-soft: oklch(86% 0.05 152 / 0.10);
+  --mint-line: oklch(86% 0.05 152 / 0.22);
+  --plum: oklch(64% 0.09 295);
+  --plum-soft: oklch(64% 0.09 295 / 0.12);
+  --plum-line: oklch(64% 0.09 295 / 0.30);
+  --lavender: oklch(89% 0.04 280);
+  --lavender-soft: oklch(89% 0.04 280 / 0.10);
+  --lavender-line: oklch(89% 0.04 280 / 0.28);
+  --line: oklch(86% 0.05 152 / 0.10);
+  --line-2: oklch(86% 0.05 152 / 0.20);
+  --ease: cubic-bezier(.25,0,0,1);
+  --gutter: clamp(1.25rem, 4vw, 3rem);
+}
+html{font-size:16px;scroll-behavior:smooth}
+body{font-family:'Swiza',ui-sans-serif,system-ui,sans-serif;font-weight:300;background:var(--canvas);color:var(--ink-soft);line-height:1.6;-webkit-font-smoothing:antialiased;font-feature-settings:"ss01","tnum"}
+a{color:inherit;text-decoration:none}
+.italic{font-family:'STIX Two Text',Georgia,serif;font-style:italic;font-weight:400}
+.wrap{max-width:1240px;margin:0 auto;padding:0 var(--gutter)}
+
+/* NAV */
+.nav{position:sticky;top:0;z-index:50;background:oklch(21% 0.035 168 / 0.88);backdrop-filter:blur(20px);border-bottom:1px solid var(--line)}
+.nav-row{display:flex;align-items:center;justify-content:space-between;height:64px}
+.brand{display:flex;align-items:center;gap:.55rem;color:var(--mint);font-weight:500;font-size:.95rem;letter-spacing:-.01em}
+.brand svg{width:22px;height:22px}
+.brand sup{font-size:.55em;margin-left:1px;font-weight:400;vertical-align:super}
+.nav-links{display:flex;gap:1.5rem;align-items:center;font-size:.85rem;color:var(--ink-muted)}
+.nav-links a:hover{color:var(--ink)}
+.nav-cta{padding:.55rem 1.1rem;border-radius:999px;border:1px solid var(--mint-line);color:var(--mint);font-size:.85rem;font-weight:500;transition:all .15s var(--ease)}
+.nav-cta:hover{background:var(--mint-soft);border-color:var(--mint)}
+@media(max-width:780px){.nav-links{display:none}}
+
+/* HERO */
+.hero{padding:clamp(3rem,6vw,5rem) 0 clamp(2rem,4vw,3rem)}
+.hero-head{text-align:center;max-width:46rem;margin:0 auto clamp(2.5rem,4vw,3.5rem)}
+.eyebrow{display:inline-flex;align-items:center;gap:.5rem;font-size:.72rem;color:var(--mint);letter-spacing:.18em;text-transform:uppercase;font-weight:600;margin-bottom:1.5rem}
+.eyebrow::before{content:"";width:24px;height:1px;background:var(--mint)}
+.eyebrow::after{content:"";width:24px;height:1px;background:var(--mint)}
+.h1{font-weight:300;font-size:clamp(2.4rem,5.4vw,4.4rem);line-height:1.04;letter-spacing:-.025em;color:var(--ink);margin-bottom:1rem}
+.h1 em{font-family:'STIX Two Text',Georgia,serif;font-style:italic;font-weight:400;color:var(--mint)}
+.lede{font-size:clamp(1.05rem,1.6vw,1.18rem);color:var(--ink-muted);max-width:42rem;margin:0 auto;line-height:1.55}
+
+/* DOORS */
+.doors{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(.75rem,1.5vw,1rem);margin-bottom:0}
+@media(max-width:880px){.doors{grid-template-columns:1fr}}
+.door{position:relative;background:var(--canvas-2);border:1px solid var(--line);border-radius:18px;padding:clamp(1.5rem,2.5vw,2rem);cursor:pointer;transition:all .25s var(--ease);overflow:hidden;text-align:left;display:flex;flex-direction:column;min-height:380px;color:inherit}
+.door::before{content:"";position:absolute;inset:0;opacity:0;transition:opacity .25s var(--ease);pointer-events:none;border-radius:18px}
+.door[data-key="leads"]::before{background:radial-gradient(ellipse at top left, var(--mint-soft), transparent 60%)}
+.door[data-key="cvr"]::before{background:radial-gradient(ellipse at top left, var(--plum-soft), transparent 60%)}
+.door[data-key="time"]::before{background:radial-gradient(ellipse at top left, var(--lavender-soft), transparent 60%)}
+.door:hover::before,.door.active::before{opacity:1}
+.door:hover{transform:translateY(-3px)}
+.door[data-key="leads"].active{border-color:var(--mint-line)}
+.door[data-key="cvr"].active{border-color:var(--plum-line)}
+.door[data-key="time"].active{border-color:var(--lavender-line)}
+
+.door-num{font-family:'STIX Two Text',serif;font-style:italic;font-size:.95rem;color:var(--ink-muted);margin-bottom:.75rem;letter-spacing:0}
+.door-tag{font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;font-weight:600;margin-bottom:1.25rem;display:inline-block;padding:.3rem .65rem;border-radius:4px}
+.door[data-key="leads"] .door-tag{color:var(--mint);background:var(--mint-soft)}
+.door[data-key="cvr"] .door-tag{color:var(--plum);background:var(--plum-soft)}
+.door[data-key="time"] .door-tag{color:var(--lavender);background:var(--lavender-soft)}
+.door-title{font-size:clamp(1.7rem,2.8vw,2.2rem);font-weight:300;color:var(--ink);line-height:1.05;letter-spacing:-.02em;margin-bottom:1.25rem}
+.door-title em{font-family:'STIX Two Text',serif;font-style:italic;font-weight:400}
+.door[data-key="leads"] .door-title em{color:var(--mint)}
+.door[data-key="cvr"] .door-title em{color:var(--plum)}
+.door[data-key="time"] .door-title em{color:var(--lavender)}
+.door-body{color:var(--ink-muted);font-size:.95rem;line-height:1.55;margin-bottom:1.5rem}
+.door-stat{display:flex;flex-direction:column;gap:.2rem;padding:1rem 0;border-top:1px solid var(--line);margin-top:auto}
+.door-stat-label{font-size:.7rem;color:var(--ink-muted);letter-spacing:.16em;text-transform:uppercase;font-weight:500}
+.door-stat-value{font-family:'STIX Two Text',serif;font-style:italic;font-size:1.5rem;color:var(--ink);font-weight:400;line-height:1.1;letter-spacing:-.01em}
+.door[data-key="leads"] .door-stat-value{color:var(--mint)}
+.door[data-key="cvr"] .door-stat-value{color:var(--plum)}
+.door[data-key="time"] .door-stat-value{color:var(--lavender)}
+.door-cta{padding-top:1rem;border-top:1px solid var(--line);font-size:.88rem;font-weight:500;display:flex;justify-content:space-between;align-items:center;color:var(--ink)}
+.door-cta .arrow{transition:transform .25s var(--ease);color:var(--ink-muted)}
+.door:hover .door-cta .arrow,.door.active .door-cta .arrow{transform:translateX(4px);color:var(--ink)}
+.door[data-key="leads"]:hover .door-cta .arrow,.door[data-key="leads"].active .door-cta .arrow{color:var(--mint)}
+.door[data-key="cvr"]:hover .door-cta .arrow,.door[data-key="cvr"].active .door-cta .arrow{color:var(--plum)}
+.door[data-key="time"]:hover .door-cta .arrow,.door[data-key="time"].active .door-cta .arrow{color:var(--lavender)}
+
+/* opened door section */
+.opened{padding:clamp(3rem,6vw,5rem) 0;border-bottom:1px solid var(--line);position:relative;overflow:hidden}
+.opened-bg{position:absolute;inset:0;opacity:0;transition:opacity .35s var(--ease);pointer-events:none}
+.opened[data-active="leads"] .opened-bg.leads-bg{opacity:1}
+.opened[data-active="cvr"] .opened-bg.cvr-bg{opacity:1}
+.opened[data-active="time"] .opened-bg.time-bg{opacity:1}
+.leads-bg{background:radial-gradient(ellipse at center top, var(--mint-soft), transparent 60%)}
+.cvr-bg{background:radial-gradient(ellipse at center top, var(--plum-soft), transparent 60%)}
+.time-bg{background:radial-gradient(ellipse at center top, var(--lavender-soft), transparent 60%)}
+
+.opened-inner{position:relative;display:none}
+.opened-inner.active{display:block}
+.opened-head{display:flex;justify-content:space-between;align-items:baseline;padding-bottom:1.5rem;border-bottom:1px solid var(--line);margin-bottom:2.5rem;flex-wrap:wrap;gap:1rem}
+.opened-tag{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;font-weight:600;color:var(--mint)}
+.opened[data-active="cvr"] .opened-tag{color:var(--plum)}
+.opened[data-active="time"] .opened-tag{color:var(--lavender)}
+.opened-switch{font-size:.78rem;color:var(--ink-muted)}
+.opened-switch a{color:var(--ink);font-weight:500;border-bottom:1px solid var(--line-2)}
+.opened-switch a:hover{color:var(--mint);border-color:var(--mint)}
+
+.opened-grid{display:grid;grid-template-columns:1.05fr 1fr;gap:clamp(2rem,5vw,4.5rem);align-items:start}
+@media(max-width:880px){.opened-grid{grid-template-columns:1fr}}
+.opened-title{font-size:clamp(2rem,3.6vw,2.8rem);font-weight:300;color:var(--ink);letter-spacing:-.02em;line-height:1.1;margin-bottom:1.25rem;max-width:18ch}
+.opened-title em{font-family:'STIX Two Text',serif;font-style:italic;font-weight:400}
+.opened[data-active="leads"] .opened-title em{color:var(--mint)}
+.opened[data-active="cvr"] .opened-title em{color:var(--plum)}
+.opened[data-active="time"] .opened-title em{color:var(--lavender)}
+.opened-body{color:var(--ink-soft);font-size:1.02rem;line-height:1.65;max-width:50ch;margin-bottom:1.5rem}
+.opened-body strong{color:var(--ink);font-weight:500}
+
+.plan{background:var(--canvas-2);border:1px solid var(--line-2);border-radius:12px;padding:1.5rem}
+.plan-label{font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;font-weight:600;color:var(--mint);margin-bottom:1.25rem}
+.opened[data-active="cvr"] .plan-label{color:var(--plum)}
+.opened[data-active="time"] .plan-label{color:var(--lavender)}
+.plan-step{display:grid;grid-template-columns:auto 1fr;gap:1rem;padding:1rem 0;border-bottom:1px solid var(--line);align-items:start}
+.plan-step:last-child{border-bottom:none;padding-bottom:0}
+.plan-step:first-child{padding-top:0}
+.plan-step-num{font-family:'STIX Two Text',serif;font-style:italic;color:var(--mint);font-size:1.1rem;line-height:1.5;min-width:1.5rem;font-variant-numeric:tabular-nums}
+.opened[data-active="cvr"] .plan-step-num{color:var(--plum)}
+.opened[data-active="time"] .plan-step-num{color:var(--lavender)}
+.plan-step-main{font-size:.95rem;color:var(--ink);font-weight:500;margin-bottom:.2rem}
+.plan-step-sub{font-size:.85rem;color:var(--ink-muted);line-height:1.5}
+.plan-foot{margin-top:1.25rem;padding-top:1.25rem;border-top:1px solid var(--line);display:flex;justify-content:space-between;font-size:.78rem;color:var(--ink-muted)}
+.plan-foot strong{color:var(--ink);font-weight:500}
+
+.opened-cta{display:flex;gap:.75rem;margin-top:1.5rem;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.85rem 1.4rem;border-radius:999px;font-weight:500;font-size:.92rem;font-family:inherit;cursor:pointer;border:1px solid transparent;transition:all .15s var(--ease)}
+.btn-primary{background:var(--mint);color:var(--canvas)}
+.btn-primary:hover{background:oklch(92% 0.06 152);transform:translateY(-1px)}
+.opened[data-active="cvr"] .btn-primary{background:var(--plum);color:var(--ink)}
+.opened[data-active="cvr"] .btn-primary:hover{background:oklch(70% 0.10 295)}
+.opened[data-active="time"] .btn-primary{background:var(--lavender);color:var(--canvas)}
+.opened[data-active="time"] .btn-primary:hover{background:oklch(94% 0.04 280)}
+.btn-ghost{color:var(--ink);border-color:var(--line-2);background:transparent}
+.btn-ghost:hover{border-color:var(--mint-line);color:var(--mint)}
+
+/* SHARED system */
+.shared{padding:clamp(4rem,7vw,6rem) 0;background:var(--canvas-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.shared-head{text-align:center;max-width:38rem;margin:0 auto clamp(3rem,5vw,4rem)}
+.section-label{font-size:.72rem;color:var(--mint);letter-spacing:.18em;text-transform:uppercase;font-weight:600;margin-bottom:1rem;display:block}
+.section-title{font-size:clamp(1.85rem,3.2vw,2.6rem);font-weight:300;letter-spacing:-.02em;line-height:1.1;color:var(--ink);margin-bottom:1rem}
+.section-title em{font-family:'STIX Two Text',serif;font-style:italic;color:var(--mint);font-weight:400}
+.section-lede{color:var(--ink-muted);font-size:1.02rem;line-height:1.6;max-width:36rem;margin:0 auto}
+
+.shared-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem}
+@media(max-width:780px){.shared-grid{grid-template-columns:1fr}}
+.shared-block{text-align:left}
+.shared-num{font-family:'STIX Two Text',serif;font-style:italic;color:var(--mint);font-size:1.4rem;margin-bottom:1rem;line-height:1}
+.shared-block h3{font-size:1.05rem;color:var(--ink);font-weight:500;margin-bottom:.5rem;letter-spacing:-.01em}
+.shared-block p{color:var(--ink-muted);font-size:.92rem;line-height:1.55}
+
+/* FINAL */
+.final{padding:clamp(4rem,7vw,6rem) 0;text-align:center}
+.final-title{font-size:clamp(2rem,4vw,3rem);font-weight:300;color:var(--ink);letter-spacing:-.02em;margin-bottom:1rem;line-height:1.1;max-width:24ch;margin-left:auto;margin-right:auto}
+.final-title em{font-family:'STIX Two Text',serif;font-style:italic;color:var(--mint);font-weight:400}
+.final-body{color:var(--ink-muted);max-width:42ch;margin:0 auto 2rem;font-size:1.02rem;line-height:1.55}
+.final-actions{display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap}
+
+/* FOOTER */
+.footer{padding:3rem 0 2.5rem;border-top:1px solid var(--line);background:var(--canvas-2)}
+.footer-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:2rem;margin-bottom:2.5rem}
+@media(max-width:780px){.footer-grid{grid-template-columns:1fr 1fr;gap:1.5rem}}
+.footer-col h4{font-size:.7rem;color:var(--mint);letter-spacing:.18em;text-transform:uppercase;font-weight:600;margin-bottom:1.25rem}
+.footer-col p{font-size:.88rem;color:var(--ink-muted);line-height:1.55;max-width:30ch}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:.55rem}
+.footer-col a{font-size:.88rem;color:var(--ink-muted)}
+.footer-col a:hover{color:var(--mint)}
+.footer-bottom{padding-top:1.5rem;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:1rem;font-size:.78rem;color:var(--ink-muted)}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav-row">
+    <a href="#" class="brand">
+      <svg viewBox="0 0 618 584" fill="none" aria-hidden="true"><path fill="currentColor" d="M211 351l186 0c36 0 66-30 67-66 0-17-7-35-19-47-13-13-29-19-47-19l-186 0c-37 0-67 30-67 66 0 17 7 35 19 47 13 13 29 19 47 19zM246 382l-104 0c-37 0-67 29-67 65 0 18 7 35 19 47 13 13 30 20 47 20l105 0c36 0 66-30 67-66 0-17-7-35-19-47-13-13-29-19-47-19zM516 72c-13-13-29-19-47-19l-186 0c-37 0-67 30-67 66 0 17 7 35 19 47 13 13 29 19 47 19l186 0c36 0 66-30 67-66 0-17-7-35-19-47zM438 398c-14-10-31-14-47-12-17 3-32 12-42 26-10 14-14 31-12 48 3 17 12 32 26 42 14 10 31 14 48 11 34-5 58-38 53-72-2-17-12-33-26-43z"/></svg>
+      <span>Effortless<sup>GTM</sup></span>
+    </a>
+    <nav class="nav-links">
+      <a href="#doors">Three problems</a>
+      <a href="#system">The system</a>
+      <a href="#audit">Audit</a>
+    </nav>
+    <a href="#audit" class="nav-cta">Take the audit</a>
+  </div>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-head">
+        <span class="eyebrow">Three problems, one system</span>
+        <h1 class="h1">Pick your <em>problem.</em></h1>
+        <p class="lede">Every B2B team we audit has one of three problems eating their pipeline. Most have all three. Pick the one that hurts most today — we'll show you what we'd do about it.</p>
+      </div>
+
+      <div class="doors" id="doors">
+        <button class="door active" data-key="leads">
+          <div class="door-num">i.</div>
+          <div class="door-tag">Problem 01</div>
+          <h2 class="door-title">A <em>lead-quantity</em> problem.</h2>
+          <p class="door-body">Product is sharp, win-rate is decent, but the top of the funnel is anaemic. Outbound is sporadic. The team is selling to whoever shouts loudest in standup.</p>
+          <div class="door-stat">
+            <span class="door-stat-label">Common pattern</span>
+            <span class="door-stat-value">&lt;40 leads / rep / month</span>
+          </div>
+          <div class="door-cta">Open this door <span class="arrow">→</span></div>
+        </button>
+
+        <button class="door" data-key="cvr">
+          <div class="door-num">ii.</div>
+          <div class="door-tag">Problem 02</div>
+          <h2 class="door-title">A <em>conversion</em> problem.</h2>
+          <p class="door-body">Leads come in, leads disappear. Reply rates under 4%. Meetings booked are with the wrong personas. Reps blame the list. The list blames the timing. Nobody fixes the timing.</p>
+          <div class="door-stat">
+            <span class="door-stat-label">Common pattern</span>
+            <span class="door-stat-value">CVR meeting → won &lt; 15%</span>
+          </div>
+          <div class="door-cta">Open this door <span class="arrow">→</span></div>
+        </button>
+
+        <button class="door" data-key="time">
+          <div class="door-num">iii.</div>
+          <div class="door-tag">Problem 03</div>
+          <h2 class="door-title">A <em>time</em> problem.</h2>
+          <p class="door-body">Plenty of leads, decent conversion, but everyone is burnt out. Reps spend two hours selling, six hours doing admin. The quarter ends, the founder looks tired, the year looks the same.</p>
+          <div class="door-stat">
+            <span class="door-stat-label">Common pattern</span>
+            <span class="door-stat-value">73% of rep time on non-selling</span>
+          </div>
+          <div class="door-cta">Open this door <span class="arrow">→</span></div>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- OPENED DOOR -->
+  <section class="opened" id="opened" data-active="leads">
+    <div class="opened-bg leads-bg"></div>
+    <div class="opened-bg cvr-bg"></div>
+    <div class="opened-bg time-bg"></div>
+
+    <div class="wrap">
+      <div class="opened-head">
+        <span class="opened-tag" id="opened-tag">Door 01 — Lead quantity</span>
+        <span class="opened-switch">Wrong door? <a href="#doors">Pick another →</a></span>
+      </div>
+
+      <!-- LEADS opened -->
+      <div class="opened-inner active" data-key="leads">
+        <div class="opened-grid">
+          <div>
+            <h2 class="opened-title">You don't have a <em>sales</em> problem. You have a <em>visibility</em> problem.</h2>
+            <p class="opened-body">If your win-rate is healthy and your reps are good, more activity will not save you. The fix is upstream: <strong>finding the 300 companies in your market who are actually ready to hear from you this quarter.</strong> Not the 30,000 in your TAM. The 300 with a buying signal this week.</p>
+            <p class="opened-body">We start by mapping signal sources to your ICP — funding events, hiring intent, exec moves, tech changes, LinkedIn engagement, your own first-party data. Then we wire scoring on top and route the hot accounts straight to your reps every Monday morning.</p>
+            <div class="opened-cta">
+              <a href="#audit" class="btn btn-primary">Audit your lead engine →</a>
+              <a href="#" class="btn btn-ghost">See sample signals</a>
+            </div>
+          </div>
+          <div class="plan">
+            <div class="plan-label">What we'd do, in order</div>
+            <div class="plan-step">
+              <span class="plan-step-num">i.</span>
+              <div>
+                <div class="plan-step-main">Map signals to your ICP</div>
+                <div class="plan-step-sub">8–12 signal sources, filtered to fit your buyer.</div>
+              </div>
+            </div>
+            <div class="plan-step">
+              <span class="plan-step-num">ii.</span>
+              <div>
+                <div class="plan-step-main">Build a fresh 1,000-account list</div>
+                <div class="plan-step-sub">Verified, scored, sliced by signal heat.</div>
+              </div>
+            </div>
+            <div class="plan-step">
+              <span class="plan-step-num">iii.</span>
+              <div>
+                <div class="plan-step-main">Route the top 50 weekly</div>
+                <div class="plan-step-sub">Direct to your reps via CRM or Slack.</div>
+              </div>
+            </div>
+            <div class="plan-foot">
+              <span>Quick-win price</span>
+              <span><strong>€1,500</strong> · 3–5 days</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CVR opened -->
+      <div class="opened-inner" data-key="cvr">
+        <div class="opened-grid">
+          <div>
+            <h2 class="opened-title">Your reply-rate is fine. Your <em>timing</em> is the problem.</h2>
+            <p class="opened-body">Static lists convert at 2–4%. The same list, reached on a buying signal, converts at 8–20%. Same product, same reps, same email — just sent on the day the VP joined, not three weeks later. <strong>Timing is the lever no one is pulling.</strong></p>
+            <p class="opened-body">We don't rewrite your outreach (you don't need us for that). We rewire when it fires. Signal-triggered sequences, persona-specific openers, and a re-engagement loop for the people you already touched and dropped.</p>
+            <div class="opened-cta">
+              <a href="#audit" class="btn btn-primary">Audit your conversion →</a>
+              <a href="#" class="btn btn-ghost">See timing examples</a>
+            </div>
+          </div>
+          <div class="plan">
+            <div class="plan-label">What we'd do, in order</div>
+            <div class="plan-step">
+              <span class="plan-step-num">i.</span>
+              <div>
+                <div class="plan-step-main">Audit your last 200 outreaches</div>
+                <div class="plan-step-sub">Tag wins, identify the timing pattern.</div>
+              </div>
+            </div>
+            <div class="plan-step">
+              <span class="plan-step-num">ii.</span>
+              <div>
+                <div class="plan-step-main">Build one signal-triggered sequence</div>
+                <div class="plan-step-sub">Fires the day a signal lands. Personalised.</div>
+              </div>
+            </div>
+            <div class="plan-step">
+              <span class="plan-step-num">iii.</span>
+              <div>
+                <div class="plan-step-main">Re-engage your dead list</div>
+                <div class="plan-step-sub">Highest-ROI move most teams skip.</div>
+              </div>
+            </div>
+            <div class="plan-foot">
+              <span>Quick-win price</span>
+              <span><strong>€2,500</strong> · 5–7 days</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TIME opened -->
+      <div class="opened-inner" data-key="time">
+        <div class="opened-grid">
+          <div>
+            <h2 class="opened-title">Your reps don't need more drive. They need fewer <em>tabs.</em></h2>
+            <p class="opened-body">Most of what a B2B rep does is not selling — it's pipeline hygiene, list cleaning, meeting prep, note-taking, follow-up scheduling, CRM hygiene. The selling fits in a two-hour window. <strong>The other six hours are automatable.</strong></p>
+            <p class="opened-body">We don't replace your reps with AI. We give them their afternoons back. Workflows that auto-write notes, surface follow-ups, prep call briefings, and feed clean data into your CRM. Built on Claude via Bedrock — your data stays in the EU.</p>
+            <div class="opened-cta">
+              <a href="#audit" class="btn btn-primary">Audit your rep time →</a>
+              <a href="#" class="btn btn-ghost">See sample workflows</a>
+            </div>
+          </div>
+          <div class="plan">
+            <div class="plan-label">What we'd do, in order</div>
+            <div class="plan-step">
+              <span class="plan-step-num">i.</span>
+              <div>
+                <div class="plan-step-main">Time-audit your top 3 reps</div>
+                <div class="plan-step-sub">Where the hours go, broken into tasks.</div>
+              </div>
+            </div>
+            <div class="plan-step">
+              <span class="plan-step-num">ii.</span>
+              <div>
+                <div class="plan-step-main">Automate the top three time-sinks</div>
+                <div class="plan-step-sub">Usually: notes, follow-ups, CRM hygiene.</div>
+              </div>
+            </div>
+            <div class="plan-step">
+              <span class="plan-step-num">iii.</span>
+              <div>
+                <div class="plan-step-main">Wire it into your existing stack</div>
+                <div class="plan-step-sub">HubSpot, Pipedrive, Salesforce, Notion, etc.</div>
+              </div>
+            </div>
+            <div class="plan-foot">
+              <span>Quick-win price</span>
+              <span><strong>€3,000</strong> · 7–10 days</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SHARED system -->
+  <section class="shared" id="system">
+    <div class="wrap">
+      <div class="shared-head">
+        <span class="section-label">Underneath every door</span>
+        <h2 class="section-title">One system. <em>Three entry points.</em></h2>
+        <p class="section-lede">Whichever door you pick, the system underneath is the same. Audit, build, run. We sell the door that matches your pain, not the system you don't need yet.</p>
+      </div>
+      <div class="shared-grid">
+        <div class="shared-block">
+          <div class="shared-num">i.</div>
+          <h3>Audit (free)</h3>
+          <p>5-minute survey, PDF with your sales-org maturity, pipeline gap in euros, and one quick-win you can run this week. Whichever door you walked through.</p>
+        </div>
+        <div class="shared-block">
+          <div class="shared-num">ii.</div>
+          <h3>Quick win (€1.5–3k)</h3>
+          <p>One concrete deliverable in five to ten days. Designed to prove the math before you sign for a bigger build. Fixed scope, fixed price.</p>
+        </div>
+        <div class="shared-block">
+          <div class="shared-num">iii.</div>
+          <h3>Signal System (€5k+ + retainer)</h3>
+          <p>The full build. All three doors merged into a single signal layer running on Bedrock in Frankfurt. Optional revenue share if you'd rather align that way.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL -->
+  <section class="final" id="audit">
+    <div class="wrap">
+      <h2 class="final-title">Not sure which door is yours? <em>The audit will tell you.</em></h2>
+      <p class="final-body">Five minutes, ten questions, one PDF. The math is honest. The recommendation is honest. The PDF is yours either way.</p>
+      <div class="final-actions">
+        <a href="#" class="btn btn-primary">Begin the audit →</a>
+        <a href="#" class="btn btn-ghost">Book a 30-min call</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <a href="#" class="brand" style="margin-bottom:1rem">
+          <svg viewBox="0 0 618 584" fill="none" aria-hidden="true"><path fill="currentColor" d="M211 351l186 0c36 0 66-30 67-66 0-17-7-35-19-47-13-13-29-19-47-19l-186 0c-37 0-67 30-67 66 0 17 7 35 19 47 13 13 29 19 47 19zM246 382l-104 0c-37 0-67 29-67 65 0 18 7 35 19 47 13 13 30 20 47 20l105 0c36 0 66-30 67-66 0-17-7-35-19-47-13-13-29-19-47-19zM516 72c-13-13-29-19-47-19l-186 0c-37 0-67 30-67 66 0 17 7 35 19 47 13 13 29 19 47 19l186 0c36 0 66-30 67-66 0-17-7-35-19-47zM438 398c-14-10-31-14-47-12-17 3-32 12-42 26-10 14-14 31-12 48 3 17 12 32 26 42 14 10 31 14 48 11 34-5 58-38 53-72-2-17-12-33-26-43z"/></svg>
+          <span>Effortless<sup>GTM</sup></span>
+        </a>
+        <p>Three problems, three doors, one signal-based system. Built on Bedrock, run from the EU.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Doors</h4>
+        <ul>
+          <li><a href="#doors">Lead quantity</a></li>
+          <li><a href="#doors">Conversion</a></li>
+          <li><a href="#doors">Time</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>System</h4>
+        <ul>
+          <li><a href="#system">How it works</a></li>
+          <li><a href="#audit">Free audit</a></li>
+          <li><a href="#">Pricing</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Reach us</h4>
+        <ul>
+          <li><a href="mailto:hello@effortless.gtm">hello@effortless.gtm</a></li>
+          <li><a href="#">LinkedIn</a></li>
+          <li><a href="#">GDPR</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Effortless GTM. Made in the EU.</span>
+      <span>v5 — Three doors</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const tagMap = {
+    leads: "Door 01 — Lead quantity",
+    cvr: "Door 02 — Conversion",
+    time: "Door 03 — Time"
+  };
+  const doors = document.querySelectorAll('.door');
+  const opened = document.getElementById('opened');
+  const tag = document.getElementById('opened-tag');
+  const inners = document.querySelectorAll('.opened-inner');
+
+  doors.forEach(d => {
+    d.addEventListener('click', () => {
+      const key = d.dataset.key;
+      doors.forEach(x => x.classList.toggle('active', x === d));
+      opened.dataset.active = key;
+      tag.textContent = tagMap[key];
+      inners.forEach(i => i.classList.toggle('active', i.dataset.key === key));
+      opened.scrollIntoView({behavior:'smooth', block:'start'});
+    });
+  });
+</script>
+
+</body>
+</html>

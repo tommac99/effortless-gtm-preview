@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Effortless GTM — Landing page variations</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=STIX+Two+Text:ital,wght@1,400&display=swap">
+<style>
+@font-face{font-family:'Swiza';src:url('fonts/swiza-regular-webfont.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap;}
+@font-face{font-family:'Swiza';src:url('fonts/swiza-light-webfont.woff2') format('woff2');font-weight:300;font-style:normal;font-display:swap;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --canvas:oklch(21% 0.035 168);
+  --canvas-2:oklch(17% 0.025 170);
+  --ink:oklch(96% 0.012 155);
+  --ink-soft:oklch(82% 0.008 155);
+  --ink-muted:oklch(64% 0.006 155);
+  --mint:oklch(86% 0.05 152);
+  --mint-soft:oklch(86% 0.05 152 / 0.10);
+  --line:oklch(86% 0.05 152 / 0.14);
+  --ease:cubic-bezier(.25,0,0,1);
+}
+body{font-family:'Swiza',ui-sans-serif,system-ui,sans-serif;font-weight:300;background:var(--canvas);color:var(--ink-soft);line-height:1.6;min-height:100vh;padding:clamp(2.5rem,5vw,5rem) clamp(1.25rem,4vw,3rem)}
+.italic{font-family:'STIX Two Text',Georgia,serif;font-style:italic;color:var(--mint);font-weight:400}
+.wrap{max-width:1100px;margin:0 auto}
+header{margin-bottom:3.5rem;padding-bottom:2rem;border-bottom:1px solid var(--line)}
+.eyebrow{font-size:.72rem;color:var(--mint);letter-spacing:.18em;text-transform:uppercase;font-weight:600;margin-bottom:1rem;display:inline-flex;align-items:center;gap:.5rem}
+.eyebrow::before{content:"";width:24px;height:1px;background:var(--mint)}
+h1{font-weight:300;font-size:clamp(2.2rem,4vw,3.4rem);color:var(--ink);letter-spacing:-.02em;line-height:1.05;margin-bottom:1rem}
+.lede{color:var(--ink-muted);font-size:1.1rem;max-width:54ch;line-height:1.55}
+.list{display:grid;gap:1rem}
+.card{display:grid;grid-template-columns:6rem 1fr auto;gap:2rem;background:var(--canvas-2);border:1px solid var(--line);border-radius:14px;padding:1.75rem;align-items:center;color:inherit;text-decoration:none;transition:all .2s var(--ease)}
+@media(max-width:680px){.card{grid-template-columns:1fr;gap:.5rem}}
+.card:hover{border-color:var(--mint);transform:translateY(-2px);background:linear-gradient(180deg,var(--mint-soft),var(--canvas-2))}
+.card .tag{font-size:.72rem;color:var(--mint);letter-spacing:.18em;text-transform:uppercase;font-weight:600;font-family:'STIX Two Text',serif;font-style:italic}
+.card h2{font-size:1.3rem;font-weight:500;color:var(--ink);letter-spacing:-.01em;margin-bottom:.4rem}
+.card h2 em{font-family:'STIX Two Text',serif;font-style:italic;color:var(--mint);font-weight:400}
+.card p{font-size:.92rem;color:var(--ink-muted);line-height:1.5;max-width:60ch}
+.card .open{font-size:.85rem;color:var(--ink-muted);font-weight:500}
+.card:hover .open{color:var(--mint)}
+.foot{margin-top:3.5rem;padding-top:1.5rem;border-top:1px solid var(--line);font-size:.85rem;color:var(--ink-muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+.foot a{color:var(--mint);text-decoration:none}
+
+/* Gate overlay */
+#gate{position:fixed;inset:0;z-index:9999;background:var(--canvas);display:flex;align-items:center;justify-content:center;padding:2rem;transition:opacity .4s var(--ease)}
+#gate.hidden{opacity:0;pointer-events:none}
+.gate-box{width:100%;max-width:380px;text-align:center}
+.gate-eyebrow{font-size:.68rem;color:var(--mint);letter-spacing:.2em;text-transform:uppercase;font-weight:600;display:inline-flex;align-items:center;gap:.5rem;margin-bottom:1.75rem}
+.gate-eyebrow::before,.gate-eyebrow::after{content:"";flex:1;min-width:20px;height:1px;background:var(--mint);opacity:.5}
+.gate-title{font-size:1.5rem;font-weight:300;color:var(--ink);letter-spacing:-.02em;margin-bottom:.35rem}
+.gate-title em{font-family:'STIX Two Text',serif;font-style:italic;color:var(--mint);font-weight:400}
+.gate-sub{font-size:.88rem;color:var(--ink-muted);margin-bottom:2rem}
+.gate-input-wrap{position:relative;margin-bottom:.75rem}
+#pw{width:100%;padding:.85rem 1.1rem;background:var(--canvas-2);border:1px solid var(--line);border-radius:8px;font-family:'Swiza',system-ui,sans-serif;font-size:1rem;font-weight:300;color:var(--ink);outline:none;transition:border-color .2s var(--ease);letter-spacing:.06em}
+#pw:focus{border-color:var(--mint)}
+#pw.shake{animation:shake .35s var(--ease)}
+@keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-8px)}40%{transform:translateX(8px)}60%{transform:translateX(-5px)}80%{transform:translateX(5px)}}
+.gate-err{font-size:.8rem;color:oklch(70% 0.12 25);min-height:1.2em;margin-bottom:.75rem;transition:opacity .2s}
+.gate-btn{width:100%;padding:.9rem;background:var(--mint);border:none;border-radius:8px;font-family:'Swiza',system-ui,sans-serif;font-size:.92rem;font-weight:500;color:var(--canvas);letter-spacing:.04em;cursor:pointer;transition:opacity .15s}
+.gate-btn:hover{opacity:.88}
+</style>
+</head>
+<body>
+
+<div id="gate">
+  <div class="gate-box">
+    <div class="gate-eyebrow">Effortless GTM</div>
+    <h2 class="gate-title">Preview access for <em>partners.</em></h2>
+    <p class="gate-sub">Enter the password to continue.</p>
+    <div class="gate-input-wrap">
+      <input id="pw" type="password" placeholder="Password" autocomplete="off" spellcheck="false" />
+    </div>
+    <p class="gate-err" id="gate-err"></p>
+    <button class="gate-btn" id="gate-submit">Continue →</button>
+  </div>
+</div>
+
+<div class="wrap">
+  <header>
+    <span class="eyebrow">Landing page variations · 2026-05-28</span>
+    <h1>Five conversion bets for <span class="italic">Effortless GTM.</span></h1>
+    <p class="lede">Each page tests a different hypothesis about what makes a B2B sales-team buyer book a call. Same brand, same offer underneath. Click in to preview each.</p>
+  </header>
+
+  <div class="list">
+    <a class="card" href="v1-calculator.html">
+      <div class="tag">v1</div>
+      <div>
+        <h2>The <em>math</em> hero — calculator</h2>
+        <p>An interactive 3-input ROI calculator above the fold. Their own number, live, in their face. Best for cold outbound and CFO-influenced buyers.</p>
+      </div>
+      <span class="open">Open →</span>
+    </a>
+
+    <a class="card" href="v2-editorial.html">
+      <div class="tag">v2</div>
+      <div>
+        <h2>The <em>editorial</em> manifesto</h2>
+        <p>Light, magazine-flavoured layout. Long-form prose, italic pull quotes, one big stat. Best for inbound, peer referrals, and brand building.</p>
+      </div>
+      <span class="open">Open →</span>
+    </a>
+
+    <a class="card" href="v3-system.html">
+      <div class="tag">v3</div>
+      <div>
+        <h2>The <em>signal layer</em> — system view</h2>
+        <p>A live signal engine and dashboard preview. Looks like a product, sells like one. Best for technical buyers and RevOps directors.</p>
+      </div>
+      <span class="open">Open →</span>
+    </a>
+
+    <a class="card" href="v4-diagnostic.html">
+      <div class="tag">v4</div>
+      <div>
+        <h2>The <em>diagnostic</em> — quiz first</h2>
+        <p>The hero is the audit. Three questions visible above the fold, PDF preview below. Best for paid traffic and retargeting.</p>
+      </div>
+      <span class="open">Open →</span>
+    </a>
+
+    <a class="card" href="v5-three-doors.html">
+      <div class="tag">v5</div>
+      <div>
+        <h2>The <em>three doors</em> — self-segment</h2>
+        <p>Lead quantity? Conversion? Time? Three large doors, three tailored paths. Best for SEO landing and broad LinkedIn audiences.</p>
+      </div>
+      <span class="open">Open →</span>
+    </a>
+  </div>
+
+  <div class="foot">
+    <span>Effortless GTM · Preview build · May 2026</span>
+  </div>
+</div>
+
+<script>
+(function(){
+  const HASH = '58c386cc8ab93f1b43cabca254ffe3d805b9155b92dd6aaddf089d4773e69f74';
+  const gate = document.getElementById('gate');
+  const pw = document.getElementById('pw');
+  const err = document.getElementById('gate-err');
+  const btn = document.getElementById('gate-submit');
+
+  if(sessionStorage.getItem('efgtm')==='1'){gate.classList.add('hidden');return;}
+
+  async function attempt(){
+    const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(pw.value));
+    const hex = Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');
+    if(hex===HASH){
+      sessionStorage.setItem('efgtm','1');
+      gate.classList.add('hidden');
+      setTimeout(()=>gate.remove(),450);
+    } else {
+      err.textContent='Incorrect password.';
+      pw.classList.add('shake');
+      pw.value='';
+      setTimeout(()=>pw.classList.remove('shake'),400);
+    }
+  }
+
+  btn.addEventListener('click', attempt);
+  pw.addEventListener('keydown', e=>{ if(e.key==='Enter') attempt(); });
+  pw.focus();
+})();
+</script>
+</body>
+</html>

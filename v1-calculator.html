@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>if(sessionStorage.getItem('efgtm')!=='1')location.replace('index.html');</script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Effortless GTM — Your sales math, made visible.</title>
+<meta name="description" content="Signal-based outbound, EU-safe AI, and a five-minute audit that returns your pipeline gap in euros." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=STIX+Two+Text:ital,wght@1,400;1,500&display=swap">
+
+<style>
+@font-face{font-family:'Swiza';src:url('fonts/swiza-light-webfont.woff2') format('woff2');font-weight:300;font-style:normal;font-display:swap;}
+@font-face{font-family:'Swiza';src:url('fonts/swiza-regular-webfont.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap;}
+@font-face{font-family:'Swiza';src:url('fonts/swiza-medium-webfont.woff2') format('woff2');font-weight:500;font-style:normal;font-display:swap;}
+@font-face{font-family:'Swiza';src:url('fonts/swiza-semibold-webfont.woff2') format('woff2');font-weight:600;font-style:normal;font-display:swap;}
+@font-face{font-family:'Swiza';src:url('fonts/swiza-bold-webfont.woff2') format('woff2');font-weight:700;font-style:normal;font-display:swap;}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --canvas: oklch(21% 0.035 168);
+  --canvas-2: oklch(17% 0.025 168);
+  --canvas-raised: oklch(25% 0.03 162);
+  --ink: oklch(95% 0.012 155);
+  --ink-soft: oklch(85% 0.008 155);
+  --ink-muted: oklch(68% 0.006 155);
+  --mint: oklch(86% 0.05 152);
+  --mint-soft: oklch(86% 0.05 152 / 0.12);
+  --mint-line: oklch(86% 0.05 152 / 0.22);
+  --plum: oklch(60% 0.08 295);
+  --lav: oklch(90% 0.03 280);
+  --line: oklch(86% 0.05 152 / 0.10);
+  --line-2: oklch(86% 0.05 152 / 0.18);
+  --ease: cubic-bezier(0.25,0,0,1);
+  --gutter: clamp(1.25rem, 4vw, 3rem);
+  --maxw: 1180px;
+  --radius: 6px;
+}
+html{font-size:16px;scroll-behavior:smooth}
+body{font-family:'Swiza',ui-sans-serif,system-ui,sans-serif;font-weight:300;background:var(--canvas);color:var(--ink-soft);line-height:1.6;-webkit-font-smoothing:antialiased;font-feature-settings:"ss01","tnum"}
+a{color:inherit;text-decoration:none}
+.italic{font-family:'STIX Two Text',Georgia,serif;font-style:italic;font-weight:400;letter-spacing:-0.01em}
+.mono-num{font-variant-numeric:tabular-nums;font-feature-settings:"tnum"}
+
+/* container */
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 var(--gutter)}
+
+/* nav */
+.nav{position:sticky;top:0;z-index:50;background:oklch(21% 0.035 168 / 0.85);backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}
+.nav-row{display:flex;align-items:center;justify-content:space-between;height:64px}
+.brand{display:flex;align-items:center;gap:.6rem;color:var(--mint);font-weight:500;font-size:.95rem;letter-spacing:-.01em}
+.brand svg{width:22px;height:22px}
+.brand sup{font-size:.55em;margin-left:1px;font-weight:400;vertical-align:super}
+.nav-links{display:flex;gap:1.75rem;align-items:center;font-size:.875rem;color:var(--ink-muted)}
+.nav-links a:hover{color:var(--ink)}
+.nav-cta{padding:.55rem 1rem;border:1px solid var(--mint-line);border-radius:999px;color:var(--mint);font-size:.85rem;font-weight:500;transition:all .15s var(--ease)}
+.nav-cta:hover{background:var(--mint-soft);border-color:var(--mint)}
+@media(max-width:720px){.nav-links{display:none}}
+
+/* hero */
+.hero{padding:clamp(3.5rem,7vw,6rem) 0 clamp(3rem,5vw,5rem);position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:auto -10% -50% -10%;height:60%;background:radial-gradient(ellipse at center, var(--mint-soft) 0%, transparent 60%);pointer-events:none;filter:blur(40px)}
+.hero-grid{display:grid;grid-template-columns: 1.05fr 1fr;gap:clamp(2rem,5vw,5rem);align-items:start}
+@media(max-width:920px){.hero-grid{grid-template-columns:1fr}}
+.eyebrow{display:inline-flex;align-items:center;gap:.5rem;font-size:.75rem;color:var(--mint);letter-spacing:.12em;text-transform:uppercase;font-weight:500;margin-bottom:1.5rem}
+.eyebrow::before{content:"";width:24px;height:1px;background:var(--mint);display:inline-block}
+.h1{font-weight:300;font-size:clamp(2.6rem,5.6vw,4.4rem);line-height:1.02;letter-spacing:-0.025em;color:var(--ink);margin-bottom:1.25rem}
+.h1 .italic{color:var(--mint);font-weight:400}
+.lede{font-size:clamp(1.05rem,1.6vw,1.2rem);color:var(--ink-muted);max-width:32rem;line-height:1.55;margin-bottom:2rem}
+.hero-actions{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center;margin-bottom:2rem}
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.85rem 1.25rem;border-radius:999px;font-weight:500;font-size:.95rem;transition:all .15s var(--ease);cursor:pointer;border:1px solid transparent;font-family:inherit}
+.btn-primary{background:var(--mint);color:var(--canvas);}
+.btn-primary:hover{background:oklch(92% 0.06 152);transform:translateY(-1px)}
+.btn-ghost{color:var(--ink);border-color:var(--line-2)}
+.btn-ghost:hover{border-color:var(--mint-line);color:var(--mint)}
+.trust{display:flex;gap:1.5rem;flex-wrap:wrap;font-size:.8rem;color:var(--ink-muted);align-items:center}
+.trust-dot{width:6px;height:6px;background:var(--mint);border-radius:50%;display:inline-block;margin-right:.4rem}
+
+/* Calculator card */
+.calc{background:linear-gradient(180deg, var(--canvas-raised), oklch(22% 0.025 165));border:1px solid var(--line-2);border-radius:14px;padding:clamp(1.5rem,2.5vw,2rem);position:relative;box-shadow:0 30px 80px -30px oklch(0% 0 0 / 0.5)}
+.calc-header{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:1.5rem;padding-bottom:1rem;border-bottom:1px solid var(--line)}
+.calc-title{font-size:.78rem;color:var(--ink-muted);text-transform:uppercase;letter-spacing:.14em;font-weight:500}
+.calc-tag{font-size:.72rem;color:var(--mint);font-weight:500}
+.calc-pulse{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--mint);margin-right:.5rem;animation:pulse 2.2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.calc-row{display:grid;grid-template-columns:1fr auto;gap:1rem;padding:1rem 0;border-bottom:1px solid var(--line);align-items:center}
+.calc-row label{font-size:.95rem;color:var(--ink);font-weight:300}
+.calc-row label small{display:block;font-size:.75rem;color:var(--ink-muted);margin-top:.2rem}
+.calc-row input{background:transparent;border:none;color:var(--ink);font-family:inherit;font-size:1.2rem;font-weight:500;text-align:right;width:7rem;outline:none;font-variant-numeric:tabular-nums;border-bottom:1px dashed var(--line-2);padding:.25rem .25rem}
+.calc-row input:focus{border-color:var(--mint)}
+.calc-row .suffix{color:var(--ink-muted);font-size:.85rem;margin-left:.4rem}
+.calc-output{margin-top:1.5rem;padding-top:1.5rem;background:linear-gradient(180deg, var(--mint-soft), transparent);border-radius:8px;padding:1.25rem;border:1px solid var(--mint-line)}
+.calc-output-label{font-size:.7rem;color:var(--mint);letter-spacing:.18em;text-transform:uppercase;font-weight:600;margin-bottom:.4rem}
+.calc-output-value{font-size:clamp(2.2rem,4vw,3rem);font-weight:300;color:var(--ink);letter-spacing:-.02em;line-height:1;font-variant-numeric:tabular-nums}
+.calc-output-value .currency{color:var(--mint);font-weight:400;margin-right:.15rem}
+.calc-output-sub{font-size:.85rem;color:var(--ink-muted);margin-top:.5rem}
+
+/* sections */
+section{padding:clamp(4rem,8vw,7rem) 0}
+.section-label{font-size:.72rem;color:var(--mint);letter-spacing:.18em;text-transform:uppercase;font-weight:600;margin-bottom:1rem}
+.section-title{font-size:clamp(1.85rem,3.2vw,2.7rem);font-weight:300;letter-spacing:-.02em;line-height:1.1;color:var(--ink);margin-bottom:1rem;max-width:32ch}
+.section-title em{font-family:'STIX Two Text',Georgia,serif;font-style:italic;color:var(--mint);font-weight:400}
+.section-lede{color:var(--ink-muted);max-width:52ch;line-height:1.6;margin-bottom:3rem;font-size:1.05rem}
+
+/* Three problems */
+.problems{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem}
+@media(max-width:880px){.problems{grid-template-columns:1fr}}
+.problem{background:var(--canvas-2);border:1px solid var(--line);border-radius:12px;padding:1.75rem;display:flex;flex-direction:column;gap:1rem;transition:all .2s var(--ease);position:relative}
+.problem:hover{border-color:var(--mint-line);transform:translateY(-2px)}
+.problem-tag{font-size:.7rem;color:var(--mint);letter-spacing:.15em;text-transform:uppercase;font-weight:600}
+.problem-num{font-family:'STIX Two Text',Georgia,serif;font-style:italic;font-size:2.4rem;color:var(--ink);line-height:1;letter-spacing:-.02em}
+.problem-num .unit{font-style:normal;font-family:'Swiza',sans-serif;font-size:1rem;color:var(--ink-muted);margin-left:.2rem;font-weight:300;letter-spacing:0}
+.problem-title{font-size:1.15rem;font-weight:500;color:var(--ink);letter-spacing:-.01em}
+.problem-body{font-size:.92rem;color:var(--ink-muted);line-height:1.6}
+.problem-footer{margin-top:auto;padding-top:1rem;font-size:.78rem;color:var(--mint);font-weight:500;display:flex;align-items:center;gap:.5rem}
+
+/* Audit flow */
+.flow-bg{background:var(--canvas-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.flow{display:grid;grid-template-columns:1fr 1.4fr;gap:clamp(2rem,5vw,4rem);align-items:center}
+@media(max-width:880px){.flow{grid-template-columns:1fr}}
+.flow-steps{display:flex;flex-direction:column;gap:0}
+.flow-step{display:grid;grid-template-columns:auto 1fr;gap:1.25rem;padding:1.5rem 0;border-bottom:1px solid var(--line);position:relative}
+.flow-step:last-child{border-bottom:none}
+.flow-step-num{width:38px;height:38px;border-radius:50%;border:1px solid var(--mint-line);display:flex;align-items:center;justify-content:center;color:var(--mint);font-weight:500;font-size:.95rem;font-variant-numeric:tabular-nums}
+.flow-step.active .flow-step-num{background:var(--mint);color:var(--canvas);border-color:var(--mint)}
+.flow-step-title{font-weight:500;color:var(--ink);margin-bottom:.3rem;font-size:1.05rem}
+.flow-step-body{color:var(--ink-muted);font-size:.92rem;line-height:1.55}
+.flow-step-meta{font-size:.7rem;color:var(--mint);letter-spacing:.15em;text-transform:uppercase;margin-top:.6rem;font-weight:500}
+
+/* Tiers */
+.tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:2rem}
+@media(max-width:920px){.tiers{grid-template-columns:1fr}}
+.tier{background:var(--canvas-2);border:1px solid var(--line);border-radius:12px;padding:1.75rem;display:flex;flex-direction:column;position:relative;overflow:hidden}
+.tier.featured{background:linear-gradient(180deg, var(--canvas-raised), var(--canvas-2));border-color:var(--mint-line)}
+.tier.featured::before{content:"Most popular";position:absolute;top:0;right:0;background:var(--mint);color:var(--canvas);font-size:.65rem;padding:.3rem .7rem;letter-spacing:.1em;text-transform:uppercase;font-weight:600;border-bottom-left-radius:8px}
+.tier-name{font-size:.72rem;color:var(--mint);letter-spacing:.18em;text-transform:uppercase;font-weight:600;margin-bottom:.8rem}
+.tier-price{font-size:2.2rem;font-weight:300;color:var(--ink);letter-spacing:-.02em;margin-bottom:.3rem;line-height:1}
+.tier-price small{font-size:.85rem;color:var(--ink-muted);font-weight:300}
+.tier-desc{font-size:.92rem;color:var(--ink-muted);margin-bottom:1.5rem;line-height:1.55}
+.tier-list{list-style:none;margin-bottom:1.75rem;display:flex;flex-direction:column;gap:.7rem}
+.tier-list li{font-size:.88rem;color:var(--ink-soft);display:flex;gap:.6rem;align-items:flex-start;line-height:1.45}
+.tier-list li::before{content:"→";color:var(--mint);font-weight:400;flex-shrink:0;margin-top:.05rem}
+.tier-cta{margin-top:auto;padding:.7rem 1rem;border-radius:999px;text-align:center;font-size:.88rem;font-weight:500;transition:all .15s var(--ease);border:1px solid var(--line-2);color:var(--ink)}
+.tier.featured .tier-cta{background:var(--mint);border-color:var(--mint);color:var(--canvas)}
+.tier-cta:hover{border-color:var(--mint);color:var(--mint)}
+.tier.featured .tier-cta:hover{background:oklch(92% 0.06 152)}
+
+/* Final CTA */
+.final{text-align:center;background:radial-gradient(ellipse at top, var(--mint-soft), transparent 70%)}
+.final .section-title{margin:0 auto 1.5rem}
+.final .section-lede{margin:0 auto 2.5rem;text-align:center}
+.final-actions{display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap}
+
+/* footer */
+.footer{padding:3rem 0 2.5rem;border-top:1px solid var(--line);background:var(--canvas-2)}
+.footer-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:2rem;margin-bottom:3rem}
+@media(max-width:780px){.footer-grid{grid-template-columns:1fr 1fr}}
+.footer-col h4{font-size:.72rem;color:var(--mint);letter-spacing:.18em;text-transform:uppercase;font-weight:600;margin-bottom:1.25rem}
+.footer-col p{font-size:.88rem;color:var(--ink-muted);line-height:1.6;max-width:28ch}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:.6rem}
+.footer-col a{font-size:.88rem;color:var(--ink-muted)}
+.footer-col a:hover{color:var(--mint)}
+.footer-bottom{padding-top:1.5rem;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;font-size:.78rem;color:var(--ink-muted)}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav-row">
+    <a href="#" class="brand" aria-label="Effortless GTM">
+      <svg viewBox="0 0 618 584" fill="none" aria-hidden="true"><path fill="currentColor" d="M211 351l186 0c36 0 66-30 67-66 0-17-7-35-19-47-13-13-29-19-47-19l-186 0c-37 0-67 30-67 66 0 17 7 35 19 47 13 13 29 19 47 19zM246 382l-104 0c-37 0-67 29-67 65 0 18 7 35 19 47 13 13 30 20 47 20l105 0c36 0 66-30 67-66 0-17-7-35-19-47-13-13-29-19-47-19zM516 72c-13-13-29-19-47-19l-186 0c-37 0-67 30-67 66 0 17 7 35 19 47 13 13 29 19 47 19l186 0c36 0 66-30 67-66 0-17-7-35-19-47zM438 398c-14-10-31-14-47-12-17 3-32 12-42 26-10 14-14 31-12 48 3 17 12 32 26 42 14 10 31 14 48 11 34-5 58-38 53-72-2-17-12-33-26-43z"/></svg>
+      <span>Effortless<sup>GTM</sup></span>
+    </a>
+    <nav class="nav-links">
+      <a href="#how">How it works</a>
+      <a href="#problems">What we fix</a>
+      <a href="#pricing">Pricing</a>
+    </nav>
+    <a href="#audit" class="nav-cta">Take the audit</a>
+  </div>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="eyebrow">EU-safe signal-based outbound</span>
+        <h1 class="h1">Your sales math, <span class="italic">made visible.</span></h1>
+        <p class="lede">Most B2B teams have no idea what their pipeline gap costs in euros every month. We do. Take the 5-minute audit and we'll send you a PDF with your number, your bottleneck, and a quick win you can run this week.</p>
+        <div class="hero-actions">
+          <a href="#audit" class="btn btn-primary">Take the 5-minute audit →</a>
+          <a href="#how" class="btn btn-ghost">How it works</a>
+        </div>
+        <div class="trust">
+          <span><span class="trust-dot"></span>EU data-resident, Bedrock-hosted</span>
+          <span><span class="trust-dot"></span>Built by Etienne &amp; Thomas</span>
+        </div>
+      </div>
+
+      <!-- Live calculator -->
+      <div class="calc" id="calc">
+        <div class="calc-header">
+          <span class="calc-title">Pipeline gap, live</span>
+          <span class="calc-tag"><span class="calc-pulse"></span>Recalculating</span>
+        </div>
+
+        <div class="calc-row">
+          <label>Leads per month<small>Marketing + outbound combined</small></label>
+          <div><input type="number" id="leads" value="120" min="0" /><span class="suffix"></span></div>
+        </div>
+        <div class="calc-row">
+          <label>Lead → meeting rate<small>Of the leads above</small></label>
+          <div><input type="number" id="cvr-meeting" value="12" min="0" max="100" step="1" /><span class="suffix">%</span></div>
+        </div>
+        <div class="calc-row">
+          <label>Meeting → won rate<small>Closed-won % from first meeting</small></label>
+          <div><input type="number" id="cvr-won" value="22" min="0" max="100" step="1" /><span class="suffix">%</span></div>
+        </div>
+        <div class="calc-row">
+          <label>Average deal size<small>One-time or annualised</small></label>
+          <div><input type="number" id="acv" value="9000" min="0" step="500" /><span class="suffix">€</span></div>
+        </div>
+
+        <div class="calc-output">
+          <div class="calc-output-label">Estimated monthly upside, if we lift leads +20% &amp; CVR +10%</div>
+          <div class="calc-output-value"><span class="currency">+€</span><span id="output" class="mono-num">3,484</span></div>
+          <div class="calc-output-sub">This is a rough model. The audit gives you the real number for your stack.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- THREE PROBLEMS -->
+  <section id="problems">
+    <div class="wrap">
+      <span class="section-label">Three places it bleeds</span>
+      <h2 class="section-title">Pipeline does not leak. <em>It pours.</em></h2>
+      <p class="section-lede">Almost every B2B sales team we audit has one of three problems. Most have all three. The audit tells you which one is costing you the most this quarter.</p>
+
+      <div class="problems">
+        <div class="problem">
+          <span class="problem-tag">Problem 01</span>
+          <div class="problem-num mono-num">38<span class="unit">% of teams</span></div>
+          <h3 class="problem-title">Not enough leads</h3>
+          <p class="problem-body">You have a great product but no one knows it exists. Outbound is sporadic, LinkedIn is on autopilot, your list is two years old. Pipeline depends on who shouted loudest in standup.</p>
+          <div class="problem-footer">Solved by signal sourcing →</div>
+        </div>
+        <div class="problem">
+          <span class="problem-tag">Problem 02</span>
+          <div class="problem-num mono-num">44<span class="unit">% of teams</span></div>
+          <h3 class="problem-title">Bad conversion</h3>
+          <p class="problem-body">Leads come in, leads go cold. Reply rates below 4%. Meetings booked are with the wrong personas. Reps blame the list, marketing blames the reps, the founder blames the moon.</p>
+          <div class="problem-footer">Solved by signal-timed outreach →</div>
+        </div>
+        <div class="problem">
+          <span class="problem-tag">Problem 03</span>
+          <div class="problem-num mono-num">73<span class="unit">% of rep time</span></div>
+          <h3 class="problem-title">Time on admin, not sales</h3>
+          <p class="problem-body">Reps spend most of their day in spreadsheets, CRM hygiene, list cleaning, note-writing, follow-up scheduling. Their actual selling fits in a two-hour window. Everyone is too tired to fix it.</p>
+          <div class="problem-footer">Solved by AI workflow build →</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AUDIT FLOW -->
+  <section id="how" class="flow-bg">
+    <div class="wrap">
+      <span class="section-label">The 5-minute audit</span>
+      <h2 class="section-title">Answer a few questions. <em>Get your number.</em></h2>
+      <p class="section-lede">Ten questions, five minutes, one PDF. Nothing to install, no sales call required. The audit is yours whether you ever talk to us or not.</p>
+
+      <div class="flow">
+        <div>
+          <p style="color:var(--ink-muted);font-size:.95rem;line-height:1.6;max-width:36ch">Your PDF is generated from your answers, not a template. It uses the same math we run on paying clients — sales-org maturity, pipeline gap in euros, time-reclaim potential, and one quick-win you can run on Monday.</p>
+          <div style="margin-top:2rem">
+            <a href="#audit" class="btn btn-primary">Start the audit →</a>
+          </div>
+        </div>
+        <div class="flow-steps">
+          <div class="flow-step active">
+            <div class="flow-step-num">1</div>
+            <div>
+              <div class="flow-step-title">Tell us your motion</div>
+              <div class="flow-step-body">Sales-led, inbound, PLG, partner-led — or a mix. Plus headcount and channels you use.</div>
+              <div class="flow-step-meta">≈ 90 seconds</div>
+            </div>
+          </div>
+          <div class="flow-step">
+            <div class="flow-step-num">2</div>
+            <div>
+              <div class="flow-step-title">Numbers in</div>
+              <div class="flow-step-body">Leads per month, conversion rates, deal size, sales cycle. Estimates are fine.</div>
+              <div class="flow-step-meta">≈ 2 minutes</div>
+            </div>
+          </div>
+          <div class="flow-step">
+            <div class="flow-step-num">3</div>
+            <div>
+              <div class="flow-step-title">Pick your pain</div>
+              <div class="flow-step-body">Lead quantity, conversion quality, or time spent on admin. You probably know.</div>
+              <div class="flow-step-meta">≈ 30 seconds</div>
+            </div>
+          </div>
+          <div class="flow-step">
+            <div class="flow-step-num">4</div>
+            <div>
+              <div class="flow-step-title">PDF in your inbox</div>
+              <div class="flow-step-body">Maturity score, pipeline gap in euros, time-reclaim model, recommended system, one quick-win.</div>
+              <div class="flow-step-meta">Sent within 60 seconds</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TIERS -->
+  <section id="pricing">
+    <div class="wrap">
+      <span class="section-label">How we work together</span>
+      <h2 class="section-title">Three ways in. <em>One outcome.</em></h2>
+      <p class="section-lede">Start with the audit. If we are a fit, you pick the engagement that matches your stage. We will tell you which one. Everything is fixed-scope.</p>
+
+      <div class="tiers">
+        <div class="tier">
+          <span class="tier-name">Tier 01 — Audit</span>
+          <div class="tier-price">Free</div>
+          <p class="tier-desc">The 5-minute survey plus a personalised PDF. The PDF is yours to keep, share, or forward to your CFO.</p>
+          <ul class="tier-list">
+            <li>Sales-org maturity score</li>
+            <li>Pipeline gap in euros</li>
+            <li>Time-reclaim model</li>
+            <li>One quick-win for this week</li>
+            <li>30-min discovery call (optional)</li>
+          </ul>
+          <a href="#audit" class="tier-cta">Start the audit</a>
+        </div>
+
+        <div class="tier featured">
+          <span class="tier-name">Tier 02 — Quick win</span>
+          <div class="tier-price mono-num">€1,500<small> – €3,000</small></div>
+          <p class="tier-desc">One concrete deliverable in two to five days. Designed to prove value before you commit to a system.</p>
+          <ul class="tier-list">
+            <li>ICP + lead list build (1,000 verified contacts)</li>
+            <li>Or: one signal-triggered outbound sequence</li>
+            <li>Or: AI workflow that reclaims 8 hours/week</li>
+            <li>Or: EU-safe Claude setup via Bedrock</li>
+            <li>Fixed scope, fixed price, no surprises</li>
+          </ul>
+          <a href="#audit" class="tier-cta">Pick a quick win</a>
+        </div>
+
+        <div class="tier">
+          <span class="tier-name">Tier 03 — Signal system</span>
+          <div class="tier-price mono-num">€5k<small> + retainer</small></div>
+          <p class="tier-desc">The full build. Signal sources, scoring, sequences, CRM hygiene, weekly review. Plus optional rev share.</p>
+          <ul class="tier-list">
+            <li>Signal sources mapped to your ICP</li>
+            <li>Scoring + routing built in your CRM</li>
+            <li>Outreach sequences across channels</li>
+            <li>Weekly review and tuning</li>
+            <li>Optional revenue share on closed-won</li>
+          </ul>
+          <a href="#audit" class="tier-cta">Talk to us</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL -->
+  <section id="audit" class="final">
+    <div class="wrap">
+      <h2 class="section-title">Find your number. <em>It is probably bigger than you think.</em></h2>
+      <p class="section-lede">Five minutes. No sales pitch. A real PDF with real math. Worst case, you learn something about your pipeline you did not know.</p>
+      <div class="final-actions">
+        <a href="#" class="btn btn-primary">Take the 5-minute audit →</a>
+        <a href="#" class="btn btn-ghost">Book a 30-min call</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <a href="#" class="brand" style="margin-bottom:1rem">
+          <svg viewBox="0 0 618 584" fill="none" aria-hidden="true"><path fill="currentColor" d="M211 351l186 0c36 0 66-30 67-66 0-17-7-35-19-47-13-13-29-19-47-19l-186 0c-37 0-67 30-67 66 0 17 7 35 19 47 13 13 29 19 47 19zM246 382l-104 0c-37 0-67 29-67 65 0 18 7 35 19 47 13 13 30 20 47 20l105 0c36 0 66-30 67-66 0-17-7-35-19-47-13-13-29-19-47-19zM516 72c-13-13-29-19-47-19l-186 0c-37 0-67 30-67 66 0 17 7 35 19 47 13 13 29 19 47 19l186 0c36 0 66-30 67-66 0-17-7-35-19-47zM438 398c-14-10-31-14-47-12-17 3-32 12-42 26-10 14-14 31-12 48 3 17 12 32 26 42 14 10 31 14 48 11 34-5 58-38 53-72-2-17-12-33-26-43z"/></svg>
+          <span>Effortless<sup>GTM</sup></span>
+        </a>
+        <p>Signal-based outbound, math-led, EU-safe. Built by Etienne and Thomas in Vienna and Lisbon.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Product</h4>
+        <ul>
+          <li><a href="#audit">The audit</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#how">How it works</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Case studies</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="#">Privacy</a></li>
+          <li><a href="#">Terms</a></li>
+          <li><a href="#">GDPR</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Effortless GTM. Made in the EU.</span>
+      <span>v1 — Calculator landing</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const $ = id => document.getElementById(id);
+  const fmt = n => Math.round(n).toLocaleString('en-US');
+  const recalc = () => {
+    const leads = +$('leads').value || 0;
+    const cm = (+$('cvr-meeting').value || 0) / 100;
+    const cw = (+$('cvr-won').value || 0) / 100;
+    const acv = +$('acv').value || 0;
+    const current = leads * cm * cw * acv;
+    const lifted = (leads * 1.2) * (cm * 1.1) * cw * acv;
+    const uplift = lifted - current;
+    $('output').textContent = fmt(uplift);
+  };
+  ['leads','cvr-meeting','cvr-won','acv'].forEach(id => $(id).addEventListener('input', recalc));
+  recalc();
+</script>
+
+</body>
+</html>
