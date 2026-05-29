@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>if(sessionStorage.getItem('efgtm')!=='1')location.replace('index.html');</script>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Effortless GTM — Free Sales Audit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#fbfaf7;
+  --bg2:#ffffff;
+  --bg3:#f3f2ed;
+  --ink:#0d0e0a;
+  --ink2:#4d4e48;
+  --ink3:#82847d;
+  --green:#1e6b3a;
+  --green-dark:#0e4a25;
+  --green-soft:#a8e0bc;
+  --green-tint:#e8f3ec;
+  --peach:#ff9d6e;
+  --lavender:#c3b3f5;
+  --line:#e6e5de;
+  --line-soft:#f0efe9;
+}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Inter',system-ui,sans-serif;font-weight:400;
+  background:var(--bg);color:var(--ink2);line-height:1.55;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+
+/* gradient mesh background */
+.mesh{
+  position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(circle 900px at 90% -10%,rgba(255,157,110,.12),transparent 50%),
+    radial-gradient(circle 700px at 5% 30%,rgba(195,179,245,.08),transparent 55%),
+    radial-gradient(circle 600px at 60% 90%,rgba(168,224,188,.12),transparent 55%);
+}
+
+main{position:relative;z-index:1}
+
+/* NAV */
+nav{
+  position:sticky;top:0;z-index:100;
+  background:rgba(251,250,247,.75);
+  backdrop-filter:blur(20px) saturate(180%);
+  -webkit-backdrop-filter:blur(20px) saturate(180%);
+  border-bottom:1px solid rgba(230,229,222,.6);
+  padding:0 clamp(1.5rem,5vw,3rem);height:64px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.logo{font-weight:600;font-size:.95rem;color:var(--ink);letter-spacing:-.01em}
+.logo span{
+  background:linear-gradient(135deg,var(--green-dark),var(--peach));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.nav-links{display:flex;align-items:center;gap:2rem}
+.nav-links a{font-size:.84rem;color:var(--ink2);text-decoration:none;font-weight:500;transition:color .15s}
+.nav-links a:hover{color:var(--ink)}
+.nav-cta{
+  padding:.55rem 1.1rem;background:var(--ink);color:#fff;
+  border-radius:100px;font-size:.82rem;font-weight:600;
+  text-decoration:none;transition:transform .15s,box-shadow .2s;
+}
+.nav-cta:hover{transform:translateY(-1px);box-shadow:0 8px 20px rgba(13,14,10,.25)}
+
+/* HERO */
+.hero{
+  padding:clamp(4rem,8vw,7rem) clamp(1.5rem,5vw,3rem) clamp(3rem,6vw,5rem);
+  max-width:1280px;margin:0 auto;
+  display:grid;grid-template-columns:1fr 1.05fr;gap:4rem;align-items:center;
+}
+@media(max-width:880px){.hero{grid-template-columns:1fr;gap:3rem}}
+
+.tag{
+  display:inline-flex;align-items:center;gap:.55rem;
+  padding:.4rem .9rem;background:var(--bg2);border:1px solid var(--line);
+  border-radius:100px;font-size:.72rem;color:var(--ink2);
+  margin-bottom:1.75rem;font-weight:500;
+}
+.tag-dot{
+  width:6px;height:6px;border-radius:50%;
+  background:var(--green);box-shadow:0 0 8px rgba(30,107,58,.5);
+  animation:pulse 2s ease-in-out infinite;
+}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
+
+.h1{
+  font-family:'Instrument Serif',serif;
+  font-size:clamp(2.6rem,5.5vw,4.6rem);
+  font-weight:400;letter-spacing:-.025em;line-height:1;
+  color:var(--ink);margin-bottom:1.5rem;
+}
+.h1 em{
+  font-style:italic;
+  background:linear-gradient(135deg,var(--green-dark) 0%,var(--peach) 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.lead{font-size:1.1rem;color:var(--ink2);max-width:46ch;line-height:1.55;margin-bottom:2rem}
+
+.benefits{display:grid;gap:.85rem;margin-bottom:2.25rem}
+.benefit{
+  display:flex;align-items:flex-start;gap:.85rem;font-size:.92rem;color:var(--ink2);
+}
+.benefit-tick{
+  width:22px;height:22px;border-radius:50%;
+  background:var(--green-tint);
+  color:var(--green-dark);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;font-size:.7rem;font-weight:700;margin-top:1px;
+}
+.benefit strong{color:var(--ink);font-weight:600}
+
+.trust{
+  display:flex;align-items:center;gap:1.25rem;font-size:.82rem;color:var(--ink3);
+  flex-wrap:wrap;
+}
+.trust strong{color:var(--ink);font-weight:600}
+.trust-divider{width:1px;height:14px;background:var(--line)}
+.trust-stars{color:var(--peach);letter-spacing:.1em;font-size:.85rem}
+
+/* AUDIT CARD */
+.audit-card{
+  background:var(--bg2);border:1px solid var(--line);border-radius:24px;
+  padding:2.25rem;position:relative;
+  box-shadow:0 12px 50px rgba(13,14,10,.07);
+  overflow:hidden;
+}
+.audit-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:4px;
+  background:linear-gradient(90deg,var(--lavender),var(--peach),var(--green-soft));
+}
+.audit-card::after{
+  content:'';position:absolute;width:300px;height:300px;
+  background:radial-gradient(circle,rgba(255,157,110,.08),transparent 70%);
+  bottom:-100px;right:-100px;pointer-events:none;
+}
+
+.audit-head{
+  display:flex;justify-content:space-between;align-items:center;
+  margin-bottom:1.75rem;
+}
+.audit-title{font-size:.92rem;font-weight:600;color:var(--ink);letter-spacing:-.005em}
+.audit-time{font-size:.76rem;color:var(--ink3);font-weight:500}
+
+.progress{
+  height:4px;background:var(--bg3);border-radius:100px;overflow:hidden;
+  margin-bottom:1.5rem;position:relative;
+}
+.progress-bar{
+  height:100%;background:linear-gradient(90deg,var(--green),var(--peach));
+  border-radius:100px;width:25%;transition:width .5s cubic-bezier(.25,0,0,1);
+}
+.progress-label{
+  font-size:.72rem;color:var(--ink3);margin-bottom:1.25rem;
+  display:flex;justify-content:space-between;font-weight:500;
+}
+
+.q-num{
+  font-family:'Instrument Serif',serif;font-style:italic;
+  font-size:1.2rem;color:var(--ink3);letter-spacing:-.01em;margin-bottom:.4rem;
+}
+.q-text{
+  font-size:1.25rem;font-weight:500;color:var(--ink);
+  letter-spacing:-.015em;line-height:1.3;margin-bottom:1.5rem;
+}
+
+.q-opts{display:grid;gap:.6rem;margin-bottom:1.75rem}
+.q-opt{
+  padding:.85rem 1.1rem;background:var(--bg);border:1px solid var(--line);
+  border-radius:12px;font-size:.92rem;color:var(--ink);cursor:pointer;
+  font-weight:500;text-align:left;
+  transition:all .2s ease;
+  display:flex;align-items:center;gap:.75rem;
+  font-family:inherit;
+}
+.q-opt::before{
+  content:'';width:18px;height:18px;border-radius:50%;
+  border:1.5px solid var(--line);flex-shrink:0;
+  transition:all .2s ease;
+}
+.q-opt:hover{border-color:var(--green);background:var(--bg2)}
+.q-opt:hover::before{border-color:var(--green)}
+.q-opt.selected{
+  background:var(--green-tint);border-color:var(--green);
+  color:var(--green-dark);
+}
+.q-opt.selected::before{
+  background:var(--green);border-color:var(--green);
+  box-shadow:inset 0 0 0 4px var(--bg2);
+}
+
+.audit-foot{
+  display:flex;justify-content:space-between;align-items:center;
+  padding-top:1.5rem;border-top:1px solid var(--line-soft);
+}
+.audit-foot small{font-size:.74rem;color:var(--ink3)}
+.next-btn{
+  display:inline-flex;align-items:center;gap:.45rem;
+  padding:.7rem 1.4rem;background:var(--ink);color:#fff;
+  border-radius:100px;font-size:.85rem;font-weight:600;
+  text-decoration:none;border:none;cursor:pointer;
+  font-family:inherit;transition:transform .15s,opacity .15s;
+}
+.next-btn:hover{transform:translateY(-1px)}
+.next-btn:disabled{opacity:.4;cursor:not-allowed}
+
+/* SECTIONS */
+section{padding:clamp(5rem,9vw,8rem) clamp(1.5rem,5vw,3rem);position:relative}
+.container{max-width:1280px;margin:0 auto}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:.55rem;
+  font-size:.72rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--green-dark);margin-bottom:1.25rem;
+}
+.eyebrow::before{content:'';width:18px;height:1px;background:var(--green-dark)}
+.section-h{
+  font-family:'Instrument Serif',serif;
+  font-size:clamp(2rem,3.5vw,3.4rem);
+  font-weight:400;letter-spacing:-.02em;line-height:1.05;
+  color:var(--ink);margin-bottom:1.25rem;max-width:22ch;
+}
+.section-h em{
+  font-style:italic;
+  background:linear-gradient(135deg,var(--green-dark),var(--peach));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.section-sub{font-size:1.05rem;color:var(--ink2);max-width:54ch;line-height:1.5}
+
+/* DELIVERABLES */
+.deliver-wrap{
+  margin-top:4rem;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;
+}
+@media(max-width:760px){.deliver-wrap{grid-template-columns:1fr;gap:2.5rem}}
+
+.deliver-list{display:grid;gap:1.25rem}
+.deliver-item{
+  display:grid;grid-template-columns:auto 1fr;gap:1.25rem;
+  padding:1.5rem 0;border-bottom:1px solid var(--line-soft);
+  opacity:0;transform:translateY(15px);transition:opacity .6s,transform .6s;
+}
+.deliver-item.in{opacity:1;transform:translateY(0)}
+.deliver-item:last-child{border-bottom:none}
+.d-num{
+  font-family:'Instrument Serif',serif;font-style:italic;
+  font-size:2rem;color:var(--ink3);line-height:1;letter-spacing:-.03em;
+}
+.deliver-item h4{font-size:1rem;font-weight:600;color:var(--ink);margin-bottom:.3rem;letter-spacing:-.005em}
+.deliver-item p{font-size:.88rem;color:var(--ink2);line-height:1.55}
+
+/* PDF preview */
+.pdf-preview{
+  background:var(--bg2);border-radius:14px;padding:2rem;
+  box-shadow:0 24px 60px rgba(13,14,10,.1);
+  position:relative;transform:rotate(-1.5deg);
+  transition:transform .3s ease;
+  border:1px solid var(--line);
+  max-width:420px;justify-self:end;
+}
+.pdf-preview:hover{transform:rotate(0deg)}
+@media(max-width:760px){.pdf-preview{transform:none;justify-self:center}.pdf-preview:hover{transform:none}}
+.pdf-preview::before{
+  content:'YOUR REPORT';font-size:.65rem;letter-spacing:.2em;
+  position:absolute;top:-12px;left:50%;transform:translateX(-50%);
+  background:var(--peach);color:#fff;padding:.25rem .85rem;
+  border-radius:100px;font-weight:700;
+}
+.pdf-head{
+  font-size:.62rem;color:var(--ink3);letter-spacing:.18em;text-transform:uppercase;
+  font-weight:600;margin-bottom:.5rem;
+}
+.pdf-h1{
+  font-family:'Instrument Serif',serif;font-size:1.5rem;color:var(--ink);
+  font-weight:400;letter-spacing:-.02em;line-height:1.05;margin-bottom:.4rem;
+}
+.pdf-h1 em{font-style:italic;color:var(--green-dark)}
+.pdf-sub{font-size:.75rem;color:var(--ink2);margin-bottom:1.25rem}
+
+.pdf-stat{
+  background:var(--green-tint);border-radius:10px;padding:.85rem 1rem;
+  margin-bottom:1rem;display:flex;justify-content:space-between;align-items:center;
+}
+.pdf-stat-label{font-size:.7rem;color:var(--ink2);font-weight:500}
+.pdf-stat-val{
+  font-family:'Instrument Serif',serif;font-style:italic;
+  font-size:1.5rem;font-weight:400;color:var(--green-dark);letter-spacing:-.02em;
+}
+.pdf-stat.peach{background:rgba(255,157,110,.13)}
+.pdf-stat.peach .pdf-stat-val{color:var(--peach)}
+
+.pdf-rec{
+  background:var(--bg);padding:.85rem;border-radius:10px;
+  font-size:.74rem;color:var(--ink2);line-height:1.4;
+  border-left:2px solid var(--green);
+}
+.pdf-rec strong{color:var(--ink);display:block;font-weight:600;margin-bottom:.2rem;font-size:.78rem}
+
+/* JOURNEY */
+.journey-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;margin-top:4rem}
+@media(max-width:760px){.journey-grid{grid-template-columns:1fr}}
+.j-card{
+  background:var(--bg2);border:1px solid var(--line);
+  border-radius:18px;padding:2rem;position:relative;
+  transition:transform .3s ease,box-shadow .3s ease,border-color .3s ease;
+  opacity:0;transform:translateY(20px);
+}
+.j-card.in{opacity:1;transform:translateY(0);transition:opacity .6s,transform .6s,box-shadow .3s,border-color .3s}
+.j-card:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(13,14,10,.06);border-color:var(--green-soft)}
+.j-card.featured{
+  border-color:var(--green-dark);
+  background:linear-gradient(180deg,#fff 0%,var(--green-tint) 100%);
+}
+.j-card.featured::before{
+  content:'Most popular';position:absolute;top:-10px;left:50%;transform:translateX(-50%);
+  background:var(--green-dark);color:#fff;font-size:.7rem;padding:.25rem .8rem;
+  border-radius:100px;font-weight:600;letter-spacing:.05em;
+}
+.j-step{font-size:.7rem;color:var(--green-dark);letter-spacing:.12em;font-weight:600;margin-bottom:1.25rem}
+.j-title{font-family:'Instrument Serif',serif;font-style:italic;font-size:1.7rem;font-weight:400;color:var(--ink);margin-bottom:.6rem;letter-spacing:-.01em}
+.j-desc{font-size:.92rem;color:var(--ink2);line-height:1.6;margin-bottom:1.5rem;min-height:5em}
+.j-meta{display:flex;justify-content:space-between;padding-top:1.25rem;border-top:1px solid var(--line-soft);font-size:.85rem;align-items:center}
+.j-price{color:var(--ink);font-weight:600;font-size:.95rem}
+.j-time{color:var(--ink3);font-size:.8rem}
+
+/* WHO IT'S FOR */
+.who{
+  background:linear-gradient(180deg,transparent,var(--bg3) 50%,transparent);
+}
+.who-grid{
+  display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;margin-top:4rem;
+}
+@media(max-width:760px){.who-grid{grid-template-columns:1fr}}
+.who-block{
+  padding:2rem;background:var(--bg2);border:1px solid var(--line);
+  border-radius:18px;
+}
+.who-block h4{
+  font-family:'Instrument Serif',serif;font-style:italic;
+  font-size:1.25rem;color:var(--ink);font-weight:400;margin-bottom:1rem;letter-spacing:-.01em;
+}
+.who-list{display:grid;gap:.65rem;font-size:.92rem}
+.who-list li{
+  list-style:none;display:flex;align-items:flex-start;gap:.75rem;color:var(--ink2);
+}
+.who-list li::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--green);margin-top:8px;flex-shrink:0}
+.who-block.no::before{content:''}
+.who-block.no .who-list li::before{background:var(--peach)}
+.who-eyebrow{
+  font-size:.7rem;font-weight:600;color:var(--green-dark);
+  letter-spacing:.15em;text-transform:uppercase;margin-bottom:.5rem;
+}
+.who-block.no .who-eyebrow{color:var(--peach)}
+
+/* CTA */
+.cta-final{
+  text-align:center;
+  background:linear-gradient(135deg,var(--green-dark) 0%,#0a3a1c 60%,#072e16 100%);
+  color:#fff;padding:clamp(5rem,9vw,8rem) clamp(1.5rem,5vw,3rem);
+  position:relative;overflow:hidden;
+}
+.cta-final::before{
+  content:'';position:absolute;width:500px;height:500px;
+  background:radial-gradient(circle,rgba(255,157,110,.22),transparent 60%);
+  filter:blur(60px);top:-100px;right:-100px;
+}
+.cta-final::after{
+  content:'';position:absolute;width:400px;height:400px;
+  background:radial-gradient(circle,rgba(195,179,245,.18),transparent 60%);
+  filter:blur(60px);bottom:-100px;left:-100px;
+}
+.cta-content{position:relative;z-index:1}
+.cta-final h2{
+  font-family:'Instrument Serif',serif;
+  font-size:clamp(2.4rem,5vw,4.4rem);font-weight:400;letter-spacing:-.025em;line-height:1.05;
+  margin-bottom:1.25rem;
+}
+.cta-final h2 em{
+  font-style:italic;
+  background:linear-gradient(135deg,var(--peach),var(--lavender));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.cta-final p{font-size:1.1rem;color:rgba(255,255,255,.7);max-width:54ch;margin:0 auto 2.5rem}
+.btn-light{
+  background:#fff;color:var(--ink);
+  padding:.95rem 2rem;border-radius:100px;
+  font-size:.95rem;font-weight:700;text-decoration:none;
+  display:inline-flex;align-items:center;gap:.5rem;
+  transition:transform .15s,box-shadow .2s;
+}
+.btn-light::after{content:'→';transition:transform .2s}
+.btn-light:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(0,0,0,.3)}
+.btn-light:hover::after{transform:translateX(4px)}
+
+footer{padding:3rem clamp(1.5rem,5vw,3rem);border-top:1px solid var(--line);color:var(--ink3);font-size:.85rem}
+.foot-inner{max-width:1280px;margin:0 auto;display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+</style>
+</head>
+<body>
+<div class="mesh"></div>
+
+<main>
+<nav>
+  <div class="logo">Effortless<span> GTM</span></div>
+  <div class="nav-links">
+    <a href="#deliverables">What you get</a>
+    <a href="#journey">Pricing</a>
+    <a href="#" class="nav-cta">Start audit →</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div>
+    <div class="tag"><span class="tag-dot"></span>Free · 5 minutes · No sales call required</div>
+    <h1 class="h1">Find out what's <em>holding your sales back.</em></h1>
+    <p class="lead">5-minute audit. Personalised PDF. We tell you exactly where your sales motion is leaking — and what to fix first. Then you decide what's next.</p>
+    <div class="benefits">
+      <div class="benefit"><span class="benefit-tick">✓</span><span><strong>Maturity score</strong> · See where you sit vs. high-performing teams</span></div>
+      <div class="benefit"><span class="benefit-tick">✓</span><span><strong>Revenue opportunities</strong> · Quantified in your own numbers</span></div>
+      <div class="benefit"><span class="benefit-tick">✓</span><span><strong>One quick win</strong> · Something you can try this week</span></div>
+    </div>
+    <div class="trust">
+      <span class="trust-stars">★★★★★</span>
+      <span><strong>4.9</strong> from 47 B2B sales teams</span>
+      <span class="trust-divider"></span>
+      <span>Avg. completion <strong>4m 38s</strong></span>
+    </div>
+  </div>
+
+  <!-- AUDIT CARD -->
+  <div class="audit-card">
+    <div class="audit-head">
+      <div class="audit-title">The 5-minute audit</div>
+      <div class="audit-time">Step <span id="step-num">1</span> of 10</div>
+    </div>
+
+    <div class="progress"><div class="progress-bar" id="bar"></div></div>
+    <div class="progress-label">
+      <span>Started</span>
+      <span id="pct">10% complete</span>
+    </div>
+
+    <div class="q-num"><em>I.</em></div>
+    <div class="q-text" id="q-text">What's your biggest sales challenge right now?</div>
+
+    <div class="q-opts" id="q-opts">
+      <button class="q-opt" data-v="leads">Not enough qualified leads</button>
+      <button class="q-opt" data-v="conv">Low conversion to meetings or deals</button>
+      <button class="q-opt" data-v="time">Team drowning in admin / data entry</button>
+      <button class="q-opt" data-v="all">Honestly… all of the above</button>
+    </div>
+
+    <div class="audit-foot">
+      <small>🔒 No spam · GDPR-clean · Used only for your report</small>
+      <button class="next-btn" id="next" disabled>Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- DELIVERABLES -->
+<section id="deliverables">
+  <div class="container">
+    <div class="eyebrow">What you get</div>
+    <h2 class="section-h">A real <em>diagnostic report</em>, not a marketing brochure.</h2>
+    <p class="section-sub">No generic advice. No upsell. A focused PDF tailored to your team, your stage, and your bottlenecks — generated in under 60 seconds after you finish.</p>
+
+    <div class="deliver-wrap">
+      <div class="deliver-list">
+        <div class="deliver-item">
+          <div class="d-num"><em>I.</em></div>
+          <div>
+            <h4>Sales maturity score</h4>
+            <p>Tier 1 to 5. Where you sit vs. teams of your size and stage. The diagnostic, not the diagnosis.</p>
+          </div>
+        </div>
+        <div class="deliver-item">
+          <div class="d-num"><em>II.</em></div>
+          <div>
+            <h4>Revenue opportunity, quantified</h4>
+            <p>What a 20% lift in leads and 10% in conversion would mean for you — in euros, monthly, your numbers.</p>
+          </div>
+        </div>
+        <div class="deliver-item">
+          <div class="d-num"><em>III.</em></div>
+          <div>
+            <h4>Time reclaim estimate</h4>
+            <p>How many hours per rep, per week, can be automated away — at your salary cost.</p>
+          </div>
+        </div>
+        <div class="deliver-item">
+          <div class="d-num"><em>IV.</em></div>
+          <div>
+            <h4>One quick win to try this week</h4>
+            <p>A specific tactic, mapped to your situation. Free to use. We just want you to see we know what we're talking about.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- PDF preview -->
+      <div class="pdf-preview">
+        <div class="pdf-head">Effortless GTM · Sales audit report</div>
+        <div class="pdf-h1">Lumeera GmbH · <em>Tier 2</em></div>
+        <div class="pdf-sub">25 employees · 5 SDRs · €1.4M ARR</div>
+
+        <div class="pdf-stat">
+          <div class="pdf-stat-label">Maturity score</div>
+          <div class="pdf-stat-val">2.6 / 5</div>
+        </div>
+        <div class="pdf-stat peach">
+          <div class="pdf-stat-label">Monthly upside</div>
+          <div class="pdf-stat-val">+€18,400</div>
+        </div>
+        <div class="pdf-stat">
+          <div class="pdf-stat-label">Time reclaim</div>
+          <div class="pdf-stat-val">14 hrs/wk</div>
+        </div>
+        <div class="pdf-rec">
+          <strong>Quick win for this week</strong>
+          Build a "warm intent" segment in HubSpot from website visits + opened emails. 30-min setup. Run for 2 weeks. Measure replies vs. cold list.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHO -->
+<section class="who">
+  <div class="container">
+    <div class="eyebrow">Who it's for</div>
+    <h2 class="section-h">Built for teams that are <em>almost there.</em></h2>
+    <p class="section-sub">Not every team needs us. Here's the honest cut.</p>
+
+    <div class="who-grid">
+      <div class="who-block">
+        <div class="who-eyebrow">→ Yes, this is for you</div>
+        <h4>You're <em>almost</em> running a system.</h4>
+        <ul class="who-list">
+          <li>B2B SaaS or services with 5–80 employees</li>
+          <li>2–8 salespeople, no dedicated RevOps</li>
+          <li>You've tried HubSpot/Apollo/Lemlist — nothing sticks</li>
+          <li>Pipeline reviews end in finger-pointing, not clarity</li>
+          <li>You want a system, not another agency on retainer</li>
+        </ul>
+      </div>
+      <div class="who-block no">
+        <div class="who-eyebrow">← Not for you (yet)</div>
+        <h4>You're <em>not</em> ready for this.</h4>
+        <ul class="who-list">
+          <li>You don't have product-market fit yet — fix that first</li>
+          <li>You sell €500-tickets at volume — different playbook</li>
+          <li>You have a full RevOps team — they've got this</li>
+          <li>You're looking for an SDR-as-a-service vendor</li>
+          <li>You're looking for the cheapest possible agency</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- JOURNEY -->
+<section id="journey">
+  <div class="container">
+    <div class="eyebrow">If the audit lands</div>
+    <h2 class="section-h">Here's <em>what's next.</em></h2>
+    <p class="section-sub">You don't sign a 12-month retainer to start. You start with the audit. Then you choose.</p>
+
+    <div class="journey-grid">
+      <div class="j-card">
+        <div class="j-step">/ FREE START</div>
+        <div class="j-title">The audit</div>
+        <div class="j-desc">5 minutes. Personalised PDF. You can stop here and we'll have helped you more than most agencies' first call.</div>
+        <div class="j-meta"><span class="j-price">€0</span><span class="j-time">5 min</span></div>
+      </div>
+      <div class="j-card featured">
+        <div class="j-step">/ FIRST PROJECT</div>
+        <div class="j-title">Quick win</div>
+        <div class="j-desc">One bottleneck, fixed. ICP refinement, signal pipeline, or outreach sequence — scoped to your audit result, delivered in two weeks.</div>
+        <div class="j-meta"><span class="j-price">From €1,500</span><span class="j-time">2 weeks</span></div>
+      </div>
+      <div class="j-card">
+        <div class="j-step">/ FULL BUILD</div>
+        <div class="j-title">AI sales system</div>
+        <div class="j-desc">Your complete operating layer — signal engine, automation, scoring, CRM hygiene. Built, tuned, and handed over with a playbook.</div>
+        <div class="j-meta"><span class="j-price">From €5,000</span><span class="j-time">4–6 weeks</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-final">
+  <div class="cta-content">
+    <h2>Take the audit.<br>See your numbers. <em>Decide from there.</em></h2>
+    <p>5 minutes of your time. A real PDF in return. No sales call required — we'll only follow up if you ask.</p>
+    <a href="#" class="btn-light">Start the audit</a>
+  </div>
+</div>
+
+<footer>
+  <div class="foot-inner">
+    <div>© 2026 Effortless GTM</div>
+    <div>Made in Europe · GDPR-clean</div>
+  </div>
+</footer>
+</main>
+
+<script>
+// reveal on scroll
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}
+  });
+},{threshold:.1,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.deliver-item,.j-card').forEach(el => io.observe(el));
+
+// audit interaction (demo only)
+const questions = [
+  { num:'I.', text:"What's your biggest sales challenge right now?", opts:[
+    {v:'leads',l:'Not enough qualified leads'},
+    {v:'conv',l:'Low conversion to meetings or deals'},
+    {v:'time',l:'Team drowning in admin / data entry'},
+    {v:'all',l:'Honestly… all of the above'},
+  ]},
+  { num:'II.', text:'How big is your sales team?', opts:[
+    {v:'1',l:'Just me / founder-led'},
+    {v:'2-4',l:'2–4 salespeople'},
+    {v:'5-10',l:'5–10 salespeople'},
+    {v:'10+',l:'More than 10'},
+  ]},
+  { num:'III.', text:"What's your average deal size?", opts:[
+    {v:'small',l:'Under €5,000'},
+    {v:'mid',l:'€5,000 – €25,000'},
+    {v:'large',l:'€25,000 – €100,000'},
+    {v:'enterprise',l:'€100,000+'},
+  ]},
+];
+let step = 0;
+const nextBtn = document.getElementById('next');
+const qOpts = document.getElementById('q-opts');
+const qText = document.getElementById('q-text');
+const stepNum = document.getElementById('step-num');
+const bar = document.getElementById('bar');
+const pct = document.getElementById('pct');
+
+function paint() {
+  const q = questions[step] || questions[questions.length-1];
+  qText.textContent = q.text;
+  qOpts.innerHTML = q.opts.map(o => `<button class="q-opt" data-v="${o.v}">${o.l}</button>`).join('');
+  stepNum.textContent = step+1;
+  const p = ((step+1)/10)*100;
+  bar.style.width = p+'%';
+  pct.textContent = Math.round(p)+'% complete';
+  nextBtn.disabled = true;
+  qOpts.querySelectorAll('.q-opt').forEach(o => {
+    o.addEventListener('click', () => {
+      qOpts.querySelectorAll('.q-opt').forEach(x => x.classList.remove('selected'));
+      o.classList.add('selected');
+      nextBtn.disabled = false;
+    });
+  });
+}
+paint();
+nextBtn.addEventListener('click', () => {
+  if(step < questions.length-1){step++;paint();}
+});
+</script>
+</body>
+</html>

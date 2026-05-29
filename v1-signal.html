@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>if(sessionStorage.getItem('efgtm')!=='1')location.replace('index.html');</script>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Effortless GTM — Mockup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg: #f8f9f7;
+  --bg2: #ffffff;
+  --ink: #111410;
+  --ink2: #444840;
+  --ink3: #7a807a;
+  --green: #1a5c35;
+  --green-soft: #2d7a48;
+  --green-tint: rgba(26,92,53,.07);
+  --green-line: rgba(26,92,53,.15);
+  --line: #e4e8e4;
+  --r: 12px;
+}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Inter',system-ui,sans-serif;
+  font-weight:400;
+  background:var(--bg);
+  color:var(--ink);
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ── NAV ── */
+nav{
+  position:sticky;top:0;z-index:100;
+  background:rgba(248,249,247,.85);
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--line);
+  padding:0 clamp(1.5rem,5vw,4rem);
+  height:60px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.nav-logo{font-weight:600;font-size:.95rem;color:var(--ink);letter-spacing:-.01em}
+.nav-logo span{color:var(--green-soft)}
+.nav-links{display:flex;align-items:center;gap:2rem}
+.nav-links a{font-size:.82rem;color:var(--ink2);text-decoration:none;font-weight:500;transition:color .15s}
+.nav-links a:hover{color:var(--ink)}
+.nav-cta{
+  padding:.5rem 1.1rem;
+  background:var(--green);
+  color:#fff;
+  border-radius:100px;
+  font-size:.8rem;font-weight:600;
+  text-decoration:none;
+  letter-spacing:.01em;
+  transition:background .15s;
+}
+.nav-cta:hover{background:var(--green-soft)}
+
+/* ── HERO ── */
+.hero{
+  padding:clamp(5rem,10vw,9rem) clamp(1.5rem,5vw,4rem) clamp(4rem,8vw,7rem);
+  max-width:1200px;margin:0 auto;
+  display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;
+}
+@media(max-width:760px){.hero{grid-template-columns:1fr}}
+
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:.6rem;
+  font-size:.72rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--green-soft);margin-bottom:1.5rem;
+}
+.hero-eyebrow::before{content:'';width:20px;height:1.5px;background:var(--green-soft)}
+
+.hero-h1{
+  font-family:'DM Serif Display',Georgia,serif;
+  font-size:clamp(2.4rem,4.5vw,3.8rem);
+  font-weight:400;
+  line-height:1.08;
+  letter-spacing:-.02em;
+  color:var(--ink);
+  margin-bottom:1.5rem;
+}
+.hero-h1 em{font-style:italic;color:var(--green-soft)}
+
+.hero-sub{
+  font-size:1.05rem;color:var(--ink2);
+  max-width:44ch;line-height:1.65;margin-bottom:2.25rem;
+}
+
+.hero-actions{display:flex;align-items:center;gap:1rem;flex-wrap:wrap}
+.btn-primary{
+  padding:.85rem 1.75rem;
+  background:var(--green);
+  color:#fff;border-radius:100px;
+  font-size:.9rem;font-weight:600;
+  text-decoration:none;
+  transition:background .15s,transform .1s;
+  display:inline-block;
+}
+.btn-primary:hover{background:var(--green-soft);transform:translateY(-1px)}
+.btn-ghost{
+  font-size:.9rem;color:var(--ink2);
+  text-decoration:none;font-weight:500;
+  display:inline-flex;align-items:center;gap:.4rem;
+  transition:color .15s;
+}
+.btn-ghost:hover{color:var(--ink)}
+.btn-ghost::after{content:'→';transition:transform .15s}
+.btn-ghost:hover::after{transform:translateX(3px)}
+
+/* ── HERO SIGNAL VISUAL ── */
+.signal-visual{
+  background:var(--bg2);
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:2rem;
+  box-shadow:0 4px 24px rgba(0,0,0,.06);
+}
+.sv-header{font-size:.72rem;font-weight:600;color:var(--ink3);letter-spacing:.1em;text-transform:uppercase;margin-bottom:1.25rem;padding-bottom:.75rem;border-bottom:1px solid var(--line)}
+.signal-row{
+  display:flex;align-items:center;gap:.75rem;
+  padding:.65rem 0;
+  border-bottom:1px solid var(--line);
+}
+.signal-row:last-of-type{border-bottom:none}
+.sig-dot{
+  width:8px;height:8px;border-radius:50%;flex-shrink:0;
+}
+.sig-dot.hot{background:#22c55e;box-shadow:0 0 0 3px rgba(34,197,94,.18)}
+.sig-dot.warm{background:#f59e0b;box-shadow:0 0 0 3px rgba(245,158,11,.18)}
+.sig-dot.cold{background:#94a3b8;box-shadow:0 0 0 3px rgba(148,163,184,.15)}
+.sig-company{font-size:.83rem;font-weight:600;color:var(--ink);flex:1}
+.sig-signal{font-size:.75rem;color:var(--ink3);flex:1.5}
+.sig-score{
+  font-size:.72rem;font-weight:600;padding:.2rem .55rem;border-radius:100px;
+}
+.sig-score.high{background:rgba(34,197,94,.1);color:#16a34a}
+.sig-score.med{background:rgba(245,158,11,.1);color:#d97706}
+.sv-footer{
+  margin-top:1.25rem;
+  font-size:.75rem;color:var(--ink3);
+  display:flex;align-items:center;gap:.5rem;
+}
+.sv-footer::before{content:'';width:6px;height:6px;border-radius:50%;background:#22c55e;flex-shrink:0;animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.6;transform:scale(.85)}}
+
+/* ── MARQUEE STRIP ── */
+.strip{
+  background:var(--green);
+  padding:.65rem 0;overflow:hidden;
+}
+.marquee-inner{
+  display:flex;gap:3rem;width:max-content;
+  animation:marquee 28s linear infinite;
+  font-size:.72rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.7);
+}
+.marquee-inner span{white-space:nowrap}
+.marquee-inner strong{color:#fff;font-weight:700}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ── SECTION SHARED ── */
+section{padding:clamp(4rem,8vw,7rem) clamp(1.5rem,5vw,4rem)}
+.container{max-width:1200px;margin:0 auto}
+.section-label{
+  font-size:.72rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--green-soft);margin-bottom:1rem;
+  display:inline-flex;align-items:center;gap:.5rem;
+}
+.section-label::before{content:'';width:16px;height:1.5px;background:var(--green-soft)}
+.section-title{
+  font-family:'DM Serif Display',Georgia,serif;
+  font-size:clamp(1.8rem,3vw,2.8rem);
+  font-weight:400;line-height:1.12;
+  letter-spacing:-.02em;
+  color:var(--ink);
+  max-width:18ch;
+  margin-bottom:1rem;
+}
+.section-title em{font-style:italic;color:var(--green-soft)}
+
+/* ── HOW IT WORKS ── */
+.how-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3.5rem;
+}
+@media(max-width:720px){.how-grid{grid-template-columns:1fr}}
+
+.how-card{
+  background:var(--bg2);
+  border:1px solid var(--line);
+  border-radius:var(--r);
+  padding:2rem;
+  position:relative;
+  transition:box-shadow .2s,transform .2s;
+}
+.how-card:hover{box-shadow:0 8px 32px rgba(0,0,0,.07);transform:translateY(-3px)}
+.how-number{
+  font-family:'DM Serif Display',serif;
+  font-size:3rem;font-weight:400;
+  color:var(--green-line);
+  line-height:1;
+  margin-bottom:1.25rem;
+  letter-spacing:-.03em;
+}
+.how-card h3{font-size:1rem;font-weight:600;color:var(--ink);margin-bottom:.5rem;letter-spacing:-.01em}
+.how-card p{font-size:.88rem;color:var(--ink2);line-height:1.6}
+.how-badge{
+  display:inline-block;margin-top:1rem;
+  padding:.3rem .75rem;
+  background:var(--green-tint);
+  color:var(--green-soft);
+  border-radius:100px;
+  font-size:.72rem;font-weight:600;
+  letter-spacing:.04em;
+}
+
+/* ── WHAT WE BUILD ── */
+.services{background:var(--bg2)}
+.services-inner{
+  display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start;
+}
+@media(max-width:760px){.services-inner{grid-template-columns:1fr;gap:2.5rem}}
+
+.service-list{margin-top:2.5rem;display:flex;flex-direction:column;gap:.75rem}
+.service-item{
+  display:flex;align-items:flex-start;gap:1rem;
+  padding:1.25rem;
+  border-radius:var(--r);
+  cursor:pointer;
+  transition:background .15s;
+  border:1px solid transparent;
+}
+.service-item:hover,.service-item.active{
+  background:var(--green-tint);
+  border-color:var(--green-line);
+}
+.service-icon{
+  width:36px;height:36px;border-radius:8px;
+  background:var(--green-tint);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;font-size:1rem;
+}
+.service-item h4{font-size:.9rem;font-weight:600;color:var(--ink);margin-bottom:.25rem}
+.service-item p{font-size:.82rem;color:var(--ink2);line-height:1.5}
+
+/* dashboard preview */
+.dashboard-preview{
+  background:var(--bg2);
+  border:1px solid var(--line);
+  border-radius:16px;
+  overflow:hidden;
+  box-shadow:0 8px 40px rgba(0,0,0,.08);
+  position:sticky;top:90px;
+}
+.db-header{
+  padding:1rem 1.25rem;
+  border-bottom:1px solid var(--line);
+  display:flex;align-items:center;justify-content:space-between;
+}
+.db-dots{display:flex;gap:.4rem}
+.db-dot{width:10px;height:10px;border-radius:50%}
+.db-title{font-size:.75rem;font-weight:600;color:var(--ink3);letter-spacing:.06em;text-transform:uppercase}
+.db-body{padding:1.25rem}
+.db-row{
+  display:flex;align-items:center;gap:.75rem;
+  padding:.65rem .75rem;
+  border-radius:8px;
+  margin-bottom:.35rem;
+  transition:background .15s;
+}
+.db-row:hover{background:var(--bg)}
+.db-avatar{
+  width:28px;height:28px;border-radius:6px;
+  background:linear-gradient(135deg,#d4e8db,#a8d4b4);
+  flex-shrink:0;font-size:.7rem;font-weight:700;
+  display:flex;align-items:center;justify-content:center;color:var(--green);
+}
+.db-name{font-size:.8rem;font-weight:600;color:var(--ink);flex:1}
+.db-signal{font-size:.72rem;color:var(--ink3);flex:1.5}
+.db-action{
+  font-size:.7rem;font-weight:600;padding:.2rem .5rem;
+  border-radius:100px;background:var(--green-tint);color:var(--green-soft);
+  white-space:nowrap;
+}
+
+/* ── CTA SECTION ── */
+.cta-section{
+  background:var(--green);
+  padding:clamp(4rem,7vw,6rem) clamp(1.5rem,5vw,4rem);
+  text-align:center;
+}
+.cta-section .section-label{color:rgba(255,255,255,.55)}
+.cta-section .section-label::before{background:rgba(255,255,255,.4)}
+.cta-section h2{
+  font-family:'DM Serif Display',serif;
+  font-size:clamp(2rem,4vw,3.4rem);
+  font-weight:400;letter-spacing:-.025em;
+  color:#fff;margin-bottom:1rem;
+  line-height:1.1;
+}
+.cta-section h2 em{font-style:italic;opacity:.8}
+.cta-section p{font-size:1rem;color:rgba(255,255,255,.65);max-width:44ch;margin:0 auto 2.5rem}
+.btn-white{
+  padding:.9rem 2rem;
+  background:#fff;
+  color:var(--green);
+  border-radius:100px;
+  font-size:.9rem;font-weight:700;
+  text-decoration:none;
+  display:inline-block;
+  transition:opacity .15s,transform .1s;
+}
+.btn-white:hover{opacity:.9;transform:translateY(-1px)}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Effortless<span> GTM</span></div>
+  <div class="nav-links">
+    <a href="#">How it works</a>
+    <a href="#">Services</a>
+    <a href="#" class="nav-cta">Take the free audit →</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div>
+    <div class="hero-eyebrow">Signal-based outreach</div>
+    <h1 class="hero-h1">Your next customer<br>is already <em>leaving signals.</em><br>Are you seeing them?</h1>
+    <p class="hero-sub">We build AI-powered sales systems that surface buying intent, automate outreach, and deliver qualified conversations to your team — without the manual work.</p>
+    <div class="hero-actions">
+      <a href="#" class="btn-primary">Take the free audit</a>
+      <a href="#" class="btn-ghost">See how it works</a>
+    </div>
+  </div>
+
+  <!-- Signal engine mini-preview -->
+  <div class="signal-visual">
+    <div class="sv-header">Signal engine · live accounts</div>
+    <div class="signal-row">
+      <div class="sig-dot hot"></div>
+      <div class="sig-company">Lumeera GmbH</div>
+      <div class="sig-signal">Hired VP Sales · +3 SDRs</div>
+      <div class="sig-score high">Hot</div>
+    </div>
+    <div class="signal-row">
+      <div class="sig-dot hot"></div>
+      <div class="sig-company">Vellix.io</div>
+      <div class="sig-signal">Series A · LinkedIn surge</div>
+      <div class="sig-score high">Hot</div>
+    </div>
+    <div class="signal-row">
+      <div class="sig-dot warm"></div>
+      <div class="sig-company">Norra Health</div>
+      <div class="sig-signal">New CRM migration</div>
+      <div class="sig-score med">Warm</div>
+    </div>
+    <div class="signal-row">
+      <div class="sig-dot warm"></div>
+      <div class="sig-company">Birch & Co.</div>
+      <div class="sig-signal">Job post: Head of RevOps</div>
+      <div class="sig-score med">Warm</div>
+    </div>
+    <div class="signal-row">
+      <div class="sig-dot cold"></div>
+      <div class="sig-company">Klaro Mobility</div>
+      <div class="sig-signal">Website visit · pricing page</div>
+      <div class="sig-score">Watching</div>
+    </div>
+    <div class="sv-footer">Updated 2 minutes ago · 24 accounts tracked</div>
+  </div>
+</div>
+
+<!-- MARQUEE -->
+<div class="strip">
+  <div class="marquee-inner">
+    <span>Signal intelligence</span><strong>·</strong>
+    <span>Automated outreach</span><strong>·</strong>
+    <span>AI sales systems</span><strong>·</strong>
+    <span>CRM automation</span><strong>·</strong>
+    <span>ICP definition</span><strong>·</strong>
+    <span>Lead scoring</span><strong>·</strong>
+    <span>Signal intelligence</span><strong>·</strong>
+    <span>Automated outreach</span><strong>·</strong>
+    <span>AI sales systems</span><strong>·</strong>
+    <span>CRM automation</span><strong>·</strong>
+    <span>ICP definition</span><strong>·</strong>
+    <span>Lead scoring</span><strong>·</strong>
+    <span>Signal intelligence</span><strong>·</strong>
+    <span>Automated outreach</span><strong>·</strong>
+    <span>AI sales systems</span><strong>·</strong>
+    <span>CRM automation</span><strong>·</strong>
+    <span>ICP definition</span><strong>·</strong>
+    <span>Lead scoring</span><strong>·</strong>
+  </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<section>
+  <div class="container">
+    <div class="section-label">The journey</div>
+    <div class="section-title">Three steps to a <em>machine</em> that sells for you</div>
+
+    <div class="how-grid">
+      <div class="how-card">
+        <div class="how-number">01</div>
+        <h3>Free audit</h3>
+        <p>15 minutes. We map your current sales motion, identify the biggest leaks, and show you exactly where AI can replace manual work.</p>
+        <span class="how-badge">Free · 15 min</span>
+      </div>
+      <div class="how-card">
+        <div class="how-number">02</div>
+        <h3>Quick win</h3>
+        <p>One high-impact fix, scoped and delivered in two weeks. You see measurable results before committing to anything bigger.</p>
+        <span class="how-badge">From €1,500</span>
+      </div>
+      <div class="how-card">
+        <div class="how-number">03</div>
+        <h3>AI system build</h3>
+        <p>Your full signal engine. Automated prospecting, enrichment, scoring, and sequences — running in the background while your team sells.</p>
+        <span class="how-badge">From €5,000</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT WE BUILD -->
+<section class="services">
+  <div class="container">
+    <div class="services-inner">
+      <div>
+        <div class="section-label">What we build</div>
+        <div class="section-title">AI that works <em>while your team sells</em></div>
+        <div class="service-list">
+          <div class="service-item active">
+            <div class="service-icon">⚡</div>
+            <div>
+              <h4>Signal intelligence</h4>
+              <p>We track funding rounds, hiring surges, LinkedIn activity, and website visits — so your team calls at the exact right moment.</p>
+            </div>
+          </div>
+          <div class="service-item">
+            <div class="service-icon">✉</div>
+            <div>
+              <h4>Automated outreach</h4>
+              <p>Personalised sequences triggered by real buying signals. Not spray-and-pray — precision outreach at scale.</p>
+            </div>
+          </div>
+          <div class="service-item">
+            <div class="service-icon">🤖</div>
+            <div>
+              <h4>AI sales workflows</h4>
+              <p>CRM hygiene, lead scoring, follow-up automation. The admin your team hates — handled by AI, invisibly.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dashboard preview -->
+      <div class="dashboard-preview">
+        <div class="db-header">
+          <div class="db-dots">
+            <div class="db-dot" style="background:#ff5f57"></div>
+            <div class="db-dot" style="background:#febc2e"></div>
+            <div class="db-dot" style="background:#28c840"></div>
+          </div>
+          <div class="db-title">Signal Dashboard</div>
+          <div></div>
+        </div>
+        <div class="db-body">
+          <div style="font-size:.7rem;font-weight:600;color:var(--ink3);letter-spacing:.08em;text-transform:uppercase;margin-bottom:.75rem">Top accounts this week</div>
+          <div class="db-row">
+            <div class="db-avatar">L</div>
+            <div class="db-name">Lumeera GmbH</div>
+            <div class="db-signal">Hired VP Sales</div>
+            <div class="db-action">Reach out →</div>
+          </div>
+          <div class="db-row">
+            <div class="db-avatar">V</div>
+            <div class="db-name">Vellix.io</div>
+            <div class="db-signal">Series A closed</div>
+            <div class="db-action">Reach out →</div>
+          </div>
+          <div class="db-row">
+            <div class="db-avatar">N</div>
+            <div class="db-name">Norra Health</div>
+            <div class="db-signal">CRM migration</div>
+            <div class="db-action">Reach out →</div>
+          </div>
+          <div class="db-row">
+            <div class="db-avatar">B</div>
+            <div class="db-name">Birch & Co.</div>
+            <div class="db-signal">RevOps hiring</div>
+            <div class="db-action">Sequence →</div>
+          </div>
+          <div style="margin-top:1rem;padding:.85rem;background:var(--bg);border-radius:8px;font-size:.75rem;color:var(--ink2);line-height:1.5">
+            <strong style="color:var(--ink);display:block;margin-bottom:.25rem">This week's output</strong>
+            18 high-intent accounts identified · 6 sequences launched · 3 replies received
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-section">
+  <div class="container">
+    <div class="section-label">Get started</div>
+    <h2>Find out what's holding<br><em>your revenue back.</em></h2>
+    <p>15-minute audit. No sales pitch. We tell you exactly what's costing you — and what to fix first.</p>
+    <a href="#" class="btn-white">Take the free audit →</a>
+  </div>
+</div>
+
+</body>
+</html>

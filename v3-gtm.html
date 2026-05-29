@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>if(sessionStorage.getItem('efgtm')!=='1')location.replace('index.html');</script>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Effortless GTM — Your Go-To-Market, Reimagined</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#fafaf7;
+  --bg2:#ffffff;
+  --bg3:#f3f3ee;
+  --ink:#0d0e0a;
+  --ink2:#4d4e48;
+  --ink3:#7a7c75;
+  --green:#1e6b3a;
+  --green-dark:#0e4a25;
+  --green-soft:#86d4a4;
+  --peach:#ff9d6e;
+  --lavender:#b6a4f0;
+  --sky:#7fc4f5;
+  --line:#e4e4dd;
+  --line-soft:#eeede7;
+}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Inter',system-ui,sans-serif;font-weight:400;
+  background:var(--bg);color:var(--ink2);line-height:1.55;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+
+/* gradient bg blobs */
+.blob{position:fixed;border-radius:50%;filter:blur(80px);pointer-events:none;z-index:0;opacity:.5}
+.blob-1{width:600px;height:600px;background:var(--peach);top:-200px;right:-150px;animation:float1 22s ease-in-out infinite}
+.blob-2{width:500px;height:500px;background:var(--lavender);top:30%;left:-200px;animation:float2 26s ease-in-out infinite}
+.blob-3{width:450px;height:450px;background:var(--green-soft);bottom:-150px;right:20%;animation:float3 28s ease-in-out infinite;opacity:.4}
+@keyframes float1{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-40px,30px) scale(1.05)}}
+@keyframes float2{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(50px,-20px) scale(.95)}}
+@keyframes float3{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-30px,-40px) scale(1.08)}}
+
+main{position:relative;z-index:1}
+
+/* ── NAV ── */
+nav{
+  position:sticky;top:0;z-index:100;
+  background:rgba(250,250,247,.7);
+  backdrop-filter:blur(20px) saturate(180%);
+  -webkit-backdrop-filter:blur(20px) saturate(180%);
+  border-bottom:1px solid rgba(228,228,221,.6);
+  padding:0 clamp(1.5rem,5vw,3rem);height:64px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.logo{font-weight:600;font-size:.95rem;color:var(--ink);letter-spacing:-.01em}
+.logo span{
+  background:linear-gradient(135deg,var(--green-dark),var(--peach));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.nav-links{display:flex;align-items:center;gap:2.25rem}
+.nav-links a{font-size:.84rem;color:var(--ink2);text-decoration:none;font-weight:500;transition:color .15s}
+.nav-links a:hover{color:var(--ink)}
+.nav-cta{
+  padding:.55rem 1.1rem;background:var(--ink);color:#fff;
+  border-radius:100px;font-size:.82rem;font-weight:600;
+  text-decoration:none;transition:transform .15s,box-shadow .2s;
+}
+.nav-cta:hover{transform:translateY(-1px);box-shadow:0 8px 20px rgba(13,14,10,.25)}
+
+/* ── HERO ── */
+.hero{
+  padding:clamp(5rem,10vw,9rem) clamp(1.5rem,5vw,3rem) clamp(3rem,6vw,5rem);
+  max-width:1280px;margin:0 auto;text-align:center;
+}
+.tag{
+  display:inline-flex;align-items:center;gap:.55rem;
+  padding:.45rem 1rem;
+  background:rgba(255,255,255,.65);
+  backdrop-filter:blur(10px);
+  border:1px solid var(--line);
+  border-radius:100px;font-size:.74rem;color:var(--ink2);
+  margin-bottom:2.25rem;font-weight:500;
+}
+.tag-dot{
+  width:6px;height:6px;border-radius:50%;
+  background:linear-gradient(135deg,var(--green),var(--peach));
+  box-shadow:0 0 8px rgba(255,157,110,.5);
+}
+
+.h1{
+  font-family:'Instrument Serif',serif;
+  font-size:clamp(2.8rem,7vw,6rem);
+  font-weight:400;letter-spacing:-.025em;line-height:.95;
+  color:var(--ink);margin-bottom:1.75rem;
+}
+.h1 em{
+  font-style:italic;
+  background:linear-gradient(135deg,var(--green-dark) 0%,var(--peach) 60%,var(--lavender) 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.lead{
+  font-size:clamp(1.1rem,1.6vw,1.3rem);color:var(--ink2);
+  max-width:58ch;margin:0 auto 2.5rem;line-height:1.5;font-weight:400;
+}
+.cta-row{display:flex;align-items:center;justify-content:center;gap:1rem;flex-wrap:wrap}
+.btn{
+  display:inline-flex;align-items:center;gap:.5rem;
+  padding:.95rem 1.85rem;border-radius:100px;
+  font-size:.92rem;font-weight:600;text-decoration:none;
+  transition:all .2s cubic-bezier(.25,0,0,1);
+}
+.btn-primary{background:var(--ink);color:var(--bg2)}
+.btn-primary::after{content:'→';transition:transform .2s}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(13,14,10,.25)}
+.btn-primary:hover::after{transform:translateX(4px)}
+.btn-ghost{color:var(--ink);background:transparent;border:1px solid var(--ink)}
+.btn-ghost:hover{background:var(--ink);color:var(--bg2)}
+
+/* ── HERO GTM FLOW DIAGRAM ── */
+.flow-wrap{
+  margin:5rem auto 0;max-width:1100px;padding:0 1rem;position:relative;
+}
+.flow-stage-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;position:relative;
+}
+@media(max-width:760px){.flow-stage-grid{grid-template-columns:repeat(2,1fr)}}
+.flow-stage{
+  background:var(--bg2);
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:1.5rem;
+  text-align:left;
+  position:relative;
+  box-shadow:0 4px 20px rgba(13,14,10,.04);
+  transition:transform .3s ease,box-shadow .3s ease,border-color .3s ease;
+  opacity:0;transform:translateY(20px);
+}
+.flow-stage.in{opacity:1;transform:translateY(0);transition:opacity .6s,transform .6s,box-shadow .3s,border-color .3s}
+.flow-stage:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(13,14,10,.08)}
+.flow-stage::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  border-radius:18px 18px 0 0;
+}
+.flow-stage:nth-child(1)::before{background:linear-gradient(90deg,var(--lavender),transparent)}
+.flow-stage:nth-child(2)::before{background:linear-gradient(90deg,var(--sky),transparent)}
+.flow-stage:nth-child(3)::before{background:linear-gradient(90deg,var(--peach),transparent)}
+.flow-stage:nth-child(4)::before{background:linear-gradient(90deg,var(--green-soft),transparent)}
+.flow-num{
+  font-family:'Instrument Serif',serif;font-style:italic;
+  font-size:1.4rem;color:var(--ink3);margin-bottom:.75rem;
+}
+.flow-title{font-size:.95rem;font-weight:600;color:var(--ink);margin-bottom:.5rem;letter-spacing:-.01em}
+.flow-desc{font-size:.8rem;color:var(--ink2);line-height:1.55}
+
+/* arrow connectors */
+.flow-stage-grid::before{
+  content:'';position:absolute;top:50%;left:5%;right:5%;height:1px;
+  background:linear-gradient(90deg,var(--lavender),var(--sky),var(--peach),var(--green-soft));
+  opacity:.3;z-index:-1;
+}
+@media(max-width:760px){.flow-stage-grid::before{display:none}}
+
+/* ── SECTIONS ── */
+section{padding:clamp(5rem,9vw,8rem) clamp(1.5rem,5vw,3rem);position:relative}
+.container{max-width:1280px;margin:0 auto}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:.55rem;
+  font-size:.72rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--green-dark);margin-bottom:1.25rem;
+}
+.eyebrow::before{content:'';width:18px;height:1px;background:var(--green-dark)}
+.section-h{
+  font-family:'Instrument Serif',serif;
+  font-size:clamp(2.2rem,4vw,3.6rem);
+  font-weight:400;letter-spacing:-.02em;line-height:1.05;
+  color:var(--ink);margin-bottom:1.25rem;max-width:22ch;
+}
+.section-h em{
+  font-style:italic;
+  background:linear-gradient(135deg,var(--green-dark),var(--peach));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.section-sub{font-size:1.1rem;color:var(--ink2);max-width:54ch;line-height:1.5}
+
+/* ── SIGNAL LAYERS ── */
+.layers-wrap{margin-top:5rem;display:grid;gap:1rem}
+.layer{
+  background:var(--bg2);border:1px solid var(--line);
+  border-radius:20px;padding:2rem;
+  display:grid;grid-template-columns:120px 1fr 1fr;gap:2.5rem;
+  align-items:center;position:relative;overflow:hidden;
+  transition:transform .3s ease,box-shadow .3s ease;
+  opacity:0;transform:translateY(20px);
+}
+.layer.in{opacity:1;transform:translateY(0);transition:opacity .6s,transform .6s,box-shadow .3s}
+.layer:hover{transform:translateY(-3px);box-shadow:0 16px 40px rgba(13,14,10,.06)}
+@media(max-width:760px){.layer{grid-template-columns:1fr;gap:1rem;padding:1.5rem}}
+
+.layer-tag{
+  font-family:'Instrument Serif',serif;font-style:italic;
+  font-size:3rem;line-height:1;letter-spacing:-.04em;
+  background:linear-gradient(135deg,var(--green-dark),var(--peach));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.layer h3{font-size:1.5rem;font-weight:500;color:var(--ink);letter-spacing:-.015em;margin-bottom:.5rem;font-family:'Instrument Serif',serif;font-style:italic}
+.layer p{font-size:.95rem;color:var(--ink2);line-height:1.55}
+
+/* signal source chips */
+.layer-sources{display:flex;flex-wrap:wrap;gap:.4rem}
+.src-chip{
+  padding:.4rem .75rem;background:var(--bg);border:1px solid var(--line);
+  border-radius:100px;font-size:.74rem;color:var(--ink2);font-weight:500;
+  transition:all .2s ease;
+}
+.layer:hover .src-chip{background:#fff;border-color:var(--green-soft);color:var(--green-dark)}
+
+/* per-layer gradient */
+.layer:nth-child(1)::after{content:'';position:absolute;width:300px;height:300px;background:radial-gradient(circle,var(--lavender),transparent 60%);bottom:-150px;left:-100px;opacity:.15;pointer-events:none}
+.layer:nth-child(2)::after{content:'';position:absolute;width:300px;height:300px;background:radial-gradient(circle,var(--sky),transparent 60%);bottom:-150px;right:-100px;opacity:.2;pointer-events:none}
+.layer:nth-child(3)::after{content:'';position:absolute;width:300px;height:300px;background:radial-gradient(circle,var(--peach),transparent 60%);bottom:-150px;left:30%;opacity:.18;pointer-events:none}
+
+/* ── CASE / SAMPLE JOURNEY ── */
+.case{
+  background:linear-gradient(180deg,transparent,var(--bg3) 30%,var(--bg3) 70%,transparent);
+}
+.case-card{
+  background:var(--bg2);border:1px solid var(--line);
+  border-radius:24px;padding:clamp(2rem,4vw,3.5rem);
+  margin-top:4rem;display:grid;grid-template-columns:1fr 1fr;gap:3rem;
+  box-shadow:0 8px 40px rgba(13,14,10,.06);
+  align-items:center;
+}
+@media(max-width:760px){.case-card{grid-template-columns:1fr;gap:1.5rem}}
+.case-quote{
+  font-family:'Instrument Serif',serif;font-style:italic;
+  font-size:clamp(1.4rem,2.2vw,1.9rem);
+  font-weight:400;color:var(--ink);line-height:1.3;letter-spacing:-.015em;
+}
+.case-quote::before{content:'\201C';color:var(--peach);font-size:3rem;line-height:0;display:block;margin-bottom:1.5rem}
+.case-meta{margin-top:2rem;font-size:.85rem;color:var(--ink3);font-weight:500}
+.case-meta strong{color:var(--ink);font-weight:600;display:block;margin-bottom:.15rem}
+
+.case-stats{display:grid;grid-template-columns:repeat(2,1fr);gap:1.25rem}
+.case-stat{padding:1.25rem;background:var(--bg);border-radius:14px;border:1px solid var(--line-soft)}
+.case-stat-num{
+  font-family:'Instrument Serif',serif;font-style:italic;
+  font-size:2.5rem;line-height:1;font-weight:400;letter-spacing:-.03em;
+  background:linear-gradient(135deg,var(--green-dark),var(--peach));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  margin-bottom:.4rem;
+}
+.case-stat-label{font-size:.8rem;color:var(--ink2);line-height:1.4}
+
+/* ── JOURNEY (3 step) ── */
+.journey-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;margin-top:4rem}
+@media(max-width:760px){.journey-grid{grid-template-columns:1fr}}
+.j-card{
+  background:var(--bg2);border:1px solid var(--line);
+  border-radius:18px;padding:2rem;position:relative;overflow:hidden;
+  transition:transform .3s ease,box-shadow .3s ease;
+  opacity:0;transform:translateY(20px);
+}
+.j-card.in{opacity:1;transform:translateY(0);transition:opacity .6s,transform .6s,box-shadow .3s}
+.j-card:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(13,14,10,.08)}
+.j-step{font-size:.7rem;color:var(--green-dark);letter-spacing:.12em;font-weight:600;margin-bottom:1.25rem}
+.j-title{font-family:'Instrument Serif',serif;font-style:italic;font-size:1.7rem;font-weight:400;color:var(--ink);margin-bottom:.6rem;letter-spacing:-.01em}
+.j-desc{font-size:.92rem;color:var(--ink2);line-height:1.6;margin-bottom:1.5rem}
+.j-meta{display:flex;justify-content:space-between;padding-top:1.25rem;border-top:1px solid var(--line-soft);font-size:.85rem}
+.j-price{color:var(--ink);font-weight:600}
+.j-time{color:var(--ink3)}
+
+/* ── CTA FINAL ── */
+.cta-final{
+  text-align:center;
+  background:linear-gradient(135deg,var(--green-dark) 0%,#0a3a1c 60%,#072e16 100%);
+  color:#fff;padding:clamp(5rem,9vw,8rem) clamp(1.5rem,5vw,3rem);
+  position:relative;overflow:hidden;
+}
+.cta-final::before{
+  content:'';position:absolute;width:500px;height:500px;
+  background:radial-gradient(circle,rgba(255,157,110,.2),transparent 60%);
+  filter:blur(60px);top:-100px;right:-100px;
+}
+.cta-final::after{
+  content:'';position:absolute;width:400px;height:400px;
+  background:radial-gradient(circle,rgba(182,164,240,.18),transparent 60%);
+  filter:blur(60px);bottom:-100px;left:-100px;
+}
+.cta-content{position:relative;z-index:1}
+.cta-eyebrow{font-size:.72rem;color:rgba(255,255,255,.6);letter-spacing:.16em;text-transform:uppercase;font-weight:600;margin-bottom:1rem}
+.cta-final h2{
+  font-family:'Instrument Serif',serif;
+  font-size:clamp(2.4rem,5vw,4.4rem);font-weight:400;letter-spacing:-.025em;line-height:1.05;
+  margin-bottom:1.25rem;
+}
+.cta-final h2 em{
+  font-style:italic;
+  background:linear-gradient(135deg,var(--peach),var(--lavender));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.cta-final p{font-size:1.1rem;color:rgba(255,255,255,.7);max-width:54ch;margin:0 auto 2.5rem}
+.btn-light{background:#fff;color:var(--ink)}
+.btn-light:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(0,0,0,.3)}
+
+footer{padding:3rem clamp(1.5rem,5vw,3rem);border-top:1px solid var(--line);color:var(--ink3);font-size:.85rem}
+.foot-inner{max-width:1280px;margin:0 auto;display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+</style>
+</head>
+<body>
+<div class="blob blob-1"></div>
+<div class="blob blob-2"></div>
+<div class="blob blob-3"></div>
+
+<main>
+<nav>
+  <div class="logo">Effortless<span> GTM</span></div>
+  <div class="nav-links">
+    <a href="#approach">How it works</a>
+    <a href="#case">Results</a>
+    <a href="#" class="nav-cta">Take the audit →</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="tag"><span class="tag-dot"></span>The new operating system for B2B revenue teams</div>
+  <h1 class="h1">Your entire <em>go-to-market</em><br>motion. Reimagined.</h1>
+  <p class="lead">From who to target, to who to call, to what to say — we design the systems that turn your sales team into a revenue machine. Signal-driven. AI-powered. Yours.</p>
+  <div class="cta-row">
+    <a href="#" class="btn btn-primary">Take the free audit</a>
+    <a href="#approach" class="btn btn-ghost">See how it works</a>
+  </div>
+
+  <!-- GTM flow -->
+  <div class="flow-wrap">
+    <div class="flow-stage-grid">
+      <div class="flow-stage flow-stage-anim">
+        <div class="flow-num"><em>I.</em></div>
+        <div class="flow-title">Define your ICP</div>
+        <div class="flow-desc">Sharpen who you sell to. Customer profile, triggers, intent shape.</div>
+      </div>
+      <div class="flow-stage flow-stage-anim">
+        <div class="flow-num"><em>II.</em></div>
+        <div class="flow-title">Find live signals</div>
+        <div class="flow-desc">Funding, hiring, intent, web visits. The buying moments your team misses.</div>
+      </div>
+      <div class="flow-stage flow-stage-anim">
+        <div class="flow-num"><em>III.</em></div>
+        <div class="flow-title">Reach out, personalised</div>
+        <div class="flow-desc">AI writes the first touch. Your team writes the close.</div>
+      </div>
+      <div class="flow-stage flow-stage-anim">
+        <div class="flow-num"><em>IV.</em></div>
+        <div class="flow-title">Close, faster</div>
+        <div class="flow-desc">Pipeline scored, follow-ups automated, deals don't slip through.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SIGNAL LAYERS -->
+<section id="approach">
+  <div class="container">
+    <div class="eyebrow">The signal layers</div>
+    <h2 class="section-h">Three layers. <em>One operating system.</em></h2>
+    <p class="section-sub">Most outbound is built on lists. We build it on signals — the live, behavioural breadcrumbs that tell you who's ready to buy, right now.</p>
+
+    <div class="layers-wrap">
+      <div class="layer">
+        <div class="layer-tag">L01</div>
+        <div>
+          <h3>First-party signals</h3>
+          <p>Your own data — who's visiting your website, who's opening emails, who's in your CRM going cold.</p>
+        </div>
+        <div class="layer-sources">
+          <span class="src-chip">Website visits</span>
+          <span class="src-chip">CRM activity</span>
+          <span class="src-chip">Email opens</span>
+          <span class="src-chip">Demo requests</span>
+          <span class="src-chip">Stale deals</span>
+        </div>
+      </div>
+
+      <div class="layer">
+        <div class="layer-tag">L02</div>
+        <div>
+          <h3>Second-party signals</h3>
+          <p>Public behaviour around your category — LinkedIn engagement, content interaction, competitor activity.</p>
+        </div>
+        <div class="layer-sources">
+          <span class="src-chip">LinkedIn likes</span>
+          <span class="src-chip">Job posts viewed</span>
+          <span class="src-chip">Content shared</span>
+          <span class="src-chip">Event attendance</span>
+          <span class="src-chip">Competitor follows</span>
+        </div>
+      </div>
+
+      <div class="layer">
+        <div class="layer-tag">L03</div>
+        <div>
+          <h3>Third-party signals</h3>
+          <p>The world telling you a company is changing — funding, hires, technology stack moves, leadership shifts.</p>
+        </div>
+        <div class="layer-sources">
+          <span class="src-chip">Funding rounds</span>
+          <span class="src-chip">New hires</span>
+          <span class="src-chip">Tech stack changes</span>
+          <span class="src-chip">Exec moves</span>
+          <span class="src-chip">News mentions</span>
+          <span class="src-chip">Patent filings</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CASE -->
+<section class="case" id="case">
+  <div class="container">
+    <div class="eyebrow">In practice</div>
+    <h2 class="section-h">A <em>real customer</em>. Six weeks of building.</h2>
+    <p class="section-sub">A series-B SaaS company with 5 salespeople. We rebuilt their GTM motion in six weeks. Here's what changed.</p>
+
+    <div class="case-card">
+      <div>
+        <p class="case-quote">We were sending 200 cold emails a week and booking 4 meetings. Six weeks later, we send 60 and book 22. The team finally has time to actually sell.</p>
+        <div class="case-meta">
+          <strong>Head of Sales</strong>
+          B2B SaaS · 25 employees · Berlin
+        </div>
+      </div>
+      <div class="case-stats">
+        <div class="case-stat">
+          <div class="case-stat-num">5.5×</div>
+          <div class="case-stat-label">more meetings per outbound rep</div>
+        </div>
+        <div class="case-stat">
+          <div class="case-stat-num">-70%</div>
+          <div class="case-stat-label">cold outbound volume</div>
+        </div>
+        <div class="case-stat">
+          <div class="case-stat-num">€<em>42k</em></div>
+          <div class="case-stat-label">new pipeline in month one</div>
+        </div>
+        <div class="case-stat">
+          <div class="case-stat-num">14<em>d</em></div>
+          <div class="case-stat-label">audit to first booked meeting</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- JOURNEY -->
+<section>
+  <div class="container">
+    <div class="eyebrow">How we work</div>
+    <h2 class="section-h">From <em>audit</em> to <em>operating system.</em></h2>
+    <p class="section-sub">You don't sign a 12-month retainer to start. You start with a free audit and decide what you want next.</p>
+
+    <div class="journey-grid">
+      <div class="j-card">
+        <div class="j-step">/ FREE</div>
+        <div class="j-title">The 15-minute audit</div>
+        <div class="j-desc">We map your sales motion, find your highest-leverage opportunities, and tell you what to fix first — in your own numbers.</div>
+        <div class="j-meta"><span class="j-price">€0</span><span class="j-time">15 min</span></div>
+      </div>
+      <div class="j-card">
+        <div class="j-step">/ QUICK WIN</div>
+        <div class="j-title">One thing, done right</div>
+        <div class="j-desc">One automation, one signal stream, or one outreach sequence — built and live in two weeks. You see the result before scaling.</div>
+        <div class="j-meta"><span class="j-price">From €1,500</span><span class="j-time">2 weeks</span></div>
+      </div>
+      <div class="j-card">
+        <div class="j-step">/ FULL BUILD</div>
+        <div class="j-title">The whole machine</div>
+        <div class="j-desc">Your complete GTM stack — signal engine, ICP, sequences, scoring, CRM — built, tuned, and handed over with the playbook.</div>
+        <div class="j-meta"><span class="j-price">From €5,000</span><span class="j-time">4–6 weeks</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<div class="cta-final">
+  <div class="cta-content">
+    <div class="cta-eyebrow">Get started</div>
+    <h2>The audit takes 15 minutes.<br>The results <em>change everything.</em></h2>
+    <p>No pitch. No slides. We tell you exactly what's broken, what's missing, and what to build first.</p>
+    <a href="#" class="btn btn-light">Take the free audit →</a>
+  </div>
+</div>
+
+<footer>
+  <div class="foot-inner">
+    <div>© 2026 Effortless GTM · GTM systems for B2B revenue teams</div>
+    <div>Made in Europe · GDPR-clean</div>
+  </div>
+</footer>
+</main>
+
+<script>
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if(e.isIntersecting){
+      e.target.classList.add('in');
+      io.unobserve(e.target);
+    }
+  });
+},{threshold:.1,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.flow-stage,.layer,.j-card').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
