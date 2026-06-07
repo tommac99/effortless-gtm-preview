@@ -4,21 +4,27 @@
 <script>if(sessionStorage.getItem('efgtm')!=='1')location.replace('index.html');</script>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>Effortless GTM — Soft Sweep Variants</title>
+<title>Effortless GTM — Type & Copy Variants</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<!-- ALL fonts loaded once, cached across variant switches -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Inter+Tight:wght@600;700;800&family=Manrope:wght@600;700;800&family=Outfit:wght@700;800&family=Plus+Jakarta+Sans:wght@600;700;800&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Bricolage+Grotesque:ital,opsz,wght@1,12..96,400;1,12..96,500&family=Geist:wght@600;700&family=Instrument+Serif:ital@1&family=Fraunces:ital,opsz,wght@1,9..144,400;1,9..144,500&family=Cormorant+Garamond:ital,wght@1,400;1,500;1,600&family=Crimson+Pro:ital,wght@1,400;1,600&family=DM+Serif+Display:ital@1&family=Playfair+Display:ital,wght@1,400;1,500&family=Spectral:ital,wght@1,400;1,500&family=Lora:ital,wght@1,400;1,500&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --canvas:#000;
   --ink:#f5f4ef;
   --ink-2:rgba(245,244,239,0.70);
   --ink-3:rgba(245,244,239,0.45);
   --mint:#bce0c6;
   --cream:#f0eadb;
   --cream-strong:#e6dec7;
-  --line:rgba(245,244,239,0.08);
+
+  /* Variant-driven (defaults: I) */
+  --font-l1:'Inter',sans-serif;
+  --weight-l1:800;
+  --font-l2:'Instrument Serif',Georgia,serif;
+  --letter-l1:-0.035em;
+  --letter-l2:-0.025em;
 }
 html,body{height:100%}
 body{
@@ -27,7 +33,6 @@ body{
   -webkit-font-smoothing:antialiased;overflow:hidden;
 }
 
-/* PHOTO */
 #bg-photo{position:fixed;inset:0;z-index:0;overflow:hidden}
 #bg-photo img{
   width:100%;height:100%;object-fit:cover;object-position:center;
@@ -41,9 +46,8 @@ body{
     linear-gradient(to top,rgba(0,0,0,0.55) 0%,transparent 35%);
 }
 
-/* NAV */
 header.nav{
-  position:fixed;top:0;left:0;right:340px;z-index:50;
+  position:fixed;top:0;left:0;right:360px;z-index:50;
   height:84px;display:flex;align-items:center;justify-content:space-between;
   padding:0 clamp(28px,4vw,56px);
 }
@@ -53,13 +57,12 @@ header.nav{
   border-radius:9999px;font-size:.92rem;font-weight:600;
   text-decoration:none;letter-spacing:.01em;
   transition:transform .15s ease,background .2s ease;
-  display:inline-flex;align-items:center;gap:.4rem;font-family:inherit;
+  display:inline-flex;align-items:center;gap:.4rem;font-family:'Inter',sans-serif;
 }
 .cta-btn:hover{background:var(--cream-strong);transform:translateY(-1px)}
 
-/* CONTENT */
 main.content{
-  position:fixed;inset:0;right:340px;z-index:10;
+  position:fixed;inset:0;right:360px;z-index:10;
   display:flex;flex-direction:column;align-items:center;justify-content:center;
   padding:96px 32px 64px;gap:2.5rem;pointer-events:none;
 }
@@ -71,24 +74,31 @@ h1.headline{
 }
 h1.headline .l1{
   display:block;
-  font-family:'Inter',sans-serif;font-weight:700;letter-spacing:-0.035em;
-  font-size:clamp(2.4rem,5vw,4.2rem);color:var(--ink);
+  font-family:var(--font-l1);
+  font-weight:var(--weight-l1);
+  letter-spacing:var(--letter-l1);
+  font-size:clamp(2.4rem,5vw,4.2rem);
+  color:var(--ink);
 }
 h1.headline .l2{
   display:block;
-  font-family:'Instrument Serif',Georgia,serif;font-style:italic;font-weight:400;
-  font-size:clamp(3.4rem,7.2vw,6.5rem);
-  letter-spacing:-0.025em;color:var(--ink);
+  font-family:var(--font-l2);
+  font-style:italic;
+  font-weight:400;
+  letter-spacing:var(--letter-l2);
+  font-size:clamp(3.4rem,7.4vw,6.8rem);
+  color:var(--ink);
   margin-top:0.25rem;
   text-shadow:0 8px 60px rgba(255,250,235,0.15);
 }
 
 .sub{
-  font-size:1rem;color:var(--ink-2);text-align:center;
+  font-family:'Inter',sans-serif;
+  font-size:1rem;font-weight:400;color:var(--ink-2);text-align:center;
   max-width:46ch;line-height:1.55;
+  letter-spacing:0.005em;
 }
 
-/* GLASS FORM */
 .form-glass{
   width:100%;max-width:580px;
   background:rgba(20,28,22,0.42);
@@ -100,19 +110,19 @@ h1.headline .l2{
   box-shadow:0 1px 0 rgba(255,255,255,0.05) inset,0 16px 50px rgba(0,0,0,0.35);
 }
 .form-glass .label{
+  font-family:'Inter',sans-serif;
   font-size:.7rem;color:var(--ink-3);font-weight:600;
   letter-spacing:0.18em;text-transform:uppercase;margin-bottom:.55rem;
 }
 .form-glass textarea{
-  width:100%;border:none;outline:none;resize:none;
-  background:transparent;color:var(--ink);font-family:inherit;
-  font-size:1.05rem;line-height:1.5;min-height:28px;
+  width:100%;border:none;outline:none;resize:none;background:transparent;color:var(--ink);
+  font-family:'Inter',sans-serif;font-size:1.05rem;line-height:1.5;min-height:28px;
 }
 .form-glass textarea::placeholder{color:var(--ink-3)}
 .form-foot{
   display:flex;justify-content:space-between;align-items:center;
-  margin-top:.85rem;padding-top:.85rem;
-  border-top:1px solid rgba(245,244,239,0.06);
+  margin-top:.85rem;padding-top:.85rem;border-top:1px solid rgba(245,244,239,0.06);
+  font-family:'Inter',sans-serif;
 }
 .form-foot .count{font-size:.72rem;color:var(--ink-3)}
 .form-foot button{
@@ -124,45 +134,45 @@ h1.headline .l2{
 
 /* PICKER */
 aside.picker{
-  position:fixed;top:0;right:0;bottom:0;width:340px;z-index:100;
-  background:rgba(6,8,7,0.95);backdrop-filter:blur(20px);
+  position:fixed;top:0;right:0;bottom:0;width:360px;z-index:100;
+  background:rgba(6,8,7,0.96);backdrop-filter:blur(20px);
   border-left:1px solid rgba(245,244,239,0.06);
-  padding:2rem 1.5rem 1.5rem;
-  display:flex;flex-direction:column;gap:1rem;overflow-y:auto;
+  padding:1.75rem 1.25rem 1.25rem;
+  display:flex;flex-direction:column;gap:.85rem;overflow-y:auto;
+  font-family:'Inter',sans-serif;
 }
 .picker-header{padding-bottom:1rem;border-bottom:1px solid rgba(245,244,239,0.06)}
-.picker-header .pe{font-size:.65rem;font-weight:700;letter-spacing:0.2em;color:var(--mint);text-transform:uppercase;margin-bottom:.4rem}
-.picker-header h2{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;font-size:1.45rem;color:var(--ink);letter-spacing:-0.01em}
-.picker-header p{font-size:.78rem;color:var(--ink-3);margin-top:.5rem;line-height:1.5}
+.picker-header .pe{font-size:.62rem;font-weight:700;letter-spacing:0.22em;color:var(--mint);text-transform:uppercase;margin-bottom:.45rem}
+.picker-header h2{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;font-size:1.4rem;color:var(--ink);letter-spacing:-0.01em}
+.picker-header p{font-size:.75rem;color:var(--ink-3);margin-top:.45rem;line-height:1.5}
 
-.picker-list{display:flex;flex-direction:column;gap:.4rem;list-style:none}
+.picker-list{display:flex;flex-direction:column;gap:.45rem;list-style:none}
 .picker-list button{
   width:100%;text-align:left;
   background:transparent;border:1px solid rgba(245,244,239,0.06);
-  border-radius:10px;padding:.85rem 1rem;
-  color:var(--ink-2);font-family:inherit;font-size:.85rem;cursor:pointer;
-  display:flex;align-items:flex-start;gap:.75rem;
+  border-radius:10px;padding:.75rem .9rem;
+  color:var(--ink-2);font-family:'Inter',sans-serif;cursor:pointer;
   transition:all .15s ease;
+  display:flex;flex-direction:column;gap:.3rem;
 }
 .picker-list button:hover{border-color:rgba(245,244,239,0.16);background:rgba(245,244,239,0.03);color:var(--ink)}
-.picker-list button.active{border-color:var(--cream);background:rgba(240,234,219,0.08);color:var(--cream)}
-.picker-list .num{font-family:'Instrument Serif',serif;font-style:italic;font-size:1.05rem;color:var(--ink-3);min-width:1.7em;flex-shrink:0}
-.picker-list button.active .num{color:var(--cream-strong)}
-.picker-list .meta{display:flex;flex-direction:column;gap:.2rem;flex:1}
-.picker-list .name{font-weight:500;font-size:.9rem}
-.picker-list .tag{font-size:.68rem;color:var(--ink-3);letter-spacing:0.06em;text-transform:uppercase}
-.picker-list button.active .tag{color:var(--cream-strong)}
+.picker-list button.active{border-color:var(--cream);background:rgba(240,234,219,0.06);color:var(--cream)}
+
+.pl-head{display:flex;align-items:baseline;gap:.55rem}
+.pl-num{font-family:'Instrument Serif',serif;font-style:italic;font-size:.95rem;color:var(--ink-3);min-width:1.8em}
+.picker-list button.active .pl-num{color:var(--cream-strong)}
+.pl-name{font-weight:500;font-size:.82rem;flex:1}
+.pl-sub{font-size:.71rem;color:var(--ink-3);line-height:1.4;font-style:italic;padding-left:2.35em}
+.picker-list button.active .pl-sub{color:rgba(240,234,219,0.7)}
 
 .picker-desc{
-  margin-top:auto;padding:1rem;
+  margin-top:auto;padding:.9rem 1rem;
   background:rgba(245,244,239,0.03);
   border:1px solid rgba(245,244,239,0.06);
   border-radius:10px;
-  font-size:.78rem;color:var(--ink-2);line-height:1.55;
+  font-size:.75rem;color:var(--ink-2);line-height:1.55;
 }
-
 canvas{display:block;width:100%!important;height:100%!important}
-
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
@@ -180,9 +190,9 @@ canvas{display:block;width:100%!important;height:100%!important}
 <main class="content">
   <h1 class="headline">
     <span class="l1">Automate your business,</span>
-    <span class="l2">intelligently.</span>
+    <span class="l2" id="l2-italic">intelligently.</span>
   </h1>
-  <p class="sub">Free 5-minute audit. We email you a personalised report with your quick wins.</p>
+  <p class="sub" id="sub-text">5-minute audit. Free report. Real numbers.</p>
 
   <div class="form-glass">
     <div class="label">What do you want to automate?</div>
@@ -196,19 +206,12 @@ canvas{display:block;width:100%!important;height:100%!important}
 
 <aside class="picker">
   <div class="picker-header">
-    <div class="pe">WebGL Soft Sweep · 5 intensities</div>
-    <h2>Same vibe, more motion.</h2>
-    <p>Same shader philosophy. Pick the level of energy.</p>
+    <div class="pe">Type & Copy · 10 variants</div>
+    <h2>Pick a voice.</h2>
+    <p>Same lighting (Faster Sweep). Different headline pair + subtitle. Hover for details.</p>
   </div>
-  <ol class="picker-list" id="picker-list">
-    <li><button data-c="1"><span class="num">I.</span><span class="meta"><span class="name">Original</span><span class="tag">Calm · single sweep</span></span></button></li>
-    <li><button data-c="2"><span class="num">II.</span><span class="meta"><span class="name">Faster Sweep</span><span class="tag">Energetic · 2× speed</span></span></button></li>
-    <li><button data-c="3"><span class="num">III.</span><span class="meta"><span class="name">Crossing Sweeps</span><span class="tag">Dynamic · two beams</span></span></button></li>
-    <li><button data-c="4"><span class="num">IV.</span><span class="meta"><span class="name">Breathing Pulse</span><span class="tag">Alive · amplitude shifts</span></span></button></li>
-    <li><button data-c="5"><span class="num">V.</span><span class="meta"><span class="name">Multi-band Wave</span><span class="tag">Layered · three streams</span></span></button></li>
-    <li><button data-c="6"><span class="num">VI.</span><span class="meta"><span class="name">Warm + Cool</span><span class="tag">Hue dance · cream + mint</span></span></button></li>
-  </ol>
-  <div class="picker-desc" id="picker-desc">Pick one. Use 1–6 keys or arrow keys.</div>
+  <ol class="picker-list" id="picker-list"></ol>
+  <div class="picker-desc" id="picker-desc">Pick one to start.</div>
 </aside>
 
 <script type="importmap">
@@ -217,169 +220,196 @@ canvas{display:block;width:100%!important;height:100%!important}
 <script type="module">
 import * as THREE from 'three'
 
-const effectEl = document.getElementById('bg-effect')
-const DESC = {
-  1: 'Original — single soft sweep, slow speed. The baseline you liked. Subtle, elegant.',
-  2: 'Roughly 2× faster. More visibly moving without changing tone. Best if the original felt too still.',
-  3: 'Two beams crossing each other diagonally. Light bounces. More cinematic feel.',
-  4: 'Single sweep with amplitude that breathes — intensity rises and falls like a heartbeat. Most "alive".',
-  5: 'Three parallel waves moving at different speeds. Layered, sophisticated, more depth.',
-  6: 'Two sweeps: one warm cream, one cool mint. Hue shifts dance against each other. Most premium feel.',
+// ─── HEADLINE / COPY VARIANTS ─────────────────────────────────────
+const VARIANTS = [
+  {
+    n:'I',  label:'Modern Editorial',
+    fontL1:'"Inter",sans-serif',         wL1:800, lL1:'-0.035em',
+    fontL2:'"Instrument Serif",serif',   lL2:'-0.025em',
+    sub:'5-minute audit. Free report. Real numbers.',
+    desc:'The baseline. Inter heavy + Instrument Serif italic. Modern SaaS meets European editorial.',
+  },
+  {
+    n:'II', label:'Premium Serif',
+    fontL1:'"Inter Tight",sans-serif',   wL1:800, lL1:'-0.04em',
+    fontL2:'"Fraunces",serif',           lL2:'-0.03em',
+    sub:'Tell us your process. We send the report.',
+    desc:'Inter Tight (denser) + Fraunces. Variable serif with editorial weight. Feels established.',
+  },
+  {
+    n:'III',label:'Soft Luxury',
+    fontL1:'"Manrope",sans-serif',       wL1:800, lL1:'-0.032em',
+    fontL2:'"Cormorant Garamond",serif', lL2:'-0.015em',
+    sub:'5 minutes to your annual savings.',
+    desc:'Manrope (rounder geometric sans) + Cormorant. The luxury fashion editorial pair. Aesop store energy.',
+  },
+  {
+    n:'IV', label:'Engineering Calm',
+    fontL1:'"Geist",sans-serif',         wL1:700, lL1:'-0.03em',
+    fontL2:'"Crimson Pro",serif',        lL2:'-0.02em',
+    sub:'Free audit. Personalised report. Optional call.',
+    desc:'Geist (Vercel) + Crimson Pro. The "we are engineers but we read books" combo.',
+  },
+  {
+    n:'V',  label:'Confident Studio',
+    fontL1:'"Outfit",sans-serif',        wL1:800, lL1:'-0.035em',
+    fontL2:'"DM Serif Display",serif',   lL2:'-0.02em',
+    sub:'Find what\'s worth automating — in 5 minutes.',
+    desc:'Outfit (friendlier sans) + DM Serif Display (heavy slab). Bold and confident.',
+  },
+  {
+    n:'VI', label:'Polished Classic',
+    fontL1:'"Plus Jakarta Sans",sans-serif',  wL1:800, lL1:'-0.034em',
+    fontL2:'"Playfair Display",serif',        lL2:'-0.02em',
+    sub:'5-min audit. Free report. No sales pitch.',
+    desc:'Plus Jakarta + Playfair Display. The "classic but contemporary" choice.',
+  },
+  {
+    n:'VII',label:'Matched Pair',
+    fontL1:'"Bricolage Grotesque",sans-serif',wL1:800, lL1:'-0.034em',
+    fontL2:'"Bricolage Grotesque",sans-serif',lL2:'-0.025em',
+    sub:'Your automation potential, calculated.',
+    desc:'Bricolage Grotesque matched pair — sans + italic from the same family. Distinctive, very designed.',
+    italic500:true,
+  },
+  {
+    n:'VIII',label:'Editorial Quiet',
+    fontL1:'"Inter",sans-serif',         wL1:800, lL1:'-0.035em',
+    fontL2:'"Spectral",serif',           lL2:'-0.025em',
+    sub:'Five minutes. Real numbers. Yours to keep.',
+    desc:'Inter + Spectral. Spectral is more conservative — feels like a serious European agency.',
+  },
+  {
+    n:'IX', label:'Honest Friendly',
+    fontL1:'"Manrope",sans-serif',       wL1:800, lL1:'-0.032em',
+    fontL2:'"Lora",serif',               lL2:'-0.02em',
+    sub:'Free assessment. Quick wins. Real savings.',
+    desc:'Manrope + Lora. Most readable, most "approachable". Less luxury, more trustworthy.',
+  },
+  {
+    n:'X',  label:'Display Drama',
+    fontL1:'"Outfit",sans-serif',        wL1:800, lL1:'-0.034em',
+    fontL2:'"Fraunces",serif',           lL2:'-0.035em',
+    sub:'5-minute audit. Your savings, in euros.',
+    desc:'Outfit + Fraunces opsz at display size — most dramatic. The italic word becomes a hero element.',
+    italic500:true,
+  },
+]
+
+const root = document.documentElement
+function applyVariant(v){
+  root.style.setProperty('--font-l1', v.fontL1)
+  root.style.setProperty('--weight-l1', String(v.wL1))
+  root.style.setProperty('--font-l2', v.fontL2)
+  root.style.setProperty('--letter-l1', v.lL1)
+  root.style.setProperty('--letter-l2', v.lL2)
+  const italicEl = document.getElementById('l2-italic')
+  italicEl.style.fontWeight = v.italic500 ? '500' : '400'
+  document.getElementById('sub-text').textContent = v.sub
+  document.getElementById('picker-desc').textContent = v.desc
 }
 
-let currentCleanup = null
-let currentN = null
-const dpr = Math.min(window.devicePixelRatio || 1, 2)
+// ─── PICKER UI ─────────────────────────────────────────────────────
+const listEl = document.getElementById('picker-list')
+VARIANTS.forEach((v, i) => {
+  const li = document.createElement('li')
+  const fontShortL1 = v.fontL1.split(',')[0].replace(/"/g,'').replace(' Grotesque','')
+  const fontShortL2 = v.fontL2.split(',')[0].replace(/"/g,'').replace(' Grotesque','').replace(' Garamond','').replace(' Display','').replace(' Pro','').replace(' Serif','')
+  li.innerHTML = `
+    <button data-c="${i}">
+      <div class="pl-head">
+        <span class="pl-num">${v.n}.</span>
+        <span class="pl-name">${v.label} — <span style="opacity:0.7">${fontShortL1} + ${fontShortL2}</span></span>
+      </div>
+      <div class="pl-sub">"${v.sub}"</div>
+    </button>`
+  listEl.appendChild(li)
+})
 
-const VARIANTS = {
-  1: { speed: 0.035, amp: 1.0, beams: 1, breathe: 0, warmCool: 0 },
-  2: { speed: 0.075, amp: 1.0, beams: 1, breathe: 0, warmCool: 0 },
-  3: { speed: 0.045, amp: 1.0, beams: 2, breathe: 0, warmCool: 0 },
-  4: { speed: 0.040, amp: 1.0, beams: 1, breathe: 1, warmCool: 0 },
-  5: { speed: 0.045, amp: 1.0, beams: 3, breathe: 0, warmCool: 0 },
-  6: { speed: 0.045, amp: 1.0, beams: 2, breathe: 0.4, warmCool: 1 },
-}
-
-function clearEffect(){
-  if(currentCleanup){ currentCleanup(); currentCleanup = null }
-  effectEl.innerHTML = ''
-}
-
-function softSweep(opts){
-  const canvas = document.createElement('canvas')
-  canvas.style.position = 'absolute'
-  canvas.style.inset = '0'
-  canvas.style.mixBlendMode = 'screen'
-  effectEl.appendChild(canvas)
-
-  const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: false })
-  renderer.setPixelRatio(Math.min(dpr, 1.5))
-
-  const scene = new THREE.Scene()
-  const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1)
-  const geom = new THREE.PlaneGeometry(2, 2)
-
-  const mat = new THREE.ShaderMaterial({
-    transparent: true,
-    blending: THREE.AdditiveBlending,
-    uniforms: {
-      uT: { value: 0 },
-      uRes: { value: new THREE.Vector2(window.innerWidth, window.innerHeight) },
-      uSpeed: { value: opts.speed },
-      uBeams: { value: opts.beams },
-      uBreathe: { value: opts.breathe },
-      uWarmCool: { value: opts.warmCool },
-    },
-    vertexShader: `void main(){gl_Position = vec4(position, 1.0);}`,
-    fragmentShader: `
-      precision highp float;
-      uniform float uT;
-      uniform vec2 uRes;
-      uniform float uSpeed;
-      uniform float uBeams;
-      uniform float uBreathe;
-      uniform float uWarmCool;
-
-      // soft band on a 1D parameter (pos)
-      float band(float pos, float t, float phase, float speed, float width){
-        float w = sin(pos * 2.8 - t * speed * 1.5 + phase) * 0.5 + 0.5;
-        return smoothstep(0.55 - width, 0.65, w) * smoothstep(0.95 - width * 0.3, 0.7 - width * 0.5, w);
-      }
-
-      void main(){
-        vec2 uv = gl_FragCoord.xy / uRes;
-
-        float t = uT * uSpeed;
-
-        // Breathing amplitude pulse
-        float breath = 1.0 + uBreathe * sin(uT * 0.5) * 0.7;
-
-        // Beam 1 — diagonal sweep
-        float a1 = 0.7;
-        float p1 = uv.x * cos(a1) + uv.y * sin(a1);
-        float beam1 = band(p1, uT, 0.0, uSpeed * 1.5, 0.0);
-        vec3 col1 = vec3(1.0, 0.97, 0.90) * beam1 * 0.18 * breath;
-
-        // Beam 2 — opposite diagonal (only if uBeams >= 2)
-        float a2 = -0.7;
-        float p2 = uv.x * cos(a2) + uv.y * sin(a2);
-        float beam2 = band(p2, uT, 1.7, uSpeed * 1.2, 0.0) * step(1.5, uBeams);
-        vec3 c2col = mix(vec3(1.0, 0.97, 0.90), vec3(0.83, 0.95, 0.88), uWarmCool);
-        vec3 col2 = c2col * beam2 * 0.16 * breath;
-
-        // Beam 3 — third parallel wave (only if uBeams >= 3)
-        float a3 = 0.7;
-        float p3 = uv.x * cos(a3) + uv.y * sin(a3) + 0.25;
-        float beam3 = band(p3, uT, 3.4, uSpeed * 0.7, 0.05) * step(2.5, uBeams);
-        vec3 col3 = vec3(1.0, 0.95, 0.85) * beam3 * 0.12 * breath;
-
-        // Soft secondary slow ambient on beam 1
-        float wave2 = sin(p1 * 1.5 + t * 0.8 + 1.5) * 0.5 + 0.5;
-        float ambient = smoothstep(0.55, 0.7, wave2) * smoothstep(0.92, 0.78, wave2) * 0.5 * breath;
-        vec3 colA = vec3(1.0, 0.97, 0.90) * ambient * 0.10;
-
-        vec3 col = col1 + col2 + col3 + colA;
-        float alpha = beam1 * 0.18 + beam2 * 0.14 + beam3 * 0.10 + ambient * 0.10;
-
-        gl_FragColor = vec4(col, alpha);
-      }
-    `,
+let currentIdx = 0
+function pick(i){
+  currentIdx = i
+  applyVariant(VARIANTS[i])
+  document.querySelectorAll('.picker-list button').forEach((b, idx) => {
+    b.classList.toggle('active', idx === i)
   })
-
-  const mesh = new THREE.Mesh(geom, mat)
-  scene.add(mesh)
-
-  function size(){
-    const w = window.innerWidth, h = window.innerHeight
-    renderer.setSize(w, h, false)
-    mat.uniforms.uRes.value.set(w, h)
-  }
-  size()
-  const onResize = () => size()
-  window.addEventListener('resize', onResize)
-
-  let rafId, start = performance.now()
-  function frame(){
-    mat.uniforms.uT.value = (performance.now() - start) / 1000
-    renderer.render(scene, camera)
-    rafId = requestAnimationFrame(frame)
-  }
-  frame()
-
-  return () => {
-    cancelAnimationFrame(rafId)
-    window.removeEventListener('resize', onResize)
-    renderer.dispose()
-    geom.dispose()
-    mat.dispose()
-  }
 }
-
-function pick(n){
-  clearEffect()
-  currentN = n
-  currentCleanup = softSweep(VARIANTS[n])
-  document.querySelectorAll('.picker-list button').forEach(b => {
-    b.classList.toggle('active', b.dataset.c === String(n))
-  })
-  document.getElementById('picker-desc').textContent = DESC[n]
-}
-
 document.querySelectorAll('.picker-list button').forEach(b => {
   b.addEventListener('click', () => pick(Number(b.dataset.c)))
 })
-
 window.addEventListener('keydown', e => {
   if(e.target.tagName === 'TEXTAREA' || e.target.tagName === 'INPUT') return
-  if(/^[1-6]$/.test(e.key)){ pick(Number(e.key)) }
+  if(/^[1-9]$/.test(e.key)){ pick(Number(e.key) - 1) }
+  if(e.key === '0'){ pick(9) }
   if(e.key === 'ArrowDown' || e.key === 'ArrowRight'){
-    e.preventDefault(); pick(currentN === 6 ? 1 : (currentN || 0) + 1)
+    e.preventDefault(); pick((currentIdx + 1) % VARIANTS.length)
   } else if(e.key === 'ArrowUp' || e.key === 'ArrowLeft'){
-    e.preventDefault(); pick(currentN === 1 ? 6 : (currentN || 2) - 1)
+    e.preventDefault(); pick((currentIdx - 1 + VARIANTS.length) % VARIANTS.length)
   }
 })
 
-pick(1)
+// ─── FASTER SWEEP (locked background) ──────────────────────────────
+const effectEl = document.getElementById('bg-effect')
+const dpr = Math.min(window.devicePixelRatio || 1, 2)
+
+const canvas = document.createElement('canvas')
+canvas.style.position = 'absolute'
+canvas.style.inset = '0'
+canvas.style.mixBlendMode = 'screen'
+effectEl.appendChild(canvas)
+
+const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: false })
+renderer.setPixelRatio(Math.min(dpr, 1.5))
+
+const scene = new THREE.Scene()
+const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1)
+const geom = new THREE.PlaneGeometry(2, 2)
+
+const mat = new THREE.ShaderMaterial({
+  transparent: true,
+  blending: THREE.AdditiveBlending,
+  uniforms: {
+    uT: { value: 0 },
+    uRes: { value: new THREE.Vector2(window.innerWidth, window.innerHeight) },
+  },
+  vertexShader: `void main(){gl_Position = vec4(position, 1.0);}`,
+  fragmentShader: `
+    precision highp float;
+    uniform float uT;
+    uniform vec2 uRes;
+    void main(){
+      vec2 uv = gl_FragCoord.xy / uRes;
+      float a1 = 0.7;
+      float p1 = uv.x * cos(a1) + uv.y * sin(a1);
+      float speed = 0.075;
+      float w = sin(p1 * 2.8 - uT * speed * 1.5) * 0.5 + 0.5;
+      float beam = smoothstep(0.55, 0.65, w) * smoothstep(0.95, 0.7, w);
+      float w2 = sin(p1 * 1.5 + uT * speed * 0.8 + 1.5) * 0.5 + 0.5;
+      float ambient = smoothstep(0.55, 0.7, w2) * smoothstep(0.92, 0.78, w2) * 0.5;
+      vec3 col = vec3(1.0, 0.97, 0.90) * (beam + ambient) * 0.20;
+      gl_FragColor = vec4(col, beam * 0.20 + ambient * 0.12);
+    }
+  `,
+})
+scene.add(new THREE.Mesh(geom, mat))
+
+function size(){
+  const w = window.innerWidth, h = window.innerHeight
+  renderer.setSize(w, h, false)
+  mat.uniforms.uRes.value.set(w, h)
+}
+size()
+window.addEventListener('resize', size)
+
+let start = performance.now()
+function frame(){
+  mat.uniforms.uT.value = (performance.now() - start) / 1000
+  renderer.render(scene, camera)
+  requestAnimationFrame(frame)
+}
+frame()
+
+pick(0)
 </script>
 </body>
 </html>
