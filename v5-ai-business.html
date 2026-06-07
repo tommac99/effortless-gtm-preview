@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>if(sessionStorage.getItem('efgtm')!=='1')location.replace('index.html');</script>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Effortless GTM — AI that does the work your team hates doing.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#fbfaf7;
+  --bg2:#ffffff;
+  --bg3:#f3f2ed;
+  --bg-dark:#0a1a0f;
+  --ink:#0d0e0a;
+  --ink2:#4a4b45;
+  --ink3:#86877f;
+  --green:#1e6b3a;
+  --green-dark:#0e4a25;
+  --green-soft:#a8e0bc;
+  --green-tint:#e8f3ec;
+  --peach:#ff9d6e;
+  --peach-soft:#ffcdb0;
+  --lavender:#c3b3f5;
+  --line:#e6e5de;
+  --line-soft:#f0efe9;
+}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Inter',system-ui,sans-serif;font-weight:400;
+  background:var(--bg);color:var(--ink2);line-height:1.55;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+
+/* THREEJS canvas sits behind hero text */
+#hero-canvas{
+  position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;
+}
+
+/* Mesh gradient overlay */
+.mesh{
+  position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(circle 900px at 92% -10%,rgba(255,157,110,.13),transparent 50%),
+    radial-gradient(circle 700px at 4% 28%,rgba(195,179,245,.09),transparent 55%),
+    radial-gradient(circle 600px at 60% 90%,rgba(168,224,188,.13),transparent 55%);
+}
+
+main{position:relative;z-index:1}
+
+/* NAV */
+nav{
+  position:sticky;top:0;z-index:100;
+  background:rgba(251,250,247,.78);
+  backdrop-filter:blur(20px) saturate(180%);
+  -webkit-backdrop-filter:blur(20px) saturate(180%);
+  border-bottom:1px solid rgba(230,229,222,.6);
+  padding:0 clamp(1.5rem,5vw,3rem);height:64px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.logo{font-weight:600;font-size:.95rem;color:var(--ink);letter-spacing:-.01em;display:flex;align-items:center;gap:.5rem}
+.logo-mark{
+  width:22px;height:22px;border-radius:6px;position:relative;
+  background:linear-gradient(135deg,var(--green-dark),var(--peach));
+  display:flex;align-items:center;justify-content:center;color:#fff;font-size:.7rem;font-weight:700;
+}
+.nav-links{display:flex;align-items:center;gap:2rem}
+.nav-links a{font-size:.84rem;color:var(--ink2);text-decoration:none;font-weight:500;transition:color .15s}
+.nav-links a:hover{color:var(--ink)}
+.nav-cta{
+  padding:.55rem 1.1rem;background:var(--ink);color:#fff;
+  border-radius:100px;font-size:.82rem;font-weight:600;
+  text-decoration:none;transition:transform .15s,box-shadow .2s;
+}
+.nav-cta:hover{transform:translateY(-1px);box-shadow:0 8px 22px rgba(13,14,10,.25)}
+
+/* HERO */
+.hero{
+  position:relative;
+  padding:clamp(5rem,10vw,9rem) clamp(1.5rem,5vw,3rem) clamp(4rem,8vw,7rem);
+  max-width:1280px;margin:0 auto;text-align:center;min-height:88vh;
+  display:flex;flex-direction:column;justify-content:center;align-items:center;
+}
+.hero-content{position:relative;z-index:2}
+.tag{
+  display:inline-flex;align-items:center;gap:.55rem;
+  padding:.4rem .9rem;background:rgba(255,255,255,.7);
+  backdrop-filter:blur(10px);border:1px solid var(--line);
+  border-radius:100px;font-size:.72rem;color:var(--ink2);
+  margin-bottom:2rem;font-weight:500;letter-spacing:.04em;
+}
+.tag-dot{
+  width:6px;height:6px;border-radius:50%;
+  background:linear-gradient(135deg,var(--green),var(--peach));
+  box-shadow:0 0 8px rgba(255,157,110,.5);
+  animation:pulse 2s ease-in-out infinite;
+}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.6;transform:scale(.85)}}
+
+.h1{
+  font-family:'Instrument Serif',serif;
+  font-size:clamp(2.8rem,7vw,5.8rem);
+  font-weight:400;letter-spacing:-.025em;line-height:.98;
+  color:var(--ink);margin-bottom:1.75rem;max-width:18ch;
+}
+.h1 em{
+  font-style:italic;
+  background:linear-gradient(135deg,var(--green-dark) 0%,var(--peach) 55%,var(--lavender) 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.lead{
+  font-size:clamp(1.05rem,1.6vw,1.25rem);color:var(--ink2);
+  max-width:54ch;margin:0 auto 2.5rem;line-height:1.55;
+}
+.cta-row{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.btn{
+  display:inline-flex;align-items:center;gap:.5rem;
+  padding:.95rem 1.85rem;border-radius:100px;
+  font-size:.92rem;font-weight:600;text-decoration:none;
+  transition:all .2s cubic-bezier(.25,0,0,1);
+}
+.btn-primary{background:var(--ink);color:#fff}
+.btn-primary::after{content:'→';transition:transform .2s}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(13,14,10,.25)}
+.btn-primary:hover::after{transform:translateX(4px)}
+.btn-ghost{color:var(--ink);background:transparent;border:1px solid var(--ink)}
+.btn-ghost:hover{background:var(--ink);color:#fff}
+
+.hero-trust{
+  margin-top:2.5rem;display:inline-flex;align-items:center;gap:1rem;
+  font-size:.78rem;color:var(--ink3);font-weight:500;
+  padding:.55rem 1.1rem;background:rgba(255,255,255,.55);
+  border:1px solid var(--line);border-radius:100px;backdrop-filter:blur(8px);
+}
+.hero-trust strong{color:var(--ink);font-weight:600}
+.hero-trust span:not(:last-child)::after{
+  content:'';display:inline-block;width:1px;height:11px;background:var(--line);
+  margin-left:1rem;vertical-align:middle;
+}
+
+/* SECTIONS */
+section{padding:clamp(5rem,9vw,8rem) clamp(1.5rem,5vw,3rem);position:relative}
+.container{max-width:1280px;margin:0 auto}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:.55rem;
+  font-size:.72rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--green-dark);margin-bottom:1.25rem;
+}
+.eyebrow::before{content:'';width:18px;height:1px;background:var(--green-dark)}
+.section-h{
+  font-family:'Instrument Serif',serif;
+  font-size:clamp(2rem,3.6vw,3.4rem);
+  font-weight:400;letter-spacing:-.02em;line-height:1.05;
+  color:var(--ink);margin-bottom:1.25rem;max-width:24ch;
+}
+.section-h em{
+  font-style:italic;
+  background:linear-gradient(135deg,var(--green-dark),var(--peach));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.section-sub{font-size:1.05rem;color:var(--ink2);max-width:56ch;line-height:1.55}
+
+/* THE PROBLEM SECTION */
+.problem-grid{
+  margin-top:4rem;display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;
+}
+@media(max-width:760px){.problem-grid{grid-template-columns:1fr}}
+.problem-card{
+  background:var(--bg2);border:1px solid var(--line);border-radius:18px;
+  padding:2rem;position:relative;overflow:hidden;
+  opacity:0;transform:translateY(20px);
+  transition:opacity .6s ease,transform .6s ease,border-color .25s ease;
+}
+.problem-card.in{opacity:1;transform:translateY(0)}
+.problem-card:hover{border-color:var(--green-soft)}
+.problem-num{
+  font-family:'Instrument Serif',serif;font-style:italic;
+  font-size:2.4rem;line-height:1;letter-spacing:-.03em;
+  background:linear-gradient(135deg,var(--green-dark),var(--peach));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  margin-bottom:1.25rem;
+}
+.problem-card h3{font-size:1.05rem;font-weight:600;color:var(--ink);margin-bottom:.5rem;letter-spacing:-.005em}
+.problem-card p{font-size:.92rem;color:var(--ink2);line-height:1.55}
+.problem-stat{
+  margin-top:1.25rem;padding-top:1.25rem;border-top:1px solid var(--line-soft);
+  font-family:'Instrument Serif',serif;font-style:italic;font-size:1.4rem;letter-spacing:-.02em;
+  color:var(--green-dark);
+}
+
+.problem-tagline{
+  margin-top:4rem;font-family:'Instrument Serif',serif;
+  font-size:clamp(1.4rem,2.4vw,2rem);font-weight:400;font-style:italic;
+  line-height:1.3;color:var(--ink);max-width:36ch;letter-spacing:-.015em;
+}
+
+/* WHAT WE AUTOMATE (BENTO) */
+.automate{background:linear-gradient(180deg,transparent,var(--bg3) 30%,var(--bg3) 70%,transparent)}
+.bento{
+  margin-top:4rem;display:grid;grid-template-columns:repeat(6,1fr);gap:1rem;
+}
+@media(max-width:900px){.bento{grid-template-columns:repeat(2,1fr)}}
+.bcard{
+  background:var(--bg2);border:1px solid var(--line);border-radius:18px;
+  padding:2rem;position:relative;overflow:hidden;
+  transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease;
+  opacity:0;transform:translateY(20px);
+}
+.bcard.in{opacity:1;transform:translateY(0);transition:opacity .6s,transform .6s,box-shadow .25s,border-color .25s}
+.bcard:hover{transform:translateY(-3px);box-shadow:0 16px 40px rgba(13,14,10,.07);border-color:var(--green-soft)}
+.bcard:nth-child(1){grid-column:span 3;grid-row:span 2}
+.bcard:nth-child(2){grid-column:span 3}
+.bcard:nth-child(3){grid-column:span 2}
+.bcard:nth-child(4){grid-column:span 2}
+.bcard:nth-child(5){grid-column:span 2}
+.bcard:nth-child(6){grid-column:span 3}
+.bcard:nth-child(7){grid-column:span 3}
+@media(max-width:900px){.bcard{grid-column:span 2!important;grid-row:auto!important}}
+
+.bcard.featured::after{
+  content:'';position:absolute;bottom:-80px;right:-80px;width:240px;height:240px;
+  background:radial-gradient(circle,rgba(255,157,110,.18),transparent 70%);
+  filter:blur(20px);pointer-events:none;
+}
+.bcard-outcome{
+  font-family:'Instrument Serif',serif;font-style:italic;
+  font-size:clamp(1.5rem,2.2vw,2rem);font-weight:400;letter-spacing:-.02em;
+  color:var(--ink);line-height:1.15;margin-bottom:1rem;
+}
+.bcard-outcome em{
+  background:linear-gradient(135deg,var(--green-dark),var(--peach));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.bcard-mech{font-size:.88rem;color:var(--ink2);line-height:1.55;margin-bottom:1.25rem}
+.bcard-tag{
+  display:inline-block;padding:.3rem .75rem;background:var(--green-tint);color:var(--green-dark);
+  border-radius:100px;font-size:.7rem;font-weight:600;letter-spacing:.05em;
+}
+
+/* mini-mech visualisation inside featured card */
+.mech-flow{
+  margin-top:1.5rem;display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;
+  font-size:.74rem;color:var(--ink3);
+}
+.mech-step{
+  padding:.4rem .75rem;background:var(--bg);border:1px solid var(--line);
+  border-radius:8px;font-weight:500;color:var(--ink2);
+}
+.mech-step.live{
+  background:var(--green-tint);color:var(--green-dark);border-color:var(--green-soft);
+  position:relative;
+}
+.mech-step.live::before{
+  content:'';position:absolute;top:50%;right:-3px;transform:translateY(-50%);
+  width:6px;height:6px;border-radius:50%;background:var(--green);
+  box-shadow:0 0 6px var(--green);animation:pulse 1.8s ease-in-out infinite;
+}
+.mech-arrow{color:var(--ink3);font-size:.8rem}
+
+/* THE AUDIT SECTION */
+.audit-section{position:relative}
+.audit-wrap{
+  margin-top:4rem;display:grid;grid-template-columns:.95fr 1.05fr;gap:4rem;align-items:start;
+}
+@media(max-width:880px){.audit-wrap{grid-template-columns:1fr;gap:3rem}}
+
+.audit-deliver{
+  display:flex;flex-direction:column;gap:1.25rem;
+}
+.deliver-item{
+  display:grid;grid-template-columns:auto 1fr;gap:1rem;
+  padding:1.25rem 0;border-bottom:1px solid var(--line-soft);
+}
+.deliver-item:last-child{border-bottom:none}
+.d-num{
+  font-family:'Instrument Serif',serif;font-style:italic;
+  font-size:1.6rem;color:var(--ink3);line-height:1;letter-spacing:-.03em;min-width:1.5em;
+}
+.deliver-item h4{font-size:.98rem;font-weight:600;color:var(--ink);margin-bottom:.25rem}
+.deliver-item p{font-size:.86rem;color:var(--ink2);line-height:1.55}
+
+/* AUDIT INTERACTIVE CARD */
+.audit-card{
+  background:var(--bg2);border:1px solid var(--line);border-radius:22px;
+  padding:2.25rem;position:relative;overflow:hidden;
+  box-shadow:0 12px 50px rgba(13,14,10,.06);
+}
+.audit-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--lavender),var(--peach),var(--green-soft));
+}
+.audit-card::after{
+  content:'';position:absolute;width:280px;height:280px;
+  background:radial-gradient(circle,rgba(255,157,110,.08),transparent 70%);
+  bottom:-90px;right:-90px;pointer-events:none;
+}
+
+.audit-head{
+  display:flex;justify-content:space-between;align-items:center;
+  margin-bottom:1.5rem;
+}
+.audit-title{font-size:.92rem;font-weight:600;color:var(--ink)}
+.audit-time{font-size:.76rem;color:var(--ink3)}
+
+.progress{
+  height:4px;background:var(--bg3);border-radius:100px;overflow:hidden;
+  margin-bottom:1rem;
+}
+.progress-bar{
+  height:100%;background:linear-gradient(90deg,var(--green),var(--peach));
+  border-radius:100px;width:10%;transition:width .5s cubic-bezier(.25,0,0,1);
+}
+.progress-label{
+  font-size:.72rem;color:var(--ink3);margin-bottom:1.5rem;
+  display:flex;justify-content:space-between;font-weight:500;
+}
+
+.q-num{
+  font-family:'Instrument Serif',serif;font-style:italic;
+  font-size:1.1rem;color:var(--ink3);margin-bottom:.35rem;
+}
+.q-text{
+  font-size:1.2rem;font-weight:500;color:var(--ink);
+  letter-spacing:-.01em;line-height:1.3;margin-bottom:1.5rem;
+}
+
+.q-opts{display:grid;gap:.55rem;margin-bottom:1.75rem}
+.q-opt{
+  padding:.85rem 1.1rem;background:var(--bg);border:1px solid var(--line);
+  border-radius:12px;font-size:.9rem;color:var(--ink);cursor:pointer;
+  font-weight:500;text-align:left;
+  transition:all .2s ease;
+  display:flex;align-items:center;gap:.75rem;font-family:inherit;
+}
+.q-opt::before{
+  content:'';width:18px;height:18px;border-radius:50%;
+  border:1.5px solid var(--line);flex-shrink:0;transition:all .2s ease;
+}
+.q-opt:hover{border-color:var(--green);background:var(--bg2)}
+.q-opt:hover::before{border-color:var(--green)}
+.q-opt.selected{background:var(--green-tint);border-color:var(--green);color:var(--green-dark)}
+.q-opt.selected::before{background:var(--green);border-color:var(--green);box-shadow:inset 0 0 0 4px var(--bg2)}
+
+.audit-foot{
+  display:flex;justify-content:space-between;align-items:center;
+  padding-top:1.25rem;border-top:1px solid var(--line-soft);gap:1rem;
+}
+.audit-foot small{font-size:.72rem;color:var(--ink3)}
+.next-btn{
+  display:inline-flex;align-items:center;gap:.4rem;
+  padding:.7rem 1.4rem;background:var(--ink);color:#fff;
+  border-radius:100px;font-size:.85rem;font-weight:600;
+  border:none;cursor:pointer;font-family:inherit;
+  transition:transform .15s,opacity .15s;
+}
+.next-btn:hover{transform:translateY(-1px)}
+.next-btn:disabled{opacity:.35;cursor:not-allowed}
+
+/* PDF preview tucked in audit section */
+.pdf-preview{
+  display:none;
+}
+
+/* HOW WE WORK */
+.work-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;margin-top:4rem}
+@media(max-width:760px){.work-grid{grid-template-columns:1fr}}
+.work-card{
+  background:var(--bg2);border:1px solid var(--line);
+  border-radius:20px;padding:2.25rem 2rem;position:relative;
+  transition:transform .3s ease,box-shadow .3s ease,border-color .3s ease;
+  opacity:0;transform:translateY(20px);
+}
+.work-card.in{opacity:1;transform:translateY(0);transition:opacity .6s,transform .6s,box-shadow .3s,border-color .3s}
+.work-card:hover{transform:translateY(-4px);box-shadow:0 18px 40px rgba(13,14,10,.07);border-color:var(--green-soft)}
+.work-card.featured{
+  background:linear-gradient(180deg,#fff 0%,var(--green-tint) 100%);
+  border-color:var(--green);
+}
+.work-num{
+  font-family:'Instrument Serif',serif;font-style:italic;
+  font-size:2.5rem;line-height:1;letter-spacing:-.03em;
+  color:var(--ink3);margin-bottom:.75rem;
+}
+.work-card.featured .work-num{
+  background:linear-gradient(135deg,var(--green-dark),var(--peach));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.work-title{font-family:'Instrument Serif',serif;font-style:italic;font-size:1.7rem;font-weight:400;color:var(--ink);margin-bottom:.6rem;letter-spacing:-.01em}
+.work-value{
+  font-size:.95rem;color:var(--ink);font-weight:500;line-height:1.5;margin-bottom:1rem;
+  padding:.85rem 1rem;background:var(--bg);border-radius:12px;border-left:3px solid var(--green);
+}
+.work-card.featured .work-value{background:rgba(255,255,255,.65)}
+.work-desc{font-size:.88rem;color:var(--ink2);line-height:1.6;margin-bottom:1.5rem;min-height:4em}
+.work-meta{
+  display:flex;justify-content:space-between;align-items:center;
+  padding-top:1.25rem;border-top:1px solid var(--line-soft);font-size:.85rem;
+}
+.work-price{color:var(--ink);font-weight:600}
+.work-time{color:var(--ink3);font-size:.78rem}
+
+/* TRUST / WHY US */
+.trust-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:4rem}
+@media(max-width:760px){.trust-grid{grid-template-columns:repeat(2,1fr)}}
+.trust-card{
+  background:var(--bg2);border:1px solid var(--line);
+  border-radius:16px;padding:1.75rem;text-align:left;
+  transition:border-color .25s ease;
+  opacity:0;transform:translateY(15px);
+}
+.trust-card.in{opacity:1;transform:translateY(0);transition:opacity .6s,transform .6s,border-color .25s}
+.trust-card:hover{border-color:var(--green-soft)}
+.trust-icon{
+  width:40px;height:40px;border-radius:10px;
+  background:linear-gradient(135deg,var(--green-tint),rgba(255,205,176,.4));
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:1.25rem;font-size:1.2rem;
+}
+.trust-card h4{font-size:.95rem;font-weight:600;color:var(--ink);margin-bottom:.4rem;letter-spacing:-.005em}
+.trust-card p{font-size:.84rem;color:var(--ink2);line-height:1.55}
+
+/* CTA */
+.cta-final{
+  text-align:center;
+  background:linear-gradient(135deg,var(--green-dark) 0%,#0a3a1c 60%,#072e16 100%);
+  color:#fff;padding:clamp(5rem,9vw,8rem) clamp(1.5rem,5vw,3rem);
+  position:relative;overflow:hidden;
+}
+.cta-final::before{
+  content:'';position:absolute;width:500px;height:500px;
+  background:radial-gradient(circle,rgba(255,157,110,.22),transparent 60%);
+  filter:blur(60px);top:-100px;right:-100px;
+}
+.cta-final::after{
+  content:'';position:absolute;width:400px;height:400px;
+  background:radial-gradient(circle,rgba(195,179,245,.18),transparent 60%);
+  filter:blur(60px);bottom:-100px;left:-100px;
+}
+.cta-content{position:relative;z-index:1}
+.cta-eyebrow{
+  font-size:.72rem;color:rgba(255,255,255,.55);
+  letter-spacing:.18em;text-transform:uppercase;font-weight:600;margin-bottom:1rem;
+}
+.cta-final h2{
+  font-family:'Instrument Serif',serif;
+  font-size:clamp(2.4rem,5vw,4.2rem);font-weight:400;letter-spacing:-.025em;line-height:1.05;
+  margin-bottom:1.25rem;
+}
+.cta-final h2 em{
+  font-style:italic;
+  background:linear-gradient(135deg,var(--peach),var(--lavender));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.cta-final p{font-size:1.1rem;color:rgba(255,255,255,.72);max-width:50ch;margin:0 auto 2.5rem}
+.btn-light{
+  background:#fff;color:var(--ink);
+  padding:.95rem 2rem;border-radius:100px;
+  font-size:.95rem;font-weight:700;text-decoration:none;
+  display:inline-flex;align-items:center;gap:.5rem;
+  transition:transform .15s,box-shadow .2s;
+}
+.btn-light::after{content:'→';transition:transform .2s}
+.btn-light:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(0,0,0,.3)}
+.btn-light:hover::after{transform:translateX(4px)}
+
+footer{padding:3rem clamp(1.5rem,5vw,3rem);border-top:1px solid var(--line);color:var(--ink3);font-size:.85rem}
+.foot-inner{max-width:1280px;margin:0 auto;display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+<div class="mesh"></div>
+
+<main>
+<nav>
+  <div class="logo">
+    <span class="logo-mark">E</span>
+    Effortless GTM
+  </div>
+  <div class="nav-links">
+    <a href="#what">What we automate</a>
+    <a href="#audit">The audit</a>
+    <a href="#audit" class="nav-cta">Take the audit →</a>
+  </div>
+</nav>
+
+<!-- HERO with ThreeJS particle sphere -->
+<div class="hero">
+  <canvas id="hero-canvas"></canvas>
+  <div class="hero-content">
+    <div class="tag"><span class="tag-dot"></span>AI-native · EU-based · GDPR-clean</div>
+    <h1 class="h1">AI that does the work<br>your team <em>hates doing.</em></h1>
+    <p class="lead">We bring AI into your business — quietly, where it pays you back fastest. Start with a free 5-minute audit. We tell you what to automate first. You decide what's next.</p>
+    <div class="cta-row">
+      <a href="#audit" class="btn btn-primary">Take the free audit</a>
+      <a href="#what" class="btn btn-ghost">See what we automate</a>
+    </div>
+    <div class="hero-trust">
+      <span>Free · <strong>5 minutes</strong></span>
+      <span>No call required</span>
+      <span>Returns a personalised <strong>PDF</strong></span>
+    </div>
+  </div>
+</div>
+
+<!-- THE PROBLEM -->
+<section>
+  <div class="container">
+    <div class="eyebrow">The work that's eating your team</div>
+    <h2 class="section-h">Every hour spent on busywork is an hour <em>not spent winning.</em></h2>
+    <p class="section-sub">Sales chases the same lead three times. Ops reconciles spreadsheets. Marketing copies data between tools. Meanwhile, AI is sitting there — ready to do all of it.</p>
+
+    <div class="problem-grid">
+      <div class="problem-card">
+        <div class="problem-num">01</div>
+        <h3>Sales team busywork</h3>
+        <p>Prospecting, enrichment, follow-ups, CRM hygiene. The admin nobody hired your salespeople to do.</p>
+        <div class="problem-stat">≈ 18 hrs/wk per rep</div>
+      </div>
+      <div class="problem-card">
+        <div class="problem-num">02</div>
+        <h3>Operations friction</h3>
+        <p>Data entry between tools, reporting prep, weekly summaries, reconciliation. Repeat work, every week.</p>
+        <div class="problem-stat">≈ 1 full day/wk</div>
+      </div>
+      <div class="problem-card">
+        <div class="problem-num">03</div>
+        <h3>Missed signals</h3>
+        <p>Hot leads that visited your pricing page, dropped off, never got followed up. Pipeline lost on autopilot.</p>
+        <div class="problem-stat">≈ 30% of inbound</div>
+      </div>
+    </div>
+
+    <p class="problem-tagline">AI can do most of this today. The question isn't <em>if</em>. It's <em>which thing first.</em></p>
+  </div>
+</section>
+
+<!-- WHAT WE AUTOMATE - BENTO -->
+<section class="automate" id="what">
+  <div class="container">
+    <div class="eyebrow">What we automate</div>
+    <h2 class="section-h">We build the workflows that <em>buy you time.</em></h2>
+    <p class="section-sub">Every project starts with one outcome — measured in hours saved, deals closed, or euros earned. We don't sell software. We sell time back to your team.</p>
+
+    <div class="bento">
+      <!-- 1 — featured: sales follow-up -->
+      <div class="bcard featured">
+        <div class="bcard-outcome">Get <em>12+ hours</em> per rep back, every week.</div>
+        <div class="bcard-mech">AI watches every conversation, drafts the next move, queues the follow-up, updates the CRM. Your team sees the work done — and only writes the messages worth writing.</div>
+        <div class="mech-flow">
+          <div class="mech-step">Reply received</div>
+          <div class="mech-arrow">→</div>
+          <div class="mech-step live">AI drafts follow-up</div>
+          <div class="mech-arrow">→</div>
+          <div class="mech-step">Queued for review</div>
+        </div>
+        <div style="margin-top:1.25rem"><span class="bcard-tag">For sales teams</span></div>
+      </div>
+
+      <!-- 2 -->
+      <div class="bcard">
+        <div class="bcard-outcome">Never lose a <em>hot lead</em> again.</div>
+        <div class="bcard-mech">Signal-triggered prospecting + auto-scoring + real-time routing. The leads that matter never sit in a queue.</div>
+        <div style="margin-top:1.25rem"><span class="bcard-tag">For sales teams</span></div>
+      </div>
+
+      <!-- 3 -->
+      <div class="bcard">
+        <div class="bcard-outcome">Pipeline reviews in <em>5 min</em>.</div>
+        <div class="bcard-mech">AI summarises every deal nightly. Walk into the meeting already knowing what's hot, stuck, or slipping.</div>
+        <div style="margin-top:1.25rem"><span class="bcard-tag">For sales leadership</span></div>
+      </div>
+
+      <!-- 4 -->
+      <div class="bcard">
+        <div class="bcard-outcome">CRM that <em>cleans itself.</em></div>
+        <div class="bcard-mech">Duplicates, missing fields, stale records — handled by background agents while you sleep.</div>
+        <div style="margin-top:1.25rem"><span class="bcard-tag">For revops</span></div>
+      </div>
+
+      <!-- 5 -->
+      <div class="bcard">
+        <div class="bcard-outcome">Onboard in <em>weeks</em>, not months.</div>
+        <div class="bcard-mech">AI-guided customer onboarding tuned to each account. Time-to-value goes from 90 days to 21.</div>
+        <div style="margin-top:1.25rem"><span class="bcard-tag">For customer success</span></div>
+      </div>
+
+      <!-- 6 -->
+      <div class="bcard">
+        <div class="bcard-outcome">Reporting that <em>writes itself.</em></div>
+        <div class="bcard-mech">Daily AI digests from your CRM, ads, and tools — delivered to Slack at 8am. Nobody opens a spreadsheet.</div>
+        <div style="margin-top:1.25rem"><span class="bcard-tag">For ops</span></div>
+      </div>
+
+      <!-- 7 -->
+      <div class="bcard">
+        <div class="bcard-outcome">Outreach that gets <em>20% reply rates.</em></div>
+        <div class="bcard-mech">Personalised by signal, written by AI, reviewed by your team. The end of cold-email-blast era.</div>
+        <div style="margin-top:1.25rem"><span class="bcard-tag">For sales teams</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- THE AUDIT -->
+<section class="audit-section" id="audit">
+  <div class="container">
+    <div class="eyebrow">Start here</div>
+    <h2 class="section-h">A free 5-minute audit. <em>Yours to keep.</em></h2>
+    <p class="section-sub">We don't pitch. We diagnose. Answer 10 questions. Get a personalised PDF showing exactly where AI can pay you back fastest — even if you never talk to us again.</p>
+
+    <div class="audit-wrap">
+      <!-- Left: what you get -->
+      <div class="audit-deliver">
+        <div class="deliver-item">
+          <div class="d-num"><em>I.</em></div>
+          <div>
+            <h4>Your automation opportunity map</h4>
+            <p>Every workflow we can automate for your team, ranked by impact — highest leverage first.</p>
+          </div>
+        </div>
+        <div class="deliver-item">
+          <div class="d-num"><em>II.</em></div>
+          <div>
+            <h4>Time reclaim, quantified in euros</h4>
+            <p>Hours your team would get back per week × your salary cost = real money on the table.</p>
+          </div>
+        </div>
+        <div class="deliver-item">
+          <div class="d-num"><em>III.</em></div>
+          <div>
+            <h4>Sales maturity score</h4>
+            <p>Where your team sits vs. similar-sized B2B teams. The diagnosis, in one number.</p>
+          </div>
+        </div>
+        <div class="deliver-item">
+          <div class="d-num"><em>IV.</em></div>
+          <div>
+            <h4>One quick win for this week</h4>
+            <p>Something specific you can try — for free, this week, without us. Yours.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: interactive audit -->
+      <div class="audit-card">
+        <div class="audit-head">
+          <div class="audit-title">Sales automation audit</div>
+          <div class="audit-time">Step <span id="step-num">1</span> of 10</div>
+        </div>
+        <div class="progress"><div class="progress-bar" id="bar"></div></div>
+        <div class="progress-label">
+          <span>Started</span>
+          <span id="pct">10% complete</span>
+        </div>
+
+        <div class="q-num"><em id="q-num">I.</em></div>
+        <div class="q-text" id="q-text">What's the biggest time-sink for your team today?</div>
+
+        <div class="q-opts" id="q-opts">
+          <button class="q-opt" data-v="prospect">Manual prospecting and enrichment</button>
+          <button class="q-opt" data-v="followup">Follow-ups and CRM updates</button>
+          <button class="q-opt" data-v="data">Data entry between tools</button>
+          <button class="q-opt" data-v="reporting">Reporting and weekly summaries</button>
+        </div>
+
+        <div class="audit-foot">
+          <small>🔒 GDPR-clean · No spam · Used only for your audit report</small>
+          <button class="next-btn" id="next" disabled>Next →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW WE WORK -->
+<section>
+  <div class="container">
+    <div class="eyebrow">How we work</div>
+    <h2 class="section-h">We anchor every price on the <em>value you get back.</em></h2>
+    <p class="section-sub">You don't sign a 12-month retainer to start. You start with the audit. Then you decide what's worth doing.</p>
+
+    <div class="work-grid">
+      <div class="work-card">
+        <div class="work-num">/01</div>
+        <div class="work-title">Free audit</div>
+        <div class="work-value">Your personalised AI opportunity map, in 5 minutes.</div>
+        <div class="work-desc">No call. No pitch. A real PDF with your numbers, your top workflows to automate, your quick win for the week.</div>
+        <div class="work-meta">
+          <span class="work-price">€0</span>
+          <span class="work-time">5 min · self-serve</span>
+        </div>
+      </div>
+
+      <div class="work-card featured">
+        <div class="work-num">/02</div>
+        <div class="work-title">Quick win</div>
+        <div class="work-value">One automation. Live in 2 weeks. Saves more than it costs by month one.</div>
+        <div class="work-desc">We pick the highest-leverage thing from your audit and ship it. Scoped, built, handed over. You see the math work before committing to more.</div>
+        <div class="work-meta">
+          <span class="work-price">€1,500 – €3,000</span>
+          <span class="work-time">2 weeks · fixed price</span>
+        </div>
+      </div>
+
+      <div class="work-card">
+        <div class="work-num">/03</div>
+        <div class="work-title">Ongoing automation</div>
+        <div class="work-value">We keep finding things to automate. Your team keeps getting time back.</div>
+        <div class="work-desc">Once the quick win pays for itself, we keep going — one workflow at a time, on a fractional basis. No big system pitch. Cancel anytime.</div>
+        <div class="work-meta">
+          <span class="work-price">From €3,000/month</span>
+          <span class="work-time">Fractional · cancel anytime</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section style="background:linear-gradient(180deg,transparent,var(--bg3) 30%,var(--bg3) 70%,transparent)">
+  <div class="container">
+    <div class="eyebrow">Why us</div>
+    <h2 class="section-h">We're the team that <em>actually uses AI</em> — not the one that just talks about it.</h2>
+    <p class="section-sub">We use AI every day to do our own work. We've built the workflows we sell, for ourselves first. We bring that to you.</p>
+
+    <div class="trust-grid">
+      <div class="trust-card">
+        <div class="trust-icon">✦</div>
+        <h4>AI-native</h4>
+        <p>We build with Claude, GPT, custom agents — the actual frontier, not last year's chatbot wrapper.</p>
+      </div>
+      <div class="trust-card">
+        <div class="trust-icon">🇪🇺</div>
+        <h4>Made in Europe</h4>
+        <p>EU-resident infra, GDPR-clean by default, your data never leaves the continent.</p>
+      </div>
+      <div class="trust-card">
+        <div class="trust-icon">↗</div>
+        <h4>Outcome-anchored</h4>
+        <p>We don't sell hours. We sell time back, deals closed, euros earned. Pricing follows the value.</p>
+      </div>
+      <div class="trust-card">
+        <div class="trust-icon">⚙</div>
+        <h4>Built by builders</h4>
+        <p>20 years of GTM operating + AI engineering, on the same team. Strategy and execution, not slides.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<div class="cta-final">
+  <div class="cta-content">
+    <div class="cta-eyebrow">Take the audit</div>
+    <h2>Five minutes.<br>Your numbers. <em>Decide from there.</em></h2>
+    <p>Free PDF, no call required. We'll only follow up if you ask us to.</p>
+    <a href="#audit" class="btn-light">Start the audit</a>
+  </div>
+</div>
+
+<footer>
+  <div class="foot-inner">
+    <div>© 2026 Effortless GTM</div>
+    <div>Made in Europe · GDPR-clean · Powered by AI</div>
+  </div>
+</footer>
+</main>
+
+<!-- ThreeJS hero animation -->
+<script type="importmap">
+{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.161.0/build/three.module.js" } }
+</script>
+<script type="module">
+import * as THREE from 'three';
+
+const canvas = document.getElementById('hero-canvas');
+const hero = canvas.parentElement;
+if(canvas && !window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+  const renderer = new THREE.WebGLRenderer({canvas, alpha: true, antialias: true});
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 100);
+  camera.position.z = 5.2;
+
+  function size(){
+    const w = hero.offsetWidth, h = hero.offsetHeight;
+    renderer.setSize(w, h, false);
+    camera.aspect = w/h;
+    camera.updateProjectionMatrix();
+  }
+  size(); window.addEventListener('resize', size);
+
+  // Point cloud sphere
+  const sphereGeo = new THREE.IcosahedronGeometry(1.5, 6);
+  const sphereMat = new THREE.PointsMaterial({
+    color: 0x1e6b3a, size: 0.022, transparent: true, opacity: 0.55, sizeAttenuation: true
+  });
+  const points = new THREE.Points(sphereGeo, sphereMat);
+  scene.add(points);
+
+  // Wireframe outer
+  const wireGeo = new THREE.WireframeGeometry(new THREE.IcosahedronGeometry(1.85, 1));
+  const wireMat = new THREE.LineBasicMaterial({color: 0xff9d6e, transparent: true, opacity: 0.16});
+  const wire = new THREE.LineSegments(wireGeo, wireMat);
+  scene.add(wire);
+
+  // Floating particles around
+  const dust = new THREE.BufferGeometry();
+  const N = 240;
+  const positions = new Float32Array(N * 3);
+  for(let i=0;i<N;i++){
+    const r = 2.4 + Math.random()*1.6;
+    const t = Math.random()*Math.PI*2;
+    const p = Math.acos(2*Math.random()-1);
+    positions[i*3]   = r*Math.sin(p)*Math.cos(t);
+    positions[i*3+1] = r*Math.sin(p)*Math.sin(t);
+    positions[i*3+2] = r*Math.cos(p);
+  }
+  dust.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+  const dustMat = new THREE.PointsMaterial({color: 0xc3b3f5, size: 0.03, transparent: true, opacity: 0.45});
+  const dustPoints = new THREE.Points(dust, dustMat);
+  scene.add(dustPoints);
+
+  let mx = 0, my = 0;
+  window.addEventListener('mousemove', e => {
+    mx = (e.clientX / window.innerWidth - 0.5) * 0.3;
+    my = (e.clientY / window.innerHeight - 0.5) * 0.3;
+  });
+
+  function frame(t){
+    points.rotation.y = t*0.00012;
+    points.rotation.x = Math.sin(t*0.00008)*0.18 + my;
+    wire.rotation.y = -t*0.00009 + mx;
+    wire.rotation.x = Math.cos(t*0.00011)*0.12 - my*0.5;
+    dustPoints.rotation.y = t*0.00006;
+    dustPoints.rotation.x = -t*0.00004;
+    renderer.render(scene, camera);
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+}
+</script>
+
+<!-- Page interactions -->
+<script>
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}
+  });
+},{threshold:.1,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.problem-card,.bcard,.work-card,.trust-card').forEach(el => io.observe(el));
+
+// AUDIT
+const questions = [
+  { num:'I.', text:"What's the biggest time-sink for your team today?", opts:[
+    {v:'prospect',l:'Manual prospecting and enrichment'},
+    {v:'followup',l:'Follow-ups and CRM updates'},
+    {v:'data',l:'Data entry between tools'},
+    {v:'reporting',l:'Reporting and weekly summaries'},
+  ]},
+  { num:'II.', text:'How big is your sales / revenue team?', opts:[
+    {v:'solo',l:'Just me / founder-led'},
+    {v:'small',l:'2–4 people'},
+    {v:'mid',l:'5–10 people'},
+    {v:'large',l:'More than 10'},
+  ]},
+  { num:'III.', text:'Where are you on AI today?', opts:[
+    {v:'none',l:'We barely use it'},
+    {v:'tools',l:'A few tools, no real systems'},
+    {v:'piecemeal',l:'Some workflows, no strategy'},
+    {v:'native',l:'AI-native already, optimising'},
+  ]},
+];
+let step = 0;
+const nextBtn = document.getElementById('next');
+const qOpts = document.getElementById('q-opts');
+const qText = document.getElementById('q-text');
+const qNum = document.getElementById('q-num');
+const stepNum = document.getElementById('step-num');
+const bar = document.getElementById('bar');
+const pct = document.getElementById('pct');
+
+function paint(){
+  const q = questions[step] || questions[questions.length-1];
+  qText.textContent = q.text;
+  qNum.innerHTML = `<em>${q.num}</em>`;
+  qOpts.innerHTML = q.opts.map(o => `<button class="q-opt" data-v="${o.v}">${o.l}</button>`).join('');
+  stepNum.textContent = step+1;
+  const p = ((step+1)/10)*100;
+  bar.style.width = p+'%';
+  pct.textContent = Math.round(p)+'% complete';
+  nextBtn.disabled = true;
+  qOpts.querySelectorAll('.q-opt').forEach(o => {
+    o.addEventListener('click', () => {
+      qOpts.querySelectorAll('.q-opt').forEach(x => x.classList.remove('selected'));
+      o.classList.add('selected');
+      nextBtn.disabled = false;
+    });
+  });
+}
+paint();
+nextBtn.addEventListener('click', () => {
+  if(step < questions.length-1){step++;paint();}
+});
+</script>
+</body>
+</html>
