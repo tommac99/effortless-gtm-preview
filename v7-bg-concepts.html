@@ -4,11 +4,10 @@
 <script>if(sessionStorage.getItem('efgtm')!=='1')location.replace('index.html');</script>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>Effortless GTM — Type & Copy Variants</title>
+<title>Effortless GTM — Automate your business, intelligently.</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<!-- ALL fonts loaded once, cached across variant switches -->
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Inter+Tight:wght@600;700;800&family=Manrope:wght@600;700;800&family=Outfit:wght@700;800&family=Plus+Jakarta+Sans:wght@600;700;800&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Bricolage+Grotesque:ital,opsz,wght@1,12..96,400;1,12..96,500&family=Geist:wght@600;700&family=Instrument+Serif:ital@1&family=Fraunces:ital,opsz,wght@1,9..144,400;1,9..144,500&family=Cormorant+Garamond:ital,wght@1,400;1,500;1,600&family=Crimson+Pro:ital,wght@1,400;1,600&family=DM+Serif+Display:ital@1&family=Playfair+Display:ital,wght@1,400;1,500&family=Spectral:ital,wght@1,400;1,500&family=Lora:ital,wght@1,400;1,500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&family=Cormorant+Garamond:ital,wght@1,400;1,500;1,600&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -18,17 +17,10 @@
   --mint:#bce0c6;
   --cream:#f0eadb;
   --cream-strong:#e6dec7;
-
-  /* Variant-driven (defaults: I) */
-  --font-l1:'Inter',sans-serif;
-  --weight-l1:800;
-  --font-l2:'Instrument Serif',Georgia,serif;
-  --letter-l1:-0.035em;
-  --letter-l2:-0.025em;
 }
 html,body{height:100%}
 body{
-  font-family:'Inter',system-ui,sans-serif;
+  font-family:'Manrope','Inter',system-ui,sans-serif;
   background:#000;color:var(--ink-2);
   -webkit-font-smoothing:antialiased;overflow:hidden;
 }
@@ -46,61 +38,81 @@ body{
     linear-gradient(to top,rgba(0,0,0,0.55) 0%,transparent 35%);
 }
 
+/* NAV */
 header.nav{
-  position:fixed;top:0;left:0;right:360px;z-index:50;
+  position:fixed;top:0;left:0;right:0;z-index:50;
   height:84px;display:flex;align-items:center;justify-content:space-between;
   padding:0 clamp(28px,4vw,56px);
 }
-.logo-img{height:46px;width:auto;filter:drop-shadow(0 2px 12px rgba(0,0,0,0.4)) brightness(1.15)}
+.logo-img{height:48px;width:auto;filter:drop-shadow(0 2px 12px rgba(0,0,0,0.4)) brightness(1.15)}
 .cta-btn{
   padding:.8rem 1.6rem;background:var(--cream);color:#1a2a1c;
   border-radius:9999px;font-size:.92rem;font-weight:600;
   text-decoration:none;letter-spacing:.01em;
   transition:transform .15s ease,background .2s ease;
-  display:inline-flex;align-items:center;gap:.4rem;font-family:'Inter',sans-serif;
+  display:inline-flex;align-items:center;gap:.4rem;
+  font-family:'Manrope','Inter',sans-serif;
 }
 .cta-btn:hover{background:var(--cream-strong);transform:translateY(-1px)}
 
+/* CONTENT */
 main.content{
-  position:fixed;inset:0;right:360px;z-index:10;
+  position:fixed;inset:0;z-index:10;
   display:flex;flex-direction:column;align-items:center;justify-content:center;
   padding:96px 32px 64px;gap:2.5rem;pointer-events:none;
 }
 main.content > *{pointer-events:auto}
 
 h1.headline{
-  text-align:center;max-width:22ch;line-height:0.96;
+  text-align:center;max-width:24ch;line-height:0.96;
   text-shadow:0 6px 40px rgba(0,0,0,0.55);
 }
 h1.headline .l1{
   display:block;
-  font-family:var(--font-l1);
-  font-weight:var(--weight-l1);
-  letter-spacing:var(--letter-l1);
-  font-size:clamp(2.4rem,5vw,4.2rem);
-  color:var(--ink);
+  font-family:'Manrope',sans-serif;font-weight:800;letter-spacing:-0.032em;
+  font-size:clamp(2.4rem,5vw,4.2rem);color:var(--ink);
 }
 h1.headline .l2{
   display:block;
-  font-family:var(--font-l2);
-  font-style:italic;
-  font-weight:400;
-  letter-spacing:var(--letter-l2);
-  font-size:clamp(3.4rem,7.4vw,6.8rem);
-  color:var(--ink);
-  margin-top:0.25rem;
-  text-shadow:0 8px 60px rgba(255,250,235,0.15);
+  font-family:'Cormorant Garamond',Georgia,serif;
+  font-style:italic;font-weight:500;
+  font-size:clamp(3.6rem,8vw,7.4rem);
+  letter-spacing:-0.015em;
+  margin-top:0.5rem;
+  /* SHIMMER — gradient passes a warm-white spark through the letters */
+  background:linear-gradient(
+    100deg,
+    #f5f4ef  20%,
+    #f5f4ef  40%,
+    #fff5d6  46%,
+    #ffffff  50%,
+    #fff5d6  54%,
+    #f5f4ef  60%,
+    #f5f4ef  80%
+  );
+  background-size:300% 100%;
+  background-position:200% 0;
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+  /* Constant warm halo */
+  filter:drop-shadow(0 6px 40px rgba(255,250,235,0.22)) drop-shadow(0 0 18px rgba(255,250,235,0.10));
+  animation:shimmer 6.5s ease-in-out infinite;
+}
+@keyframes shimmer{
+  0%   { background-position: 220% 0; }
+  100% { background-position: -120% 0; }
 }
 
 .sub{
-  font-family:'Inter',sans-serif;
-  font-size:1rem;font-weight:400;color:var(--ink-2);text-align:center;
-  max-width:46ch;line-height:1.55;
-  letter-spacing:0.005em;
+  font-family:'Manrope','Inter',sans-serif;
+  font-size:1.02rem;font-weight:400;color:var(--ink-2);text-align:center;
+  max-width:46ch;line-height:1.55;letter-spacing:0.005em;
 }
 
+/* GLASS FORM */
 .form-glass{
-  width:100%;max-width:580px;
+  width:100%;max-width:600px;
   background:rgba(20,28,22,0.42);
   backdrop-filter:blur(30px) saturate(140%);
   -webkit-backdrop-filter:blur(30px) saturate(140%);
@@ -110,19 +122,19 @@ h1.headline .l2{
   box-shadow:0 1px 0 rgba(255,255,255,0.05) inset,0 16px 50px rgba(0,0,0,0.35);
 }
 .form-glass .label{
-  font-family:'Inter',sans-serif;
+  font-family:'Manrope',sans-serif;
   font-size:.7rem;color:var(--ink-3);font-weight:600;
   letter-spacing:0.18em;text-transform:uppercase;margin-bottom:.55rem;
 }
 .form-glass textarea{
   width:100%;border:none;outline:none;resize:none;background:transparent;color:var(--ink);
-  font-family:'Inter',sans-serif;font-size:1.05rem;line-height:1.5;min-height:28px;
+  font-family:'Manrope',sans-serif;font-size:1.05rem;line-height:1.5;min-height:28px;
 }
 .form-glass textarea::placeholder{color:var(--ink-3)}
 .form-foot{
   display:flex;justify-content:space-between;align-items:center;
   margin-top:.85rem;padding-top:.85rem;border-top:1px solid rgba(245,244,239,0.06);
-  font-family:'Inter',sans-serif;
+  font-family:'Manrope',sans-serif;
 }
 .form-foot .count{font-size:.72rem;color:var(--ink-3)}
 .form-foot button{
@@ -130,50 +142,12 @@ h1.headline .l2{
   background:var(--cream);color:#1a2a1c;border:none;cursor:pointer;
   display:flex;align-items:center;justify-content:center;font-size:1rem;
   box-shadow:0 4px 16px rgba(240,234,219,0.18);
+  transition:transform .15s ease, background .2s ease;
 }
+.form-foot button:hover{background:var(--cream-strong);transform:scale(1.05)}
 
-/* PICKER */
-aside.picker{
-  position:fixed;top:0;right:0;bottom:0;width:360px;z-index:100;
-  background:rgba(6,8,7,0.96);backdrop-filter:blur(20px);
-  border-left:1px solid rgba(245,244,239,0.06);
-  padding:1.75rem 1.25rem 1.25rem;
-  display:flex;flex-direction:column;gap:.85rem;overflow-y:auto;
-  font-family:'Inter',sans-serif;
-}
-.picker-header{padding-bottom:1rem;border-bottom:1px solid rgba(245,244,239,0.06)}
-.picker-header .pe{font-size:.62rem;font-weight:700;letter-spacing:0.22em;color:var(--mint);text-transform:uppercase;margin-bottom:.45rem}
-.picker-header h2{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;font-size:1.4rem;color:var(--ink);letter-spacing:-0.01em}
-.picker-header p{font-size:.75rem;color:var(--ink-3);margin-top:.45rem;line-height:1.5}
-
-.picker-list{display:flex;flex-direction:column;gap:.45rem;list-style:none}
-.picker-list button{
-  width:100%;text-align:left;
-  background:transparent;border:1px solid rgba(245,244,239,0.06);
-  border-radius:10px;padding:.75rem .9rem;
-  color:var(--ink-2);font-family:'Inter',sans-serif;cursor:pointer;
-  transition:all .15s ease;
-  display:flex;flex-direction:column;gap:.3rem;
-}
-.picker-list button:hover{border-color:rgba(245,244,239,0.16);background:rgba(245,244,239,0.03);color:var(--ink)}
-.picker-list button.active{border-color:var(--cream);background:rgba(240,234,219,0.06);color:var(--cream)}
-
-.pl-head{display:flex;align-items:baseline;gap:.55rem}
-.pl-num{font-family:'Instrument Serif',serif;font-style:italic;font-size:.95rem;color:var(--ink-3);min-width:1.8em}
-.picker-list button.active .pl-num{color:var(--cream-strong)}
-.pl-name{font-weight:500;font-size:.82rem;flex:1}
-.pl-sub{font-size:.71rem;color:var(--ink-3);line-height:1.4;font-style:italic;padding-left:2.35em}
-.picker-list button.active .pl-sub{color:rgba(240,234,219,0.7)}
-
-.picker-desc{
-  margin-top:auto;padding:.9rem 1rem;
-  background:rgba(245,244,239,0.03);
-  border:1px solid rgba(245,244,239,0.06);
-  border-radius:10px;
-  font-size:.75rem;color:var(--ink-2);line-height:1.55;
-}
-canvas{display:block;width:100%!important;height:100%!important}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+canvas{display:block;width:100%!important;height:100%!important}
 </style>
 </head>
 <body>
@@ -190,9 +164,9 @@ canvas{display:block;width:100%!important;height:100%!important}
 <main class="content">
   <h1 class="headline">
     <span class="l1">Automate your business,</span>
-    <span class="l2" id="l2-italic">intelligently.</span>
+    <span class="l2">intelligently.</span>
   </h1>
-  <p class="sub" id="sub-text">5-minute audit. Free report. Real numbers.</p>
+  <p class="sub">5 minutes to your annual savings.</p>
 
   <div class="form-glass">
     <div class="label">What do you want to automate?</div>
@@ -204,151 +178,12 @@ canvas{display:block;width:100%!important;height:100%!important}
   </div>
 </main>
 
-<aside class="picker">
-  <div class="picker-header">
-    <div class="pe">Type & Copy · 10 variants</div>
-    <h2>Pick a voice.</h2>
-    <p>Same lighting (Faster Sweep). Different headline pair + subtitle. Hover for details.</p>
-  </div>
-  <ol class="picker-list" id="picker-list"></ol>
-  <div class="picker-desc" id="picker-desc">Pick one to start.</div>
-</aside>
-
 <script type="importmap">
 { "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.161.0/build/three.module.js" } }
 </script>
 <script type="module">
 import * as THREE from 'three'
 
-// ─── HEADLINE / COPY VARIANTS ─────────────────────────────────────
-const VARIANTS = [
-  {
-    n:'I',  label:'Modern Editorial',
-    fontL1:'"Inter",sans-serif',         wL1:800, lL1:'-0.035em',
-    fontL2:'"Instrument Serif",serif',   lL2:'-0.025em',
-    sub:'5-minute audit. Free report. Real numbers.',
-    desc:'The baseline. Inter heavy + Instrument Serif italic. Modern SaaS meets European editorial.',
-  },
-  {
-    n:'II', label:'Premium Serif',
-    fontL1:'"Inter Tight",sans-serif',   wL1:800, lL1:'-0.04em',
-    fontL2:'"Fraunces",serif',           lL2:'-0.03em',
-    sub:'Tell us your process. We send the report.',
-    desc:'Inter Tight (denser) + Fraunces. Variable serif with editorial weight. Feels established.',
-  },
-  {
-    n:'III',label:'Soft Luxury',
-    fontL1:'"Manrope",sans-serif',       wL1:800, lL1:'-0.032em',
-    fontL2:'"Cormorant Garamond",serif', lL2:'-0.015em',
-    sub:'5 minutes to your annual savings.',
-    desc:'Manrope (rounder geometric sans) + Cormorant. The luxury fashion editorial pair. Aesop store energy.',
-  },
-  {
-    n:'IV', label:'Engineering Calm',
-    fontL1:'"Geist",sans-serif',         wL1:700, lL1:'-0.03em',
-    fontL2:'"Crimson Pro",serif',        lL2:'-0.02em',
-    sub:'Free audit. Personalised report. Optional call.',
-    desc:'Geist (Vercel) + Crimson Pro. The "we are engineers but we read books" combo.',
-  },
-  {
-    n:'V',  label:'Confident Studio',
-    fontL1:'"Outfit",sans-serif',        wL1:800, lL1:'-0.035em',
-    fontL2:'"DM Serif Display",serif',   lL2:'-0.02em',
-    sub:'Find what\'s worth automating — in 5 minutes.',
-    desc:'Outfit (friendlier sans) + DM Serif Display (heavy slab). Bold and confident.',
-  },
-  {
-    n:'VI', label:'Polished Classic',
-    fontL1:'"Plus Jakarta Sans",sans-serif',  wL1:800, lL1:'-0.034em',
-    fontL2:'"Playfair Display",serif',        lL2:'-0.02em',
-    sub:'5-min audit. Free report. No sales pitch.',
-    desc:'Plus Jakarta + Playfair Display. The "classic but contemporary" choice.',
-  },
-  {
-    n:'VII',label:'Matched Pair',
-    fontL1:'"Bricolage Grotesque",sans-serif',wL1:800, lL1:'-0.034em',
-    fontL2:'"Bricolage Grotesque",sans-serif',lL2:'-0.025em',
-    sub:'Your automation potential, calculated.',
-    desc:'Bricolage Grotesque matched pair — sans + italic from the same family. Distinctive, very designed.',
-    italic500:true,
-  },
-  {
-    n:'VIII',label:'Editorial Quiet',
-    fontL1:'"Inter",sans-serif',         wL1:800, lL1:'-0.035em',
-    fontL2:'"Spectral",serif',           lL2:'-0.025em',
-    sub:'Five minutes. Real numbers. Yours to keep.',
-    desc:'Inter + Spectral. Spectral is more conservative — feels like a serious European agency.',
-  },
-  {
-    n:'IX', label:'Honest Friendly',
-    fontL1:'"Manrope",sans-serif',       wL1:800, lL1:'-0.032em',
-    fontL2:'"Lora",serif',               lL2:'-0.02em',
-    sub:'Free assessment. Quick wins. Real savings.',
-    desc:'Manrope + Lora. Most readable, most "approachable". Less luxury, more trustworthy.',
-  },
-  {
-    n:'X',  label:'Display Drama',
-    fontL1:'"Outfit",sans-serif',        wL1:800, lL1:'-0.034em',
-    fontL2:'"Fraunces",serif',           lL2:'-0.035em',
-    sub:'5-minute audit. Your savings, in euros.',
-    desc:'Outfit + Fraunces opsz at display size — most dramatic. The italic word becomes a hero element.',
-    italic500:true,
-  },
-]
-
-const root = document.documentElement
-function applyVariant(v){
-  root.style.setProperty('--font-l1', v.fontL1)
-  root.style.setProperty('--weight-l1', String(v.wL1))
-  root.style.setProperty('--font-l2', v.fontL2)
-  root.style.setProperty('--letter-l1', v.lL1)
-  root.style.setProperty('--letter-l2', v.lL2)
-  const italicEl = document.getElementById('l2-italic')
-  italicEl.style.fontWeight = v.italic500 ? '500' : '400'
-  document.getElementById('sub-text').textContent = v.sub
-  document.getElementById('picker-desc').textContent = v.desc
-}
-
-// ─── PICKER UI ─────────────────────────────────────────────────────
-const listEl = document.getElementById('picker-list')
-VARIANTS.forEach((v, i) => {
-  const li = document.createElement('li')
-  const fontShortL1 = v.fontL1.split(',')[0].replace(/"/g,'').replace(' Grotesque','')
-  const fontShortL2 = v.fontL2.split(',')[0].replace(/"/g,'').replace(' Grotesque','').replace(' Garamond','').replace(' Display','').replace(' Pro','').replace(' Serif','')
-  li.innerHTML = `
-    <button data-c="${i}">
-      <div class="pl-head">
-        <span class="pl-num">${v.n}.</span>
-        <span class="pl-name">${v.label} — <span style="opacity:0.7">${fontShortL1} + ${fontShortL2}</span></span>
-      </div>
-      <div class="pl-sub">"${v.sub}"</div>
-    </button>`
-  listEl.appendChild(li)
-})
-
-let currentIdx = 0
-function pick(i){
-  currentIdx = i
-  applyVariant(VARIANTS[i])
-  document.querySelectorAll('.picker-list button').forEach((b, idx) => {
-    b.classList.toggle('active', idx === i)
-  })
-}
-document.querySelectorAll('.picker-list button').forEach(b => {
-  b.addEventListener('click', () => pick(Number(b.dataset.c)))
-})
-window.addEventListener('keydown', e => {
-  if(e.target.tagName === 'TEXTAREA' || e.target.tagName === 'INPUT') return
-  if(/^[1-9]$/.test(e.key)){ pick(Number(e.key) - 1) }
-  if(e.key === '0'){ pick(9) }
-  if(e.key === 'ArrowDown' || e.key === 'ArrowRight'){
-    e.preventDefault(); pick((currentIdx + 1) % VARIANTS.length)
-  } else if(e.key === 'ArrowUp' || e.key === 'ArrowLeft'){
-    e.preventDefault(); pick((currentIdx - 1 + VARIANTS.length) % VARIANTS.length)
-  }
-})
-
-// ─── FASTER SWEEP (locked background) ──────────────────────────────
 const effectEl = document.getElementById('bg-effect')
 const dpr = Math.min(window.devicePixelRatio || 1, 2)
 
@@ -408,8 +243,6 @@ function frame(){
   requestAnimationFrame(frame)
 }
 frame()
-
-pick(0)
 </script>
 </body>
 </html>
