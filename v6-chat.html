@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>if(sessionStorage.getItem('efgtm')!=='1')location.replace('index.html');</script>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Effortless GTM — We know AI, we build business automation.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#fafaf7;
+  --bg2:#ffffff;
+  --ink:#0d0e0a;
+  --ink2:#4a4b45;
+  --ink3:#92938c;
+  --green:#1e6b3a;
+  --green-dark:#0e4a25;
+  --green-tint:#e8f3ec;
+  --peach:#ff9d6e;
+  --peach-dark:#e8743c;
+  --lavender:#c3b3f5;
+  --line:#e6e5de;
+  --line-soft:#f0efe9;
+  --shadow:0 4px 24px rgba(13,14,10,.07);
+  --shadow-lg:0 12px 48px rgba(13,14,10,.10);
+}
+html,body{height:100%}
+body{
+  font-family:'Inter',system-ui,sans-serif;font-weight:400;
+  background:var(--bg);color:var(--ink2);line-height:1.55;
+  -webkit-font-smoothing:antialiased;overflow:hidden;
+  /* Dot grid */
+  background-image:radial-gradient(circle,rgba(180,176,164,.55) 1px,transparent 1px);
+  background-size:26px 26px;
+  background-color:var(--bg);
+  /* Gradient mesh over the grid */
+  position:relative;
+}
+body::before{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:
+    radial-gradient(ellipse 60% 50% at 92% -5%,rgba(255,157,110,.18),transparent 60%),
+    radial-gradient(ellipse 55% 50% at 4% 30%,rgba(195,179,245,.12),transparent 60%),
+    radial-gradient(ellipse 50% 45% at 55% 100%,rgba(168,224,188,.14),transparent 60%),
+    var(--bg);
+}
+
+/* ── CANVAS (ThreeJS) ── */
+#bg-canvas{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.7}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  height:62px;padding:0 clamp(1.5rem,4vw,3rem);
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(250,250,247,.72);
+  backdrop-filter:blur(18px) saturate(160%);
+  -webkit-backdrop-filter:blur(18px) saturate(160%);
+  border-bottom:1px solid rgba(230,229,222,.5);
+}
+.logo{
+  display:flex;align-items:center;gap:.55rem;
+  font-weight:600;font-size:.95rem;color:var(--ink);letter-spacing:-.01em;
+  text-decoration:none;
+}
+.logo-mark{
+  width:26px;height:26px;border-radius:7px;
+  background:linear-gradient(135deg,var(--green-dark),var(--peach));
+  display:flex;align-items:center;justify-content:center;
+  color:#fff;font-size:.72rem;font-weight:700;letter-spacing:-.02em;flex-shrink:0;
+}
+.book-call{
+  padding:.55rem 1.15rem;
+  background:var(--ink);color:#fff;
+  border-radius:100px;font-size:.82rem;font-weight:600;
+  text-decoration:none;letter-spacing:.01em;
+  transition:transform .15s,box-shadow .2s;
+  display:inline-flex;align-items:center;gap:.4rem;
+}
+.book-call:hover{transform:translateY(-1px);box-shadow:0 8px 22px rgba(13,14,10,.22)}
+.book-call::after{content:'→';transition:transform .2s}
+.book-call:hover::after{transform:translateX(3px)}
+
+/* ── HERO WRAPPER ── */
+.hero{
+  position:fixed;inset:0;top:62px;z-index:2;
+  display:flex;align-items:center;justify-content:center;
+  padding:2rem clamp(1rem,4vw,2rem);
+  pointer-events:none;
+}
+
+/* ── TOOL CARDS (floating) ── */
+.card-slot{
+  position:absolute;top:50%;transform:translateY(-50%);
+  pointer-events:none;
+  width:220px;
+}
+.card-slot.left{left:clamp(1rem,4vw,3.5rem)}
+.card-slot.right{right:clamp(1rem,4vw,3.5rem)}
+@media(max-width:1000px){.card-slot{display:none}}
+
+.tool-card{
+  background:var(--bg2);
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:1.25rem 1.1rem 1rem;
+  box-shadow:var(--shadow-lg);
+  opacity:0;
+  transition:opacity .35s ease,transform .35s ease;
+  pointer-events:none;position:relative;overflow:hidden;
+}
+.tool-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2.5px;
+  background:linear-gradient(90deg,var(--lavender),var(--peach));
+}
+.tool-card.visible{opacity:1}
+.card-slot.left .tool-card{transform:translateX(-20px)}
+.card-slot.left .tool-card.visible{transform:translateX(0)}
+.card-slot.right .tool-card{transform:translateX(20px)}
+.card-slot.right .tool-card.visible{transform:translateX(0)}
+
+.tc-nodes{
+  display:flex;align-items:center;gap:0;margin-bottom:.85rem;
+  justify-content:space-between;padding:0 .25rem;
+}
+.tc-node{display:flex;flex-direction:column;align-items:center;gap:.4rem;flex:0 0 auto;width:68px}
+.tc-circle{
+  width:42px;height:42px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:.75rem;font-weight:700;color:#fff;
+  box-shadow:0 4px 12px rgba(0,0,0,.15);
+  letter-spacing:-.01em;flex-shrink:0;
+}
+.tc-name{font-size:.65rem;font-weight:600;color:var(--ink);text-align:center;line-height:1.2}
+.tc-action{font-size:.6rem;color:var(--ink3);text-align:center;line-height:1.2;margin-top:.1rem}
+
+.tc-connector{
+  flex:1;display:flex;align-items:center;padding:0 .25rem;margin-top:-12px;
+}
+.tc-dots{
+  width:100%;display:flex;align-items:center;justify-content:space-between;
+  padding:0 2px;
+}
+.tc-dot{width:4px;height:4px;border-radius:50%;background:var(--line);flex-shrink:0}
+
+/* ── CENTER CONTENT ── */
+.hero-inner{
+  pointer-events:all;
+  display:flex;flex-direction:column;align-items:center;
+  gap:clamp(1.5rem,3vh,2.5rem);
+  width:100%;max-width:660px;text-align:center;
+}
+
+h1{
+  font-size:clamp(2rem,5.5vw,3.8rem);
+  font-weight:700;letter-spacing:-.03em;line-height:1;
+  color:var(--ink);
+}
+h1 em{
+  font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;
+  background:linear-gradient(135deg,var(--green-dark),var(--peach) 60%,var(--lavender));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  letter-spacing:-.02em;
+}
+
+/* ── FORM WRAP ── */
+.form-wrap{width:100%;max-width:620px;position:relative}
+
+/* Step label */
+.step-label{
+  font-size:.78rem;font-weight:600;color:var(--ink3);
+  letter-spacing:.08em;text-transform:uppercase;
+  margin-bottom:.65rem;text-align:left;
+  transition:opacity .3s ease;
+}
+
+/* Main input card */
+.input-card{
+  background:var(--bg2);
+  border:1.5px solid var(--line);
+  border-radius:18px;
+  padding:1.25rem 1.25rem .85rem;
+  box-shadow:var(--shadow-lg);
+  transition:border-color .2s ease,box-shadow .2s ease;
+  position:relative;
+}
+.input-card:focus-within{
+  border-color:rgba(13,14,10,.35);
+  box-shadow:0 0 0 3px rgba(13,14,10,.06),var(--shadow-lg);
+}
+
+/* Textarea */
+.chat-input{
+  width:100%;background:transparent;border:none;outline:none;resize:none;
+  font-family:'Inter',system-ui,sans-serif;font-size:1.05rem;font-weight:400;
+  color:var(--ink);line-height:1.55;
+  min-height:28px;max-height:160px;overflow-y:auto;
+  caret-color:var(--green-dark);
+}
+.chat-input::placeholder{color:var(--ink3);font-weight:400}
+.chat-input::-webkit-scrollbar{width:4px}
+.chat-input::-webkit-scrollbar-thumb{background:var(--line);border-radius:100px}
+
+/* Contact step fields */
+.contact-fields{display:grid;gap:.6rem;margin-bottom:.25rem}
+.contact-row{display:grid;grid-template-columns:1fr 1fr;gap:.6rem}
+.field-input{
+  width:100%;padding:.75rem .9rem;
+  background:var(--bg);border:1.5px solid var(--line);
+  border-radius:12px;font-family:'Inter',sans-serif;
+  font-size:.92rem;color:var(--ink);outline:none;
+  transition:border-color .2s;
+}
+.field-input:focus{border-color:rgba(13,14,10,.35)}
+.field-input::placeholder{color:var(--ink3)}
+
+/* GDPR row */
+.gdpr-row{
+  display:flex;align-items:flex-start;gap:.65rem;
+  margin-top:.6rem;font-size:.76rem;color:var(--ink3);line-height:1.4;
+  text-align:left;
+}
+.gdpr-row input[type=checkbox]{
+  margin-top:2px;flex-shrink:0;width:15px;height:15px;
+  accent-color:var(--green-dark);cursor:pointer;
+}
+
+/* Card footer row */
+.input-footer{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-top:.75rem;padding-top:.65rem;border-top:1px solid var(--line-soft);
+}
+.step-counter{font-size:.76rem;color:var(--ink3);font-weight:500;font-variant-numeric:tabular-nums}
+.send-btn{
+  width:36px;height:36px;border-radius:50%;
+  background:var(--ink);color:#fff;border:none;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  font-size:.9rem;transition:background .15s,transform .15s,opacity .15s;
+  flex-shrink:0;
+}
+.send-btn:hover:not(:disabled){background:var(--green-dark);transform:scale(1.08)}
+.send-btn:disabled{opacity:.3;cursor:not-allowed}
+
+/* ── COMPLETION STATE ── */
+.completion{
+  display:none;flex-direction:column;align-items:center;gap:1.5rem;
+  animation:fadeUp .5s ease forwards;
+}
+.completion.show{display:flex}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.completion-msg{font-size:1.05rem;color:var(--ink2);text-align:center;max-width:44ch;line-height:1.6}
+.completion-msg strong{color:var(--ink);font-weight:600}
+.calendly-btn{
+  display:inline-flex;align-items:center;gap:.55rem;
+  padding:.9rem 1.75rem;
+  background:var(--peach);color:#fff;
+  border-radius:100px;font-size:.92rem;font-weight:700;
+  text-decoration:none;letter-spacing:.01em;
+  transition:background .15s,transform .15s,box-shadow .2s;
+  box-shadow:0 8px 24px rgba(255,157,110,.35);
+}
+.calendly-btn:hover{background:var(--peach-dark);transform:translateY(-2px);box-shadow:0 12px 32px rgba(255,157,110,.4)}
+.or-divider{
+  font-size:.78rem;color:var(--ink3);display:flex;align-items:center;gap:.75rem;
+  width:280px;
+}
+.or-divider::before,.or-divider::after{content:'';flex:1;height:1px;background:var(--line)}
+.phone-row{
+  display:flex;gap:.55rem;width:100%;max-width:340px;
+}
+.phone-input{
+  flex:1;padding:.75rem 1rem;
+  background:var(--bg2);border:1.5px solid var(--line);
+  border-radius:100px;font-family:'Inter',sans-serif;
+  font-size:.9rem;color:var(--ink);outline:none;
+  transition:border-color .2s;
+}
+.phone-input:focus{border-color:rgba(13,14,10,.35)}
+.phone-input::placeholder{color:var(--ink3)}
+.phone-send{
+  padding:.75rem 1.25rem;background:var(--ink);color:#fff;
+  border-radius:100px;border:none;font-family:'Inter',sans-serif;
+  font-size:.85rem;font-weight:600;cursor:pointer;
+  transition:background .15s,transform .15s;white-space:nowrap;
+}
+.phone-send:hover{background:var(--green-dark);transform:translateY(-1px)}
+
+/* ── FOOTER ── */
+footer{
+  position:fixed;bottom:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:center;
+  padding:.85rem 2rem;pointer-events:none;
+}
+.mono-toggle{
+  pointer-events:all;
+  display:inline-flex;align-items:center;gap:.65rem;
+  padding:.4rem .85rem;
+  background:rgba(255,255,255,.7);
+  backdrop-filter:blur(12px);
+  border:1px solid var(--line);border-radius:100px;
+  cursor:pointer;user-select:none;
+  transition:box-shadow .2s;
+}
+.mono-toggle:hover{box-shadow:var(--shadow)}
+.toggle-label{font-size:.72rem;font-weight:600;color:var(--ink3);letter-spacing:.06em;text-transform:uppercase;transition:color .2s}
+.toggle-label.active{color:var(--ink)}
+.toggle-track{
+  width:36px;height:20px;background:var(--line);border-radius:100px;
+  position:relative;transition:background .25s;flex-shrink:0;
+}
+.toggle-track.on{background:var(--ink)}
+.toggle-thumb{
+  position:absolute;top:3px;left:3px;width:14px;height:14px;
+  background:#fff;border-radius:50%;
+  transition:transform .25s cubic-bezier(.25,0,0,1);
+  box-shadow:0 1px 4px rgba(0,0,0,.2);
+}
+.toggle-track.on .toggle-thumb{transform:translateX(16px)}
+
+/* ── MONOCHROME MODE ── */
+html.mono body{filter:grayscale(1);transition:filter .4s ease}
+html:not(.mono) body{filter:grayscale(0);transition:filter .4s ease}
+
+/* ── TRANSITIONS ── */
+.fade-out{opacity:0;transform:translateY(-6px);transition:opacity .25s ease,transform .25s ease}
+.fade-in{animation:fadeUp .3s ease forwards}
+
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<canvas id="bg-canvas"></canvas>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="logo">
+    <div class="logo-mark">E</div>
+    Effortless GTM
+  </a>
+  <a href="https://calendly.com/effortlessgtm" target="_blank" class="book-call">Book a call</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+
+  <!-- floating tool cards -->
+  <div class="card-slot left" id="card-left">
+    <div class="tool-card" id="tc-left"></div>
+  </div>
+  <div class="card-slot right" id="card-right">
+    <div class="tool-card" id="tc-right"></div>
+  </div>
+
+  <!-- center -->
+  <div class="hero-inner">
+    <h1>We know AI,<br>we build <em>business automation.</em></h1>
+
+    <!-- FORM -->
+    <div class="form-wrap" id="form-section">
+      <div class="step-label" id="step-label">Tell us about you</div>
+      <div class="input-card" id="input-card">
+        <div id="input-area">
+          <textarea
+            class="chat-input"
+            id="chat-input"
+            placeholder="What does your business do and how big is the team?"
+            rows="1"
+            autocomplete="off"
+            spellcheck="false"
+          ></textarea>
+        </div>
+        <div class="input-footer">
+          <span class="step-counter" id="step-counter">1 / 4</span>
+          <button class="send-btn" id="send-btn" disabled aria-label="Next">→</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- COMPLETION -->
+    <div class="completion" id="completion">
+      <div class="completion-msg" id="completion-msg">
+        Thanks! We'll send your personalised report to <strong id="confirm-email"></strong>
+      </div>
+      <a href="https://calendly.com/effortlessgtm" target="_blank" class="calendly-btn">
+        Book a 30-min call with Etienne →
+      </a>
+      <div class="or-divider">or</div>
+      <div class="phone-row">
+        <input class="phone-input" type="tel" placeholder="+44 7700 …" id="phone-input" autocomplete="tel"/>
+        <button class="phone-send" id="phone-send">Call me</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="mono-toggle" id="mono-toggle" role="switch" aria-checked="false" tabindex="0">
+    <span class="toggle-label active" id="lbl-color">Color</span>
+    <div class="toggle-track" id="toggle-track">
+      <div class="toggle-thumb"></div>
+    </div>
+    <span class="toggle-label" id="lbl-mono">Mono</span>
+  </div>
+</footer>
+
+<!-- THREEJS background -->
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.161.0/build/three.module.js"}}</script>
+<script type="module">
+import * as THREE from 'three';
+const canvas = document.getElementById('bg-canvas');
+if(canvas && !window.matchMedia('(prefers-reduced-motion:reduce)').matches){
+  const renderer = new THREE.WebGLRenderer({canvas,alpha:true,antialias:false});
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio,1.5));
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(60,1,0.1,200);
+  camera.position.z = 30;
+
+  function resize(){
+    const w=window.innerWidth,h=window.innerHeight;
+    renderer.setSize(w,h,false);
+    camera.aspect=w/h;
+    camera.updateProjectionMatrix();
+  }
+  resize(); window.addEventListener('resize',resize);
+
+  const N = 220;
+  const geo = new THREE.BufferGeometry();
+  const pos = new Float32Array(N*3);
+  const vel = new Float32Array(N*3);
+  const cols = new Float32Array(N*3);
+  const palette = [
+    [0.76,0.70,0.96], // lavender
+    [1.00,0.62,0.43], // peach
+    [0.66,0.88,0.74], // green-soft
+    [0.88,0.87,0.84], // neutral
+    [0.92,0.92,0.89], // near-white
+  ];
+  for(let i=0;i<N;i++){
+    const spread=28;
+    pos[i*3]  =(Math.random()-.5)*spread*(camera.aspect||1.6);
+    pos[i*3+1]=(Math.random()-.5)*spread;
+    pos[i*3+2]=(Math.random()-.5)*10;
+    vel[i*3]  =(Math.random()-.5)*.006;
+    vel[i*3+1]=(Math.random()-.5)*.006;
+    vel[i*3+2]=0;
+    const c=palette[Math.floor(Math.random()*palette.length)];
+    cols[i*3]=c[0];cols[i*3+1]=c[1];cols[i*3+2]=c[2];
+  }
+  geo.setAttribute('position',new THREE.BufferAttribute(pos,3));
+  geo.setAttribute('color',new THREE.BufferAttribute(cols,3));
+  const mat = new THREE.PointsMaterial({size:.28,vertexColors:true,transparent:true,opacity:.65,sizeAttenuation:true});
+  const points = new THREE.Points(geo,mat);
+  scene.add(points);
+
+  let mx=0,my=0;
+  window.addEventListener('mousemove',e=>{mx=(e.clientX/window.innerWidth-.5)*.6;my=(e.clientY/window.innerHeight-.5)*.6;});
+
+  const halfW = ()=>camera.aspect*30*.5+2;
+  const halfH = 17;
+  function tick(){
+    const p=geo.attributes.position.array;
+    for(let i=0;i<N;i++){
+      p[i*3]  +=vel[i*3]+mx*.0015;
+      p[i*3+1]+=vel[i*3+1]-my*.0015;
+      if(p[i*3]>halfW())p[i*3]=-halfW();
+      if(p[i*3]<-halfW())p[i*3]=halfW();
+      if(p[i*3+1]>halfH)p[i*3+1]=-halfH;
+      if(p[i*3+1]<-halfH)p[i*3+1]=halfH;
+    }
+    geo.attributes.position.needsUpdate=true;
+    renderer.render(scene,camera);
+    requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+}
+</script>
+
+<script>
+/* ── TOOL DEFINITIONS ── */
+const TOOLS = [
+  {keys:['linkedin'],name:'LinkedIn',color:'#0A66C2',letter:'in',pair:{name:'HubSpot',color:'#FF7A59',letter:'H',from:'New connection',to:'Create contact'}},
+  {keys:['google sheets','sheets'],name:'Google Sheets',color:'#34A853',letter:'GS',pair:{name:'Slack',color:'#4A154B',letter:'S',from:'New row added',to:'Send alert'}},
+  {keys:['gmail'],name:'Gmail',color:'#EA4335',letter:'M',pair:{name:'Notion',color:'#1a1a1a',letter:'N',from:'New email',to:'Save to DB'}},
+  {keys:['slack'],name:'Slack',color:'#4A154B',letter:'S',pair:{name:'Notion',color:'#1a1a1a',letter:'N',from:'New message',to:'Log entry'}},
+  {keys:['notion'],name:'Notion',color:'#1a1a1a',letter:'N',pair:{name:'Slack',color:'#4A154B',letter:'S',from:'New page',to:'Notify team'}},
+  {keys:['facebook','fb'],name:'Facebook',color:'#1877F2',letter:'f',pair:{name:'Google Sheets',color:'#34A853',letter:'GS',from:'Lead Ads',to:'Add row'}},
+  {keys:['instagram','ig'],name:'Instagram',color:'#E4405F',letter:'IG',pair:{name:'Slack',color:'#4A154B',letter:'S',from:'New comment',to:'Notify team'}},
+  {keys:['hubspot'],name:'HubSpot',color:'#FF7A59',letter:'H',pair:{name:'Slack',color:'#4A154B',letter:'S',from:'New deal',to:'Notify sales'}},
+  {keys:['salesforce'],name:'Salesforce',color:'#00A1E0',letter:'SF',pair:{name:'Gmail',color:'#EA4335',letter:'M',from:'Opportunity',to:'Send email'}},
+  {keys:['airtable'],name:'Airtable',color:'#F82B60',letter:'A',pair:{name:'Slack',color:'#4A154B',letter:'S',from:'New record',to:'Alert team'}},
+  {keys:['zapier'],name:'Zapier',color:'#FF4A00',letter:'Z',pair:{name:'Google Sheets',color:'#34A853',letter:'GS',from:'Trigger',to:'Update row'}},
+  {keys:['make','integromat'],name:'Make',color:'#6D00CC',letter:'M',pair:{name:'HubSpot',color:'#FF7A59',letter:'H',from:'Scenario run',to:'Create record'}},
+  {keys:['stripe'],name:'Stripe',color:'#635BFF',letter:'S',pair:{name:'Gmail',color:'#EA4335',letter:'M',from:'New payment',to:'Send receipt'}},
+  {keys:['whatsapp'],name:'WhatsApp',color:'#25D366',letter:'W',pair:{name:'HubSpot',color:'#FF7A59',letter:'H',from:'New message',to:'Log contact'}},
+  {keys:['calendly'],name:'Calendly',color:'#006BFF',letter:'C',pair:{name:'HubSpot',color:'#FF7A59',letter:'H',from:'New booking',to:'Create deal'}},
+  {keys:['excel','microsoft'],name:'Excel',color:'#217346',letter:'X',pair:{name:'Slack',color:'#4A154B',letter:'S',from:'New row',to:'Send alert'}},
+  {keys:['discord'],name:'Discord',color:'#5865F2',letter:'D',pair:{name:'Notion',color:'#1a1a1a',letter:'N',from:'New message',to:'Log thread'}},
+  {keys:['chatgpt','openai','claude','claude ai'],name:'AI / Claude',color:'#10A37F',letter:'AI',pair:{name:'Notion',color:'#1a1a1a',letter:'N',from:'Generate text',to:'Save output'}},
+  {keys:['tiktok'],name:'TikTok',color:'#000000',letter:'TT',pair:{name:'Slack',color:'#4A154B',letter:'S',from:'New video',to:'Notify team'}},
+  {keys:['google calendar','calendar'],name:'Calendar',color:'#4285F4',letter:'GC',pair:{name:'Slack',color:'#4A154B',letter:'S',from:'New event',to:'Send reminder'}},
+];
+
+function detectTools(text){
+  const lower = text.toLowerCase();
+  return TOOLS.filter(t => t.keys.some(k => lower.includes(k)));
+}
+
+function cardHTML(tool){
+  const p = tool.pair;
+  return `
+    <div class="tc-nodes">
+      <div class="tc-node">
+        <div class="tc-circle" style="background:${tool.color}">${tool.letter}</div>
+        <div class="tc-name">${tool.name}</div>
+        <div class="tc-action">${tool.pair.from}</div>
+      </div>
+      <div class="tc-connector">
+        <div class="tc-dots">
+          ${Array.from({length:5}).map((_,i)=>`<div class="tc-dot" style="opacity:${.3+i*.14}"></div>`).join('')}
+        </div>
+      </div>
+      <div class="tc-node">
+        <div class="tc-circle" style="background:${p.color}">${p.letter}</div>
+        <div class="tc-name">${p.name}</div>
+        <div class="tc-action">${p.to}</div>
+      </div>
+    </div>`;
+}
+
+/* Card slots */
+const tcLeft  = document.getElementById('tc-left');
+const tcRight = document.getElementById('tc-right');
+let leftTool = null, rightTool = null;
+
+function updateCards(detected){
+  const d = detected.slice(0,2);
+
+  // Left slot
+  const t0 = d[0] || null;
+  if(t0 && t0 !== leftTool){
+    leftTool = t0;
+    tcLeft.innerHTML = cardHTML(t0);
+    tcLeft.classList.remove('visible');
+    requestAnimationFrame(()=>requestAnimationFrame(()=>tcLeft.classList.add('visible')));
+  } else if(!t0 && leftTool){
+    tcLeft.classList.remove('visible');
+    leftTool = null;
+  }
+
+  // Right slot
+  const t1 = d[1] || null;
+  if(t1 && t1 !== rightTool){
+    rightTool = t1;
+    tcRight.innerHTML = cardHTML(t1);
+    tcRight.classList.remove('visible');
+    requestAnimationFrame(()=>requestAnimationFrame(()=>tcRight.classList.add('visible')));
+  } else if(!t1 && rightTool){
+    tcRight.classList.remove('visible');
+    rightTool = null;
+  }
+}
+
+/* ── FORM FLOW ── */
+const STEPS = [
+  {
+    label:'Tell us about you',
+    placeholder:'What does your business do and how big is the team?',
+    type:'textarea',
+  },
+  {
+    label:'The problem',
+    placeholder:'What workflow or process is eating the most time right now? Mention any tools you use.',
+    type:'textarea',
+    detect:true,
+  },
+  {
+    label:'The cost',
+    placeholder:'Roughly how many hours a week does it cost you — and what\'s the labour cost?',
+    type:'textarea',
+  },
+  {
+    label:'Your details',
+    type:'contact',
+  },
+];
+
+let step = 0;
+const answers = {};
+const textarea   = document.getElementById('chat-input');
+const sendBtn    = document.getElementById('send-btn');
+const stepLabel  = document.getElementById('step-label');
+const stepCounter= document.getElementById('step-counter');
+const inputArea  = document.getElementById('input-area');
+const formSection= document.getElementById('form-section');
+const completion = document.getElementById('completion');
+const confirmEmail= document.getElementById('confirm-email');
+
+let detectTimer = null;
+
+function renderStep(){
+  const s = STEPS[step];
+  stepLabel.textContent = s.label;
+  stepCounter.textContent = `${step+1} / ${STEPS.length}`;
+  sendBtn.disabled = true;
+
+  if(s.type === 'contact'){
+    inputArea.innerHTML = `
+      <div class="contact-fields">
+        <div class="contact-row">
+          <input class="field-input" id="f-first" type="text" placeholder="First name" autocomplete="given-name"/>
+          <input class="field-input" id="f-last"  type="text" placeholder="Last name"  autocomplete="family-name"/>
+        </div>
+        <input class="field-input" id="f-email" type="email" placeholder="Work email" autocomplete="email" style="width:100%"/>
+        <div class="gdpr-row">
+          <input type="checkbox" id="gdpr-cb"/>
+          <label for="gdpr-cb">I agree to receive my personalised automation report and to be contacted by Effortless GTM. My data is stored in the EU and never shared with third parties.</label>
+        </div>
+      </div>`;
+    ['f-first','f-last','f-email','gdpr-cb'].forEach(id=>{
+      document.getElementById(id).addEventListener('input',checkContact);
+      document.getElementById(id).addEventListener('change',checkContact);
+    });
+  } else {
+    inputArea.innerHTML = `<textarea class="chat-input" id="chat-input" placeholder="${s.placeholder}" rows="1" autocomplete="off" spellcheck="false"></textarea>`;
+    const ta = document.getElementById('chat-input');
+    ta.addEventListener('input',()=>{
+      ta.style.height='auto';
+      ta.style.height=Math.min(ta.scrollHeight,160)+'px';
+      sendBtn.disabled = ta.value.trim().length < 3;
+      if(s.detect){
+        clearTimeout(detectTimer);
+        detectTimer = setTimeout(()=>updateCards(detectTools(ta.value)),450);
+      }
+    });
+    ta.addEventListener('keydown',e=>{
+      if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();if(!sendBtn.disabled)advance();}
+    });
+    ta.focus();
+  }
+}
+
+function checkContact(){
+  const first = (document.getElementById('f-first')?.value||'').trim();
+  const last  = (document.getElementById('f-last')?.value||'').trim();
+  const email = (document.getElementById('f-email')?.value||'').trim();
+  const gdpr  = document.getElementById('gdpr-cb')?.checked;
+  const validEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  sendBtn.disabled = !(first && last && validEmail && gdpr);
+}
+
+function advance(){
+  const s = STEPS[step];
+  if(s.type === 'contact'){
+    answers.first = document.getElementById('f-first').value.trim();
+    answers.last  = document.getElementById('f-last').value.trim();
+    answers.email = document.getElementById('f-email').value.trim();
+  } else {
+    answers[`q${step}`] = document.getElementById('chat-input').value.trim();
+  }
+
+  if(step < STEPS.length - 1){
+    step++;
+    // Clear detect cards when leaving detect step
+    if(STEPS[step-1].detect) updateCards([]);
+    // Animate transition
+    const card = document.getElementById('input-card');
+    card.style.opacity='0';card.style.transform='translateY(-8px)';card.style.transition='opacity .2s,transform .2s';
+    setTimeout(()=>{
+      renderStep();
+      card.style.opacity='1';card.style.transform='translateY(0)';
+    },220);
+  } else {
+    showCompletion();
+  }
+}
+
+function showCompletion(){
+  // Clear any tool cards
+  updateCards([]);
+  formSection.style.opacity='0';
+  formSection.style.transform='translateY(-8px)';
+  formSection.style.transition='opacity .3s,transform .3s';
+  setTimeout(()=>{
+    formSection.style.display='none';
+    confirmEmail.textContent = answers.email;
+    completion.classList.add('show');
+  },320);
+}
+
+sendBtn.addEventListener('click',()=>{ if(!sendBtn.disabled) advance(); });
+renderStep();
+
+/* ── PHONE SEND ── */
+document.getElementById('phone-send').addEventListener('click',()=>{
+  const v = document.getElementById('phone-input').value.trim();
+  if(!v) return;
+  document.getElementById('phone-input').value='';
+  document.getElementById('phone-send').textContent='✓ We\'ll call you';
+  document.getElementById('phone-send').style.background='var(--green-dark)';
+});
+
+/* ── MONOCHROME TOGGLE ── */
+const toggle = document.getElementById('mono-toggle');
+const track  = document.getElementById('toggle-track');
+const lblColor= document.getElementById('lbl-color');
+const lblMono = document.getElementById('lbl-mono');
+let mono = false;
+
+function setMono(on){
+  mono = on;
+  toggle.setAttribute('aria-checked', String(on));
+  track.classList.toggle('on', on);
+  document.documentElement.classList.toggle('mono', on);
+  lblColor.classList.toggle('active', !on);
+  lblMono.classList.toggle('active', on);
+}
+
+toggle.addEventListener('click',()=>setMono(!mono));
+toggle.addEventListener('keydown',e=>{if(e.key===' '||e.key==='Enter'){e.preventDefault();setMono(!mono);}});
+</script>
+</body>
+</html>
